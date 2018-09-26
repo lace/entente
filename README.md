@@ -5,7 +5,7 @@ entente
 
 [pypi]: https://pypi.org/project/entente/
 
-Transfer landmarks between two meshes that have vertexwise correspondence.
+Transfer landmarks between two meshes that have vertex-wise correspondence.
 
 Installation
 ------------
