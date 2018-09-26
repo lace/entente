@@ -7,7 +7,7 @@ class Landmarker(object):
         # self.landmarks = {
         #     'back bottom': landmarks['back bottom']
         # }
-        self.landmarks['back bottom'][2] = -75
+        # self.landmarks['back bottom'][2] = -75
 
     @classmethod
     def load(cls, source_mesh_path, landmark_path):
