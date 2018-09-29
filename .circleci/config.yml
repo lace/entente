@@ -53,7 +53,7 @@ jobs:
             mkdir -p venv
             virtualenv venv
             . venv/bin/activate
-            set -o pipefail; pip install -U black | cat
+            set -o pipefail; pip install -U click black | cat
 
       - run:
           name: Show versions
