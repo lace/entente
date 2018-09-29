@@ -3,7 +3,7 @@ entente
 
 [![version](https://img.shields.io/pypi/v/entente.svg?style=flat-square)][pypi]
 
-Library for working with [lace][]-style meshes that have vertex-wise
+Library for working with [lace][]-style polygonal meshes which have vertex-wise
 correspondence.
 
 [pypi]: https://pypi.org/project/entente/

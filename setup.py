@@ -10,7 +10,7 @@ with open('requirements.txt') as f:
 setup(
     name='entente',
     version=importlib.import_module('entente').__version__,
-    description='Stretch polygonal meshes in segments along an axis',
+    description='Library for working with polygonal meshes which have vertex-wise correspondence',
     long_description=readme,
     long_description_content_type='text/markdown',
     author='Metabolize',
