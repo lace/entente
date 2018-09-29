@@ -6,6 +6,7 @@ def attr_has_same_shape(first_obj, second_obj, attr):
         return first.shape == second.shape
 
 def attr_is_equal(first_obj, second_obj, attr):
+    import numpy as np
     # Avoid comparing None's.
     return attr_has_same_shape(first_obj, second_obj, attr) and \
         np.array_equal(getattr(first_obj, attr), getattr(second_obj, attr))
