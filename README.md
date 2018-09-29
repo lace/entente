@@ -5,7 +5,15 @@ entente
 
 [pypi]: https://pypi.org/project/entente/
 
-Transfer landmarks between two meshes that have vertex-wise correspondence.
+Library for working with [lace][]-style meshes that have vertex-wise
+correspondence.
+
+
+Features
+--------
+
+- Transfer landmarks from the surface of one mesh to the surface of another.
+
 
 Installation
 ------------
@@ -16,12 +24,14 @@ Requires Python 2.7.
 pip install entente
 ```
 
+
 Usage
 -----
 
 ```sh
 python -m entente.cli source.obj source.pp target1.obj target2.obj ...
 ```
+
 
 Contribute
 ----------
@@ -30,6 +40,7 @@ Contribute
 - Source Code: https://github.com/metabolize/entente
 
 Pull requests welcome!
+
 
 Support
 -------
