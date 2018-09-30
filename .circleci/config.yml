@@ -53,7 +53,7 @@ jobs:
             mkdir -p venv
             virtualenv venv
             . venv/bin/activate
-            set -o pipefail; pip install -U click executor black | cat
+            set -o pipefail; pip install -U click metabolexecutor black | cat
 
       - run:
           name: Show versions
