@@ -16,6 +16,14 @@ def test():
     execute('nose2')
 
 @cli.command()
+def black():
+    execute('black entente/')
+
+@cli.command()
+def black_test():
+    execute('black --test entente/')
+
+@cli.command()
 def upload():
     execute('rm -rf dist/')
     execute('python setup.py sdist')
