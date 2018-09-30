@@ -17,7 +17,7 @@ def transfer_landmarks(source_mesh, landmarks, target_mesh, out):
     import os
     from lace.mesh import Mesh
     from lace.serialization import meshlab_pickedpoints
-    from .core import Landmarker
+    from .landmarks import Landmarker
 
     landmarker = Landmarker.load(
         source_mesh_path=source_mesh,

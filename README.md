@@ -25,6 +25,14 @@ Requires Python 2.7.
 pip install entente
 ```
 
+CGAL and cgal-bindings are required for landmark transfer and AABB tree. They
+are optional because cgal-bindings takes a long time to build.
+
+```sh
+brew install cgal swig
+pip install cgal-bindings
+```
+
 
 Usage
 -----
