@@ -1,9 +1,9 @@
 import numpy as np
 
 
-def scramble_vertices(mesh):
+def shuffle_vertices(mesh):
     """
-    Scramble the mesh's vertex ordering.
+    Shuffle the mesh's vertex ordering.
 
     Mutate the mesh and return np array that maps from old vertex indices to new.
     """
@@ -12,9 +12,9 @@ def scramble_vertices(mesh):
     return v_old_to_new
 
 
-def scramble_faces(mesh):
+def shuffle_faces(mesh):
     """
-    Scramble the mesh's face ordering.
+    Shuffle the mesh's face ordering.
 
     Mutate the mesh and return np array that maps from old face indices to new.
     """

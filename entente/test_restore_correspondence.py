@@ -23,10 +23,10 @@ class TestRestoreCorrespondence(ExtraAssertions, unittest.TestCase):
         np.testing.assert_array_equal(a[result_permutation], b)
 
     def test_restore_correspondence(self):
-        from .scramble import scramble_vertices
+        from .shuffle import shuffle_vertices
 
         working = self.test_mesh.copy_fv()
-        permutation = scramble_vertices(working)
+        permutation = shuffle_vertices(working)
 
         result_permutation = restore_correspondence(
             working, self.test_mesh, progress=False
