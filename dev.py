@@ -41,15 +41,6 @@ def black_check():
 @cli.command()
 def doc():
     execute("rm -rf build/ doc/build/ doc/api/")
-    execute(
-        "sphinx-apidoc",
-        "--separate",
-        "--no-toc",
-        "-o",
-        "doc/api",
-        "entente",
-        "**/test_*.py",
-    )
     execute("sphinx-build -b html doc doc/build")
 
 

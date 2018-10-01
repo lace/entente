@@ -189,8 +189,29 @@ napoleon_include_special_with_doc = True
 autosummary_generate = True
 
 
+def run_apidoc(_):
+    """
+    Support sphinx-apidoc from RTD.
+    https://github.com/rtfd/readthedocs.org/issues/1139
+    """
+    from sphinx.ext import apidoc
+
+    ignore_paths = ["**/test_*.py"]
+    args = [
+        "-f",
+        "--no-toc",
+        "--separate",
+        "--module-first",
+        "--output-dir",
+        "doc/api/",
+        "entente",
+    ] + ignore_paths
+    apidoc.main(args)
+
+
 def setup(app):
     from recommonmark.transform import AutoStructify
 
     app.add_config_value("recommonmark_config", {}, True)
     app.add_transform(AutoStructify)
+    app.connect("builder-inited", run_apidoc)
