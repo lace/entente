@@ -3,8 +3,8 @@ entente
 
 [![version](https://img.shields.io/pypi/v/entente.svg?style=flat-square)][pypi]
 [![license](https://img.shields.io/pypi/l/entente.svg?style=flat-square)][pypi]
-[![build](https://img.shields.io/circleci/project/gh/lace/entente/master.svg?style=flat-square)][build]
-[![docs build](https://img.shields.io/readthedocs/entente.svg)][docs build]
+[![build](https://img.shields.io/circleci/project/github/lace/entente/master.svg?style=flat-square)][build]
+[![docs build](https://img.shields.io/readthedocs/entente.svg?style=flat-square)][docs build]
 [![code style](https://img.shields.io/badge/code%20style-black-black.svg?style=flat-square)][black]
 
 Library for working with [lace][]-style polygonal meshes which have vertex-wise
