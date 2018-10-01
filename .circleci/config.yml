@@ -65,8 +65,7 @@ jobs:
           name: Check code format
           command: |
             . venv/bin/activate
-            ./dev.py --help
-            ./dev.py black_check
+            ./dev.py black-check
 
 workflows:
   version: 2
