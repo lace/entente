@@ -8,16 +8,18 @@ class TestScramble(unittest.TestCase):
         from .testing import vitra_mesh
 
         self.test_mesh = vitra_mesh()
+        # For performance.
+        self.test_mesh.keep_vertices(np.arange(1000))
 
     def test_find_correspondence_produces_expected_correspondence(self):
-        return
-        unscrambled = self.test_mesh.v
-        indexes = np.random.permutation(len(unscrambled))
-        scrambled = unscrambled[indexes]
+        a = self.test_mesh.v
+        permutation = np.random.permutation(len(a))
+        b = a[permutation]
 
-        np.testing.assert_array_equal(
-            find_correspondence(unscrambled, scrambled), indexes
-        )
+        correspondence = find_correspondence(a, b, progress=False)
+
+        np.testing.assert_array_equal(correspondence, permutation)
+        np.testing.assert_array_equal(a[correspondence], b)
 
     def test_restore_correspondence_restores_original_array(self):
         return

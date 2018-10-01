@@ -1,17 +1,52 @@
-def find_correspondence(a, b):
+def _maybe_tqdm(iterable, progress):
+    if progress:
+        from tqdm import tqdm
+        return tqdm(iterable)
+    else:
+        return iterable
+
+
+def find_correspondence(a, b, progress=True):
     """
-    Given two orderings of identical elements, return an array that maps
-    indices of the first to the indices of the second.
+    Given two permutations of identical elements `a` and `b`, return an array
+    mapping indices of `a` to indices of `b`. `a[find_correspondence(a, b)]`
+    is equal to `b`.
+
+    progress: When `True`, show a progress bar.
+
+    This relies on a brute-force algorithm.
     """
     import numpy as np
 
     if not len(a) == len(b):
         raise
 
-    b_remaining = np.ones(len(b), dtype=np.bool_)
-    for item in a:
-        idx = np.logical_and(b_remaining, b == item)
+    a_remaining = np.ones(len(a), dtype=np.bool_)
+    a_to_b = np.zeros(len(a), dtype=np.uint64)
+
+    for i, item in _maybe_tqdm(enumerate(b), progress):
+        indices, = np.nonzero(~(a - item).any(axis=1))
+        if len(indices) != 1:
+            raise ValueError(
+                "Couldn't find corresponding element in a for item {} in b".format(i)
+            )
+        index = indices[0]
+        a_remaining[index] = 0
+        a_to_b[i] = index
+
+    return a_to_b
 
 
-def restore_correspondence():
+def restore_correspondence(mesh, reference_mesh, progress=True):
+    """
+    Reorder the vertices in `mesh` to match the desired order in
+    `reference_mesh`. The sets of vertices in the two meshes must be exactly
+    identical. `reference_mesh` is not modified. Face ordering and groups in
+
+    This relies on a brute-force algorithm.
+
+    progress: When `True`, show a progress bar.
+
+    Return a np array mapping from old vertex indices to new.
+    """
     pass
