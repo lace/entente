@@ -3,9 +3,9 @@ import numpy as np
 
 def scramble_vertices(mesh):
     """
-    Scramble the vertex ordering.
+    Scramble the mesh's vertex ordering.
 
-    Return np array that maps from old vertex indices to new.
+    Mutate the mesh and return np array that maps from old vertex indices to new.
     """
     v_old_to_new = np.random.permutation(len(mesh.v))
     mesh.v = mesh.v[v_old_to_new]
@@ -21,9 +21,9 @@ def scramble_vertices(mesh):
 
 def scramble_faces(mesh):
     """
-    Scramble the face ordering.
+    Scramble the mesh's face ordering.
 
-    Return np array that maps from old face indices to new.
+    Mutate the mesh and return np array that maps from old face indices to new.
     """
     f_old_to_new = np.random.permutation(len(mesh.f))
     mesh.f = mesh.f[f_old_to_new]
