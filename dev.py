@@ -15,13 +15,15 @@ def init():
 def test():
     execute('nose2')
 
+source_files = ['*.py', 'entente/']
+
 @cli.command()
 def black():
-    execute('black entente/')
+    execute('black', *source_files)
 
 @cli.command()
 def black_check():
-    execute('black --check entente/')
+    execute('black', '--check', *source_files)
 
 @cli.command()
 def upload():
