@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import click
+import glob
 from executor import execute
 
 @click.group()
@@ -14,8 +15,8 @@ def init():
 @cli.command()
 def test():
     execute('nose2')
+source_files = glob.glob("*.py") + ["entente/"]
 
-source_files = ['*.py', 'entente/']
 
 @cli.command()
 def black():
