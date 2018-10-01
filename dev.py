@@ -1,6 +1,7 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
 import click
+import glob
 from executor import execute
 
 @click.group()
@@ -14,14 +15,16 @@ def init():
 @cli.command()
 def test():
     execute('nose2')
+source_files = glob.glob("*.py") + ["entente/"]
+
 
 @cli.command()
 def black():
-    execute('black entente/')
+    execute('black', *source_files)
 
 @cli.command()
-def black_test():
-    execute('black --test entente/')
+def black_check():
+    execute('black', '--check', *source_files)
 
 @cli.command()
 def upload():
