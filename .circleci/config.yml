@@ -16,7 +16,7 @@ jobs:
             sudo apt-get update
             sudo apt-get install -qq python-opencv libsuitesparse-dev libboost-dev libcgal-dev swig
             curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-            sudo apt-get install git-lfs
+            sudo apt-get install -qq git-lfs
 
       - run:
           name: Install python dependencies
