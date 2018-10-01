@@ -15,6 +15,11 @@ def require_cgal():
     try:
         from CGAL.CGAL_Kernel import Point_3, Triangle_3
         from CGAL.CGAL_AABB_tree import AABB_tree_Triangle_3_soup
+
+        # For pyflakes.
+        assert Point_3
+        assert Triangle_3
+        assert AABB_tree_Triangle_3_soup
     except ImportError:
         raise ImportError(message)
 

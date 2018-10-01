@@ -24,6 +24,11 @@ source_files = glob.glob("*.py") + ["entente/"]
 
 
 @cli.command()
+def lint():
+    execute("pyflakes", *source_files)
+
+
+@cli.command()
 def black():
     execute("black", *source_files)
 
