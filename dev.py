@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
 import click
 from executor import execute
@@ -20,8 +20,8 @@ def black():
     execute('black entente/')
 
 @cli.command()
-def black_test():
-    execute('black --test entente/')
+def black_check():
+    execute('black --check entente/')
 
 @cli.command()
 def upload():

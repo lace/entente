@@ -53,7 +53,7 @@ jobs:
             mkdir -p venv
             virtualenv venv
             . venv/bin/activate
-            set -o pipefail; pip install -U click black | cat
+            set -o pipefail; pip install -Ur requirements_dev_py3.txt | cat
 
       - run:
           name: Show versions
@@ -65,7 +65,7 @@ jobs:
           name: Check code format
           command: |
             . venv/bin/activate
-            ./dev.py black_test
+            ./dev.py black-check
 
 workflows:
   version: 2

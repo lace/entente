@@ -2,11 +2,14 @@ entente
 =======
 
 [![version](https://img.shields.io/pypi/v/entente.svg?style=flat-square)][pypi]
+[![license](https://img.shields.io/pypi/l/entente.svg?style=flat-square)][pypi]
+[![code style](https://img.shields.io/badge/code%20style-black-black.svg?style=flat-square)][black]
 
 Library for working with [lace][]-style polygonal meshes which have vertex-wise
 correspondence.
 
 [pypi]: https://pypi.org/project/entente/
+[black]: https://black.readthedocs.io/en/stable/
 [lace]: https://github.com/metabolize/lace
 
 
