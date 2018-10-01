@@ -50,6 +50,6 @@ def restore_correspondence(mesh, reference_mesh, progress=True):
 
     Return a np array mapping from old vertex indices to new.
     """
-    v_old_to_new = find_permutation(reference_mesh.v, mesh.v)
+    v_old_to_new = find_permutation(reference_mesh.v, mesh.v, progress=progress)
     mesh.reorder_vertices(v_old_to_new)
     return v_old_to_new
