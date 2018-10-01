@@ -62,7 +62,15 @@ jobs:
             pip freeze
 
       - run:
+          name: Check lint
+          when: always
+          command: |
+            . venv/bin/activate
+            ./dev.py lint
+
+      - run:
           name: Check code format
+          when: always
           command: |
             . venv/bin/activate
             ./dev.py black-check
