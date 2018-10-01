@@ -19,11 +19,12 @@ def compute_barycentric_coordinates(vertices_of_tris, points):
     from blmath.geometry.barycentric import barycentric_coordinates_of_projection
     from .validation import validate_shape_from_ns
 
-    k = validate_shape_from_ns(locals(), 'vertices_of_tris', '*', 3, 3)
-    validate_shape_from_ns(locals(), 'points', k, 3)
+    k = validate_shape_from_ns(locals(), "vertices_of_tris", "*", 3, 3)
+    validate_shape_from_ns(locals(), "points", k, 3)
 
     return barycentric_coordinates_of_projection(
         points,
         vertices_of_tris[:, 0],
         vertices_of_tris[:, 1] - vertices_of_tris[:, 0],
-        vertices_of_tris[:, 2] - vertices_of_tris[:, 0])
+        vertices_of_tris[:, 2] - vertices_of_tris[:, 0],
+    )

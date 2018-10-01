@@ -18,21 +18,24 @@ def require_cgal():
     except ImportError:
         raise ImportError(message)
 
+
 def create_aabb_tree(mesh):
     from CGAL.CGAL_Kernel import Point_3, Triangle_3
     from CGAL.CGAL_AABB_tree import AABB_tree_Triangle_3_soup
+
     cgal_verts = [Point_3(*xyz) for xyz in mesh.v]
     cgal_faces = [
-        Triangle_3(cgal_verts[a], cgal_verts[b], cgal_verts[c])
-        for a, b, c in mesh.f
+        Triangle_3(cgal_verts[a], cgal_verts[b], cgal_verts[c]) for a, b, c in mesh.f
     ]
     tree = AABB_tree_Triangle_3_soup(cgal_faces)
     tree.accelerate_distance_queries()
     return tree
 
+
 def faces_nearest_to_points(mesh, to_points, ret_points=False):
     import numpy as np
     from CGAL.CGAL_Kernel import Point_3
+
     tree = create_aabb_tree(mesh)
     face_indices = np.empty(shape=(len(to_points),), dtype=np.uint64)
     if ret_points:
