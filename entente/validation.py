@@ -1,11 +1,13 @@
 def validate_shape(a, *shape, **kwargs):
     """
-    a: An array-like input.
-    shape: Shape to validate. To require 3 by 1, pass (3,). To require n by 3,
-      pass (-1, 3). Pass '*' for a wildcard dimension.
-    name: Variable name to embed in the error message.
+    Args:
+        a: An array-like input.
+        shape (tuple): Shape to validate. To require 3 by 1, pass (3,). To
+            require n by 3, pass (-1, 3). Pass '*' for a wildcard dimension.
+        name (str): Variable name to embed in the error message.
 
-    Return: The wildcard dimension or a tuple of wildcard dimensions.
+    Returns:
+        object: The wildcard dimension or a tuple of wildcard dimensions.
     """
     is_wildcard = lambda dim: dim == "*"
     if all(not isinstance(dim, int) and not is_wildcard(dim) for dim in shape):
