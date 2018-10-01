@@ -1,16 +1,17 @@
 def _maybe_tqdm(iterable, progress):
     if progress:
         from tqdm import tqdm
+
         return tqdm(iterable)
     else:
         return iterable
 
 
-def find_correspondence(a, b, progress=True):
+def find_permutation(a, b, progress=True):
     """
     Given two permutations of identical elements `a` and `b`, return an array
-    mapping indices of `a` to indices of `b`. `a[find_correspondence(a, b)]`
-    is equal to `b`.
+    of the indices of `a` ordered such that `a[find_permutation(a, b)]` is
+    equal to `b`.
 
     progress: When `True`, show a progress bar.
 
@@ -49,4 +50,6 @@ def restore_correspondence(mesh, reference_mesh, progress=True):
 
     Return a np array mapping from old vertex indices to new.
     """
-    pass
+    v_old_to_new = find_permutation(reference_mesh.v, mesh.v)
+    mesh.reorder_vertices(v_old_to_new)
+    return v_old_to_new

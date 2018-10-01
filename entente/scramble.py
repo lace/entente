@@ -8,14 +8,7 @@ def scramble_vertices(mesh):
     Mutate the mesh and return np array that maps from old vertex indices to new.
     """
     v_old_to_new = np.random.permutation(len(mesh.v))
-    mesh.v = mesh.v[v_old_to_new]
-    mesh.f = np.vstack(
-        [
-            v_old_to_new[mesh.f[:, 0]],
-            v_old_to_new[mesh.f[:, 1]],
-            v_old_to_new[mesh.f[:, 2]],
-        ]
-    ).T
+    mesh.reorder_vertices(v_old_to_new)
     return v_old_to_new
 
 

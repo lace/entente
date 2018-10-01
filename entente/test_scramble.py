@@ -1,13 +1,10 @@
 import unittest
 import numpy as np
 from .scramble import scramble_vertices, scramble_faces
+from .testing import ExtraAssertions
 
 
-def coord_set(a):
-    return set(tuple(coords) for coords in a)
-
-
-class TestScramble(unittest.TestCase):
+class TestScramble(ExtraAssertions, unittest.TestCase):
     def setUp(self):
         from .testing import vitra_mesh
 
@@ -24,7 +21,7 @@ class TestScramble(unittest.TestCase):
         np.testing.assert_raises(
             AssertionError, np.testing.assert_array_equal, scrambled.f, self.test_mesh.f
         )
-        self.assertItemsEqual(coord_set(self.test_mesh.v), coord_set(scrambled.v))
+        self.assertSameVertexSet(self.test_mesh, scrambled)
 
     def test_scramble_faces(self):
         scrambled = self.test_mesh.copy_fv()
@@ -35,4 +32,4 @@ class TestScramble(unittest.TestCase):
         np.testing.assert_raises(
             AssertionError, np.testing.assert_array_equal, scrambled.f, self.test_mesh.f
         )
-        self.assertItemsEqual(coord_set(self.test_mesh.f), coord_set(scrambled.f))
+        self.assertSameFaceSet(self.test_mesh, scrambled)

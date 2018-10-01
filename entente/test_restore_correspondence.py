@@ -1,9 +1,10 @@
 import unittest
 import numpy as np
-from .restore_correspondence import find_correspondence, restore_correspondence
+from .restore_correspondence import find_permutation, restore_correspondence
+from .testing import ExtraAssertions
 
 
-class TestScramble(unittest.TestCase):
+class TestRestoreCorrespondence(ExtraAssertions, unittest.TestCase):
     def setUp(self):
         from .testing import vitra_mesh
 
@@ -11,22 +12,30 @@ class TestScramble(unittest.TestCase):
         # For performance.
         self.test_mesh.keep_vertices(np.arange(1000))
 
-    def test_find_correspondence_produces_expected_correspondence(self):
+    def test_find_permutation(self):
         a = self.test_mesh.v
-        permutation = np.random.permutation(len(a))
-        b = a[permutation]
+        expected_permutation = np.random.permutation(len(a))
+        b = a[expected_permutation]
 
-        correspondence = find_correspondence(a, b, progress=False)
+        result_permutation = find_permutation(a, b, progress=False)
 
-        np.testing.assert_array_equal(correspondence, permutation)
-        np.testing.assert_array_equal(a[correspondence], b)
+        np.testing.assert_array_equal(result_permutation, expected_permutation)
+        np.testing.assert_array_equal(a[result_permutation], b)
 
-    def test_restore_correspondence_restores_original_array(self):
-        return
-        from lace.mesh import Mesh
+    def test_restore_correspondence(self):
+        from .scramble import scramble_vertices
 
-        scrambled_mesh = Mesh(f=self.test_mesh.f)
+        working = self.test_mesh.copy_fv()
+        permutation = scramble_vertices(working)
 
-        restore_correspondence(scrambled),
+        result_permutation = restore_correspondence(
+            working, self.test_mesh, progress=False
+        )
 
-        np.testing.assert_array_equal(indexes)
+        np.testing.assert_array_equal(working.v, self.test_mesh.v)
+        np.testing.assert_array_equal(working.f, self.test_mesh.f)
+
+        # Compute the inverse of the permutation.
+        # https://stackoverflow.com/a/11649931/893113
+        v_old_to_new = np.argsort(permutation)
+        np.testing.assert_array_equal(result_permutation, v_old_to_new)
