@@ -1,6 +1,13 @@
 Changelog
 =========
 
+## 0.3.0 (Oct 2, 2018)
+
+- Add entente.shuffle.shuffle_faces
+- Add entente.shuffle.shuffle_vertices
+- Add entente.restore_correspondence.find_permutation
+- Add entente.restore_correspondence.restore_correspondence
+
 ## 0.2.0 (Oct 1, 2018)
 
 - entente.cgal_search.faces_nearest_to_points: Rename argument `to_points` to
