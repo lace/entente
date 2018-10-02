@@ -4,6 +4,15 @@ import click
 import glob
 from executor import execute
 
+def nose_cmd():
+    # More reliably locate this command when more than one Python are
+    # installed.
+    try:
+        execute("nose2-2.7 --help", capture=True)
+        return "nose2-2.7"
+    except:
+        return "nose2"
+
 
 @click.group()
 def cli():
@@ -17,7 +26,7 @@ def init():
 
 @cli.command()
 def test():
-    execute("nose2")
+    execute(nose_cmd())
 
 
 source_files = glob.glob("*.py") + ["entente/", "doc/"]
