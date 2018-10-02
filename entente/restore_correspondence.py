@@ -64,7 +64,7 @@ def restore_correspondence(mesh, reference_mesh, progress=True):
         progress (bool): When `True`, show a progress bar.
 
     Returns:
-        np.array: `vx1` mapping of old face indices to new
+        np.ndarray: `vx1` mapping of old face indices to new
 
     Note:
         This relies on a brute-force algorithm.
