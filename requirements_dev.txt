@@ -3,3 +3,6 @@
 nose2 == 0.5.0
 # Used in dev.py.
 metabolexecutor
+Sphinx
+sphinxcontrib-apidoc
+recommonmark

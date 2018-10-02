@@ -20,7 +20,7 @@ def test():
     execute("nose2")
 
 
-source_files = glob.glob("*.py") + ["entente/"]
+source_files = glob.glob("*.py") + ["entente/", "doc/"]
 
 
 @cli.command()
@@ -36,6 +36,17 @@ def black():
 @cli.command()
 def black_check():
     execute("black", "--check", *source_files)
+
+
+@cli.command()
+def doc():
+    execute("rm -rf build/ doc/build/ doc/api/")
+    execute("sphinx-build -b html doc doc/build")
+
+
+@cli.command()
+def doc_open():
+    execute("open doc/build/index.html")
 
 
 @cli.command()

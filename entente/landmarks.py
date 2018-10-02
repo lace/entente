@@ -1,7 +1,25 @@
+"""
+Functions for transferring landmarks from one mesh to another.
+
+This module requires CGAL. See note in ``entente.cgal_search``.
+"""
+
 from cached_property import cached_property
 
 
 class Landmarker(object):
+    """
+    An object which encapsulates a source mesh and a set of landmarks on that
+    mesh. Its function is to transfer those landmarks onto a new mesh.
+
+    The resultant landmarks will always be on or near the surface of the mesh.
+
+    Args:
+        source_mesh (lace.mesh.Mesh): The source mesh
+        landmarks (dict): A mapping of landmark names to the points, which are
+            `3x1` arraylike objects.
+    """
+
     def __init__(self, source_mesh, landmarks):
         from cgal_search import require_cgal
 
@@ -11,6 +29,14 @@ class Landmarker(object):
 
     @classmethod
     def load(cls, source_mesh_path, landmark_path):
+        """
+        Create a landmarker using the given paths to a source mesh and landmarks.
+
+        Args:
+            source_mesh_path (str): File path to the source mesh.
+            landmark_path (str): File path to a meshlab ``.pp`` file containing
+                the landmark points.
+        """
         from lace.mesh import Mesh
         from lace.serialization import meshlab_pickedpoints
 
@@ -20,7 +46,7 @@ class Landmarker(object):
         )
 
     @cached_property
-    def regressor(self):
+    def _regressor(self):
         import numpy as np
         from blmath.numerics.matlab import sparse
         from .geometry import compute_barycentric_coordinates
@@ -50,15 +76,23 @@ class Landmarker(object):
             3 * self.source_mesh.v.shape[0],
         )
 
-    def invoke_regressor(self, target):
-        coords = self.regressor * target.v.reshape(-1)
+    def _invoke_regressor(self, target):
+        coords = self._regressor * target.v.reshape(-1)
         return dict(zip(self.landmarks.keys(), coords.reshape(-1, 3)))
 
     def transfer_landmarks_onto(self, target):
+        """
+        Transfer landmarks onto the given target mesh, which must be in the same
+        topology as the source mesh.
+
+        Args:
+            target (lace.mesh.Mesh): Target mesh
+
+        Returns:
+            dict: A mapping of landmark names to a np.ndarray with shape `3x1`.
+        """
         from .equality import have_same_topology
 
         if not have_same_topology(self.source_mesh, target):
-            # raise ValueError('Target mesh must have the same topology')
-            target.f = self.source_mesh.f
-            target.ft = self.source_mesh.ft
-        return self.invoke_regressor(target)
+            raise ValueError("Target mesh must have the same topology")
+        return self._invoke_regressor(target)

@@ -10,12 +10,16 @@ with open("requirements.txt") as f:
 setup(
     name="entente",
     version=importlib.import_module("entente").__version__,
-    description="Library for working with polygonal meshes which have vertex-wise correspondence",
+    description="Work with polygonal meshes which have vertex-wise correspondence",
     long_description=readme,
     long_description_content_type="text/markdown",
     author="Metabolize",
     author_email="github@paulmelnikow.com",
     url="https://github.com/metabolize/entente",
+    project_urls={
+        "Issue Tracker": "https://github.com/metabolize/entente/issues"
+        "Documentation": "https://entente.readthedocs.io/en/stable/",
+    },
     packages=find_packages(),
     install_requires=install_requires,
     classifiers=[

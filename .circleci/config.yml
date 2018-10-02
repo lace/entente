@@ -48,6 +48,12 @@ jobs:
             . venv/bin/activate
             ./dev.py test
 
+      - run:
+          name: Run the doc build
+          command: |
+            . venv/bin/activate
+            ./dev.py doc
+
   python3:
     docker:
       - image: circleci/python:3
