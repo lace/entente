@@ -12,7 +12,7 @@ ENV PYTHONPATH /src
 RUN pip freeze
 RUN python -m easy_install --version
 
-RUN pip uninstall sphinxcontrib-apidoc
+RUN pip uninstall -y sphinxcontrib-apidoc
 RUN pip install sphinxcontrib-apidoc
 
 RUN ./dev.py doc || true
