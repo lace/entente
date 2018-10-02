@@ -6,7 +6,7 @@ def shuffle_vertices(mesh):
     Shuffle the mesh's vertex ordering. The mesh is mutated.
 
     Args:
-        mesh (lace.mesh.Mesh): The mesh whose vertices should be shuffled.
+        mesh (lace.mesh.Mesh): A mesh.
 
     Returns:
         np.ndarray: `vx1` mapping of old vertex indices to new.
@@ -21,7 +21,7 @@ def shuffle_faces(mesh):
     Shuffle the mesh's face ordering. The mesh is mutated.
 
     Args:
-        mesh (lace.mesh.Mesh): The mesh whose faces should be shuffled.
+        mesh (lace.mesh.Mesh): A mesh.
 
     Returns:
         np.ndarray: `fx1` mapping of old face indices to new.
