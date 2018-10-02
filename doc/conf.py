@@ -196,7 +196,7 @@ autosummary_generate = True
 doc_home = os.path.abspath(os.path.dirname(__file__))
 # .encode() to avoid
 # WARNING: The config value `apidoc_module_dir' has type `unicode', expected to ['str'].
-apidoc_module_dir = os.path.join(doc_home, "..", "entente").encode('utf-8')
+apidoc_module_dir = os.path.join(doc_home, "..", "entente").encode("utf-8")
 apidoc_output_dir = os.path.join(doc_home, "api")
 apidoc_excluded_paths = ["test_*"]
 apidoc_separate_modules = True

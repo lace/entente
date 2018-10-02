@@ -19,6 +19,7 @@ class Landmarker(object):
         landmarks (dict): A mapping of landmark names to the points, which are
             `3x1` arraylike objects.
     """
+
     def __init__(self, source_mesh, landmarks):
         from cgal_search import require_cgal
 
@@ -93,5 +94,5 @@ class Landmarker(object):
         from .equality import have_same_topology
 
         if not have_same_topology(self.source_mesh, target):
-            raise ValueError('Target mesh must have the same topology')
+            raise ValueError("Target mesh must have the same topology")
         return self._invoke_regressor(target)

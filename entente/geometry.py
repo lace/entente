@@ -2,6 +2,7 @@
 Functions relating to mesh geometry.
 """
 
+
 def compute_barycentric_coordinates(vertices_of_tris, points):
     """
     Compute barycentric coordinates for the projection of a set of points to a

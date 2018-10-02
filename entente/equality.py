@@ -2,6 +2,7 @@
 Utilities related to mesh equality.
 """
 
+
 def attr_has_same_shape(first_obj, second_obj, attr):
     """
     Given two objects, check if the given arraylike attributes of those
