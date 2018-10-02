@@ -11,21 +11,15 @@ jobs:
 
       - run:
           name: Show versions
-          command: |
-            . venv/bin/activate
-            pip freeze
+          command: pip freeze
 
       - run:
           name: Run tests
-          command: |
-            . venv/bin/activate
-            ./dev.py test
+          command: ./dev.py test
 
       - run:
           name: Run the doc build
-          command: |
-            . venv/bin/activate
-            ./dev.py doc
+          command: ./dev.py doc
 
   python3:
     docker:
