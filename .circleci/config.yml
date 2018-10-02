@@ -2,7 +2,7 @@ version: 2
 jobs:
   python2:
     docker:
-      - image: circleci/python:2
+      - image: laceproject/entente-ci-py2.7:0.1.4
 
     working_directory: ~/repo
 
@@ -10,28 +10,8 @@ jobs:
       - checkout
 
       - run:
-          name: Install container dependencies
-          # libcgal-dev and swig are for CGAL.
-          command: |
-            sudo apt-get update
-            curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
-            sudo apt-get install -qq python-opencv libsuitesparse-dev libboost-dev libcgal-dev swig git-lfs
-
-      - run:
-          name: Install python dependencies
-          # set -o pipefail; pip .. | cat is used to disable the progress bar.
-          command: |
-            mkdir -p venv
-            virtualenv venv
-            . venv/bin/activate
-            set -o pipefail; pip install -U 'numpy>=1.10.1' | cat
-            set -o pipefail; pip install -Ur requirements_dev.txt | cat
-
-      - run:
           name: Show versions
-          command: |
-            . venv/bin/activate
-            pip freeze
+          command: pip freeze
 
       - run:
           name: Pull test assets from Git LFS
@@ -43,19 +23,15 @@ jobs:
 
       - run:
           name: Run tests
-          command: |
-            . venv/bin/activate
-            ./dev.py test
+          command: ./dev.py test
 
       - run:
           name: Run the doc build
-          command: |
-            . venv/bin/activate
-            ./dev.py doc
+          command: ./dev.py doc
 
   python3:
     docker:
-      - image: circleci/python:3
+      - image: laceproject/entente-ci-py3.6:0.1.4
 
     working_directory: ~/repo
 
@@ -63,32 +39,18 @@ jobs:
       - checkout
 
       - run:
-          name: Install python dependencies
-          command: |
-            mkdir -p venv
-            virtualenv venv
-            . venv/bin/activate
-            set -o pipefail; pip install -Ur requirements_dev_py3.txt | cat
-
-      - run:
           name: Show versions
-          command: |
-            . venv/bin/activate
-            pip freeze
+          command: pip freeze
 
       - run:
           name: Check lint
           when: always
-          command: |
-            . venv/bin/activate
-            ./dev.py lint
+          command: ./dev.py lint
 
       - run:
           name: Check code format
           when: always
-          command: |
-            . venv/bin/activate
-            ./dev.py black-check
+          command: ./dev.py black-check
 
 workflows:
   version: 2
