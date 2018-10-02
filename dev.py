@@ -15,18 +15,26 @@ def init():
     execute("pip install --upgrade -r requirements_dev.txt")
 
 
+def docker_repo(python_version, tag):
+    return "laceproject/entente-ci-{}:{}".format(python_version, tag)
+
+
+python_versions = ["py3.6", "py2.7"]
+
+
 @cli.command()
 @click.argument("tag")
 def docker_build(tag):
-    execute(
-        "docker",
-        "build",
-        "-t",
-        "laceproject/entente-ci-py2.7:{}".format(tag),
-        "-f",
-        "docker/entente-ci-py2.7/Dockerfile",
-        ".",
-    )
+    for python_version in python_versions:
+        execute(
+            "docker",
+            "build",
+            "-t",
+            docker_repo(python_version, tag),
+            "-f",
+            "docker/entente-ci/Dockerfile.{}".format(python_version),
+            ".",
+        )
 
 
 @cli.command()
@@ -36,7 +44,8 @@ def docker_push(tag):
     When pushing a new version, bump the minor version. It's okay to re-push,
     though once it's being used in master, you should leave it alone.
     """
-    execute("docker", "push", "laceproject/entente-ci-py2.7:{}".format(tag))
+    for python_version in python_versions:
+        execute("docker", "push", docker_repo(python_version, tag))
 
 
 @cli.command()
