@@ -4,19 +4,10 @@
 #
 # The underlying docker image is defined in docker/entente-ci-py2.7/Dockerfile.
 
-FROM laceproject/entente-ci-py2.7:0.1.2
+FROM laceproject/entente-ci-py2.7:0.1.3
 WORKDIR /src
 COPY . /src
 ENV PYTHONPATH /src
 
-RUN python -m easy_install --version
-RUN pip freeze
-RUN python -m easy_install --version
-
-RUN pip uninstall -y sphinxcontrib-apidoc
-RUN pip install sphinxcontrib-apidoc
-
-RUN ./dev.py doc || true
-RUN cat /tmp/sphinx-err-*.log
+RUN ./dev.py doc
 RUN cp -r doc/build /public
-RUN false
