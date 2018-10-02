@@ -21,6 +21,8 @@ Features
 --------
 
 - Transfer landmarks from the surface of one mesh to the surface of another.
+- Shuffle vertices.
+- Restore correspondence of vertices.
 - Spatial search, lightly wrapping CGAL.
 - Complete documentation: https://entente.readthedocs.io/en/stable/
 
