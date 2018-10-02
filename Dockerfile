@@ -9,6 +9,7 @@ WORKDIR /src
 COPY . /src
 ENV PYTHONPATH /src
 
+RUN python -m easy_install --version
 RUN pip freeze
 RUN python -m easy_install --version
 
