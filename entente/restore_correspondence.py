@@ -9,13 +9,22 @@ def _maybe_tqdm(iterable, progress):
 
 def find_permutation(a, b, progress=True):
     """
-    Given two permutations of identical elements `a` and `b`, return an array
-    of the indices of `a` ordered such that `a[find_permutation(a, b)]` is
-    equal to `b`.
+    Given a `kxn` array `a` and a permutation of it `b`, return the indices of
+    `a` ordered such that `a[find_permutation(a, b)]` is equal to `b`.
 
-    progress: When `True`, show a progress bar.
+    The permutation must be along the first axis, such `a[0], a[1], ...` and
+    `b[0], b[1], ...` have the same elements.
 
-    This relies on a brute-force algorithm.
+    Args:
+        a (np.arraylike): `kxn` array
+        b (np.arraylike): Another `kxn` array
+        progress (bool): When `True`, show a progress bar.
+
+    Return:
+        np.ndarray: Indices of `b` as `kx1`
+
+    Note:
+        This relies on a brute-force algorithm.
     """
     import numpy as np
 
@@ -40,15 +49,25 @@ def find_permutation(a, b, progress=True):
 
 def restore_correspondence(mesh, reference_mesh, progress=True):
     """
-    Reorder the vertices in `mesh` to match the desired order in
-    `reference_mesh`. The sets of vertices in the two meshes must be exactly
-    identical. `reference_mesh` is not modified. Face ordering and groups in
+    Given `mesh` which has the same vertex set as a given `reference_mesh`, but
+    which has lost its correspondence due to the vertices being scrambled,
+    reorder the vertices in `mesh` so they match the order in `reference_mesh`.
 
-    This relies on a brute-force algorithm.
+    This was designed to assist in extracting face ordering and groups from a
+    shuffled `mesh` that work on `reference_mesh` and may have other uses as
+    well.
 
-    progress: When `True`, show a progress bar.
+    Args:
+        mesh (lace.mesh.Mesh): A mesh, which will be mutated
+        reference_mesh (lace.mesh.Mesh): Another mesh with the same set of
+            vertices in the desired order
+        progress (bool): When `True`, show a progress bar.
 
-    Return a np array mapping from old vertex indices to new.
+    Returns:
+        np.array: `vx1` mapping of old face indices to new
+
+    Note:
+        This relies on a brute-force algorithm.
     """
     v_old_to_new = find_permutation(reference_mesh.v, mesh.v, progress=progress)
     mesh.reorder_vertices(v_old_to_new)
