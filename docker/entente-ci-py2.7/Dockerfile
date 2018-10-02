@@ -19,3 +19,5 @@ RUN pip install numpy==1.13.1
 # code changes but the dependencies are the same.
 COPY requirements_dev.txt requirements.txt /tmp/
 RUN pip install --upgrade -r /tmp/requirements_dev.txt
+
+RUN rm -rf /root/.cache/pip
