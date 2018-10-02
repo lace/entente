@@ -1,8 +1,15 @@
 -r requirements.txt
 
-nose2 == 0.5.0
 # Used in dev.py.
 metabolexecutor
+
+# Documentation.
 Sphinx
-sphinxcontrib-apidoc
+# Using fork of sphinxcontrib-apidoc:
+# https://github.com/sphinx-contrib/apidoc/issues/8
+# https://github.com/sphinx-contrib/apidoc/pull/9
+git+https://github.com/paulmelnikow/apidoc.git@working
 recommonmark
+
+# Unit tests.
+nose2 == 0.5.0
