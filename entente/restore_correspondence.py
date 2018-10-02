@@ -49,13 +49,10 @@ def find_permutation(a, b, progress=True):
 
 def restore_correspondence(mesh, reference_mesh, progress=True):
     """
-    Given `mesh` which has the same vertex set as a given `reference_mesh`, but
-    which has lost its correspondence due to the vertices being scrambled,
-    reorder the vertices in `mesh` so they match the order in `reference_mesh`.
-
-    This was designed to assist in extracting face ordering and groups from a
-    shuffled `mesh` that work on `reference_mesh` and may have other uses as
-    well.
+    Given `mesh` which has the same vertex set as a given `reference_mesh`,
+    but which has lost its correspondence due to the vertices being shuffled,
+    reorder the vertices in `mesh` so they match the order in
+    `reference_mesh`.
 
     Args:
         mesh (lace.mesh.Mesh): A mesh, which will be mutated
@@ -67,7 +64,11 @@ def restore_correspondence(mesh, reference_mesh, progress=True):
         np.ndarray: `vx1` mapping of old face indices to new
 
     Note:
-        This relies on a brute-force algorithm.
+        This was designed to assist in extracting face ordering and groups from a
+        shuffled `mesh` that work on `reference_mesh` and may have other uses as
+        well.
+
+        It relies on a brute-force algorithm.
     """
     v_old_to_new = find_permutation(reference_mesh.v, mesh.v, progress=progress)
     mesh.reorder_vertices(v_old_to_new)
