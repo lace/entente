@@ -11,5 +11,7 @@ ENV PYTHONPATH /src
 
 RUN pip freeze
 
-RUN ./dev.py doc
+RUN ./dev.py doc || true
+RUN cat /tmp/sphinx-err-*.log
 RUN cp -r doc/build /public
+RUN false
