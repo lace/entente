@@ -45,7 +45,7 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinx.ext.napoleon",
     "sphinx.ext.autosummary",
-    "sphinxcontrib.apidoc",
+    # "sphinxcontrib.apidoc",
 ]
 
 source_parsers = {".md": "recommonmark.parser.CommonMarkParser"}
