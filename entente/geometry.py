@@ -1,3 +1,7 @@
+"""
+Functions relating to mesh geometry.
+"""
+
 def compute_barycentric_coordinates(vertices_of_tris, points):
     """
     Compute barycentric coordinates for the projection of a set of points to a
@@ -5,25 +9,25 @@ def compute_barycentric_coordinates(vertices_of_tris, points):
 
     These barycentric coordinates can refer to points outside the triangle.
     This happens when one of the coordinates is negative. However they can't
-    specify points outside the triangle's plane. That requires tetrahedral
-    coordinates.
+    specify points outside the triangle's plane. (That requires tetrahedral
+    coordinates.)
 
     The returned coordinates supply a linear combination which, applied to the
     vertices, returns the projection of the original point the plane of the
     triangle.
 
     Args:
-        vertices_of_tris (arraylike): A set of triangle vertices with shape kx3x3.
-        points (arraylike): Coordinates of points with shape kx3.
+        vertices_of_tris (np.arraylike): A set of triangle vertices as `kx3x3`.
+        points (np.arraylike): Coordinates of points as `kx3`.
 
     Returns:
-        np.ndarray: with shape kx3
+        np.ndarray: Barycentric coordinates as `kx3`
 
     See Also:
         https://en.wikipedia.org/wiki/Barycentric_coordinate_system
 
-    Todo:
-        A function with this signature probably belongs in blmath.
+    Note:
+        A function with this signature probably belongs in `blmath`.
     """
     from blmath.geometry.barycentric import barycentric_coordinates_of_projection
     from .validation import validate_shape_from_ns

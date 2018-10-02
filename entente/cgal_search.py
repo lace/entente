@@ -1,24 +1,22 @@
 """
-`cgal_search` provides spatial search on vertices and faces. This is
-implemented atop [CGAL's axis-aligned-bounding-box search tree][aabb].
+`cgal_search` provides spatial search for vertices and faces. This is
+implemented atop `CGAL's axis-aligned-bounding-box search tree
+<https://doc.cgal.org/latest/AABB_tree/index.html>`_.
 
-[CGAL][] is a heavy dependency and therefore is optional. Before using this
-module, you must install CGAL and its Python bindings (which take quite some
-time to build).
+`CGAL <https://www.cgal.org/>`_ is a heavy dependency and therefore is
+optional. Before using this module, you must install CGAL and its Python
+bindings (which take quite some time to build).
 
 On Mac OS:
 
-    ```sh
+.. code-block:: sh
+
     brew install cgal swig
     pip install cgal-bindings
-    # wait a year
-    ```
+    # wait approximately one year
 
-Note: The AABB tree is in the [GPLv3-licensed portion of CGAL][cgal license].
-
-[aabb]: https://doc.cgal.org/latest/AABB_tree/index.html
-[cgal]: https://www.cgal.org/
-[cgal license]: https://www.cgal.org/license.html
+Note: The AABB tree is in the `GPLv3-licensed portion of CGAL
+<https://www.cgal.org/license.html>`_
 """
 from __future__ import print_function
 
@@ -55,16 +53,15 @@ def create_aabb_tree(mesh):
     """
     Create a CGAL AABB tree from the given mesh.
 
-    These trees may rely on some shared internal storage in CGAL, so to be
-    conservative, *finish using one before creating another*.
+    Reports suggest trees may rely on some shared internal storage in CGAL, so
+    to be conservative, *finish using one before creating another*.
 
-    For more information, see:
-
-    - https://doc.cgal.org/latest/AABB_tree/index.html
-    - https://github.com/CGAL/cgal-swig-bindings/blob/master/examples/python/AABB_triangle_3_example.py
+    See also:
+        - https://doc.cgal.org/latest/AABB_tree/index.html
+        - https://github.com/CGAL/cgal-swig-bindings/blob/master/examples/python/AABB_triangle_3_example.py
 
     Returns:
-        CGAL_AABB_tree: A CGAL AABB tree.
+        CGAL.CGAL_AABB_tree: A CGAL AABB tree.
     """
     from CGAL.CGAL_Kernel import Point_3, Triangle_3
     from CGAL.CGAL_AABB_tree import AABB_tree_Triangle_3_soup
@@ -84,16 +81,16 @@ def faces_nearest_to_points(mesh, query_points, ret_points=False):
     points.
 
     Args:
-        query_points (arraylike): The points to query, with shape kx3
+        query_points (np.arraylike): The points to query, with shape `kx3`
         ret_points (bool): When `True`, return both the indices of the
             nearest faces and the closest points to the query points, which
             are not necessarily vertices. When `False`, return only the
             face indices.
 
     Returns:
-        object: np.ndarray with shape kx1 of face indices, or when `ret_points`
-        is `True`, a tuple which also contains a np.ndarray with shape kx3 with
-        the coordinates of the closest points.
+        object: face indices as `kx1 np.ndarray`, or when `ret_points`
+        is `True`, a tuple also including the coordinates of the closest points
+        as `kx3 np.ndarray`.
     """
     import numpy as np
     from CGAL.CGAL_Kernel import Point_3
