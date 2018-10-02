@@ -26,7 +26,7 @@ def find_permutation(a, b, progress=True):
     a_to_b = np.zeros(len(a), dtype=np.uint64)
 
     for i, item in _maybe_tqdm(enumerate(b), progress):
-        indices, = np.nonzero(~(a - item).any(axis=1))
+        indices, = np.nonzero(np.logical_not(a - item).all(axis=1))
         if len(indices) != 1:
             raise ValueError(
                 "Couldn't find corresponding element in a for item {} in b".format(i)
