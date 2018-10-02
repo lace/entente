@@ -65,8 +65,7 @@ def restore_correspondence(mesh, reference_mesh, progress=True):
 
     Note:
         This was designed to assist in extracting face ordering and groups from a
-        shuffled `mesh` that work on `reference_mesh` and may have other uses as
-        well.
+        shuffled `mesh` that "work" with `reference_mesh`.
 
         It relies on a brute-force algorithm.
     """
