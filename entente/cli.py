@@ -3,9 +3,11 @@ Command line for invoking utilities in this library.
 
 Example:
 
-    ```sh
-    python -m entente.cli examples/vitra/vitra.obj examples/vitra/vitra.pp examples/vitra/vitra_stretched.obj
-    ```
+    .. code-block:: sh
+
+        python -m entente.cli examples/vitra/vitra.obj examples/vitra/vitra.pp \\
+            examples/vitra/vitra_stretched.obj
+
 """
 
 import click
