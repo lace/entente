@@ -12,7 +12,32 @@ def cli():
 
 @cli.command()
 def init():
-    execute("pip install -r requirements_dev.txt")
+    execute("pip install --upgrade -r requirements_dev.txt")
+
+
+@cli.command()
+@click.argument('tag')
+def docker_build(tag):
+    execute(
+        "docker",
+        "build",
+        "-t", "laceproject/entente-ci-py2.7:{}".format(tag),
+        "-f", "docker/entente-ci-py2.7/Dockerfile",
+        "."
+    )
+
+@cli.command()
+@click.argument('tag')
+def docker_push(tag):
+    """
+    When pushing a new version, bump the minor version. It's okay to re-push,
+    though once it's being used in master, you should leave it alone.
+    """
+    execute([
+        "docker",
+        "push",
+        "laceproject/entente-ci-py2.7:{}".format(tag),
+    ])
 
 
 @cli.command()
