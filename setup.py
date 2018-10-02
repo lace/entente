@@ -16,6 +16,10 @@ setup(
     author="Metabolize",
     author_email="github@paulmelnikow.com",
     url="https://github.com/metabolize/entente",
+    project_urls={
+        "Issue Tracker": "https://github.com/metabolize/entente/issues",
+        "Documentation": "https://entente.readthedocs.io/en/stable/",
+    },
     packages=find_packages(),
     install_requires=install_requires,
     classifiers=[
