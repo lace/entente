@@ -3,7 +3,8 @@ import numpy as np
 
 def shuffle_vertices(mesh):
     """
-    Shuffle the mesh's vertex ordering. The mesh is mutated.
+    Shuffle the mesh's vertex ordering, preserving the integrity of the faces.
+    The mesh is mutated.
 
     Args:
         mesh (lace.mesh.Mesh): A mesh.
