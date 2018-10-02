@@ -199,13 +199,9 @@ doc_home = os.path.abspath(os.path.dirname(__file__))
 apidoc_module_dir = os.path.join(doc_home, "..", "entente").encode("utf-8")
 apidoc_excluded_paths = ["test_*"]
 apidoc_separate_modules = True
+# https://github.com/sphinx-contrib/apidoc/pulls/9
 apidoc_toc_file = False
 apidoc_module_first = True
-
-# It's not possible to configure --no-toc in sphinxcontrib-apidoc. This
-# results in a warning being emitted:
-# /.../entente/doc/api/modules.rst: WARNING: document isn't included in any toctree
-# https://github.com/sphinx-contrib/apidoc/issues/7
 
 
 def setup(app):
