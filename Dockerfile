@@ -12,6 +12,8 @@ ENV PYTHONPATH /src
 RUN pip freeze
 RUN python -m easy_install --version
 
+RUN pip install sphinxcontrib-apidoc
+
 RUN ./dev.py doc || true
 RUN cat /tmp/sphinx-err-*.log
 RUN cp -r doc/build /public
