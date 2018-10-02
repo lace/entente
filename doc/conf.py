@@ -45,6 +45,7 @@ extensions = [
     "sphinx.ext.viewcode",
     "sphinx.ext.napoleon",
     "sphinx.ext.autosummary",
+    "sphinxcontrib.apidoc",
 ]
 
 source_parsers = {".md": "recommonmark.parser.CommonMarkParser"}
@@ -188,25 +189,20 @@ napoleon_include_special_with_doc = True
 # Autosummary settings.
 autosummary_generate = True
 
+# For RTFD, we need to run sphinx-apidoc from sphinx. Use the
+# sphinxcontrib-apidoc extension to do this.
+# https://github.com/sphinx-contrib/apidoc
+# https://github.com/rtfd/readthedocs.org/issues/1139
+doc_home = os.path.abspath(os.path.dirname(__file__))
+apidoc_module_dir = os.path.join(doc_home, "..", "entente")
+apidoc_output_dir = os.path.join(doc_home, "api")
+apidoc_excluded_paths = ["**/test_*.py"]
+apidoc_separate_modules = True
 
-def run_apidoc(_):
-    """
-    Support sphinx-apidoc from RTD.
-    https://github.com/rtfd/readthedocs.org/issues/1139
-    """
-    from sphinx.ext import apidoc
-
-    ignore_paths = ["**/test_*.py"]
-    args = [
-        "-f",
-        "--no-toc",
-        "--separate",
-        "--module-first",
-        "--output-dir",
-        "doc/api/",
-        "entente",
-    ] + ignore_paths
-    apidoc.main(args)
+# It's not possible to configure --no-toc in sphinxcontrib-apidoc. This
+# results in a warning being emitted:
+# /.../entente/doc/api/modules.rst: WARNING: document isn't included in any toctree
+# https://github.com/sphinx-contrib/apidoc/issues/7
 
 
 def setup(app):
@@ -214,4 +210,3 @@ def setup(app):
 
     app.add_config_value("recommonmark_config", {}, True)
     app.add_transform(AutoStructify)
-    app.connect("builder-inited", run_apidoc)
