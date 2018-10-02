@@ -9,15 +9,15 @@ def _maybe_tqdm(iterable, progress):
 
 def find_permutation(a, b, progress=True):
     """
-    Given a `kxn` array `a` and a permutation of it `b`, return the indices of
-    `a` ordered such that `a[find_permutation(a, b)]` is equal to `b`.
+    Given a `kxn` array `a` and its permutation `b`, order the indices of `a`
+    such that `a[find_permutation(a, b)]` is equal to `b`.
 
-    The permutation must be along the first axis, such `a[0], a[1], ...` and
-    `b[0], b[1], ...` have the same elements.
+    The permutation must be along the first axis, such that `a[0], a[1], ...`
+    and `b[0], b[1], ...` have the same elements.
 
     Args:
         a (np.arraylike): `kxn` array
-        b (np.arraylike): Another `kxn` array
+        b (np.arraylike): `kxn` array
         progress (bool): When `True`, show a progress bar.
 
     Return:
