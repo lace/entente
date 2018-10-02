@@ -34,7 +34,7 @@ jobs:
             pip freeze
 
       - run:
-          name: Pull Git LFS files
+          name: Pull test assets from Git LFS
           command: |
             mkdir -p ~/.ssh
             ssh-keyscan -H github.com >> ~/.ssh/known_hosts
