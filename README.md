@@ -14,7 +14,7 @@ correspondence.
 [black]: https://black.readthedocs.io/en/stable/
 [lace]: https://github.com/metabolize/lace
 [build]: https://circleci.com/gh/lace/entente/tree/master
-[docs build]: https://img.shields.io/readthedocs/entente.svg
+[docs build]: https://entente.readthedocs.io/en/latest/
 
 
 Features
