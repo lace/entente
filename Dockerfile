@@ -4,7 +4,7 @@
 #
 # The underlying docker image is defined in docker/entente-ci-py2.7/Dockerfile.
 
-FROM laceproject/entente-ci-py2.7:0.1.4
+FROM laceproject/entente-ci-py2.7:0.1.5
 WORKDIR /src
 COPY . /src
 RUN ./dev.py doc

@@ -5,7 +5,8 @@ apt-get install -y --no-install-recommends \
   libsuitesparse-dev \
   libboost-dev \
   libcgal-dev \
-  swig
+  swig \
+  git-lfs
 rm -rf /var/lib/apt/lists/*
 
 # numpy is an install dependency for blmath and lace, so we install it with
