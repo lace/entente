@@ -22,6 +22,7 @@ Features
 
 - Transfer landmarks from the surface of one mesh to the surface of another.
 - Spatial search, lightly wrapping CGAL.
+- Complete documentation: https://entente.readthedocs.io/en/stable/
 
 
 Installation
