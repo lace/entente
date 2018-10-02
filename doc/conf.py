@@ -194,9 +194,11 @@ autosummary_generate = True
 # https://github.com/sphinx-contrib/apidoc
 # https://github.com/rtfd/readthedocs.org/issues/1139
 doc_home = os.path.abspath(os.path.dirname(__file__))
-apidoc_module_dir = os.path.join(doc_home, "..", "entente")
+# .encode() to avoid
+# WARNING: The config value `apidoc_module_dir' has type `unicode', expected to ['str'].
+apidoc_module_dir = os.path.join(doc_home, "..", "entente").encode("utf-8")
 apidoc_output_dir = os.path.join(doc_home, "api")
-apidoc_excluded_paths = ["**/test_*.py"]
+apidoc_excluded_paths = ["test_*"]
 apidoc_separate_modules = True
 
 # It's not possible to configure --no-toc in sphinxcontrib-apidoc. This
