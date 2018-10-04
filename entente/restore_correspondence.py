@@ -12,11 +12,11 @@ def find_correspondence(
 ):
     """
     Given `a[0], a[1], ..., a[k]` and `b[0], b[1], ..., b[j]`, match each element
-    of `a` to the corresponding element in `b`.
+    of `a` to the corresponding element of `b`.
 
-    When `all_must_match` is `True`, the default, `a` and `b` must contain the
-    same set of elements, and in that case, `b[find_correspondence(a, b)]`
-    will equal `a`. Otherwise, return `-1` for elements with no match in `b`.
+    When `all_must_match` is `True` `a` and `b` must contain the same set of
+    elements. `b[find_correspondence(a, b)]` equals `a`. Otherwise, return
+    `-1` for elements with no match in `b`.
 
     Args:
         a (np.arraylike): `kxn` array.
@@ -68,8 +68,8 @@ def restore_correspondence(shuffled_mesh, reference_mesh, atol=1e-4, progress=Tr
     """
     Given a reference mesh, reorder the vertices of a shuffled copy to restore
     correspondence with the reference mesh. The vertex set of the shuffled
-    mesh and reference mesh must be the same within `atol`. Mutates
-    `reference_mesh`. Faces are preserved but ignored.
+    mesh and reference mesh must be equal within `atol`. Mutate
+    `reference_mesh`. Ignore faces but preserves their integrity.
 
     Args:
         reference_mesh (lace.mesh.Mesh): A mesh with the vertices in the
