@@ -83,7 +83,8 @@ def restore_correspondence(shuffled_mesh, reference_mesh, atol=1e-4, progress=Tr
 
     Note:
         This was designed to assist in extracting face ordering and groups from a
-        shuffled `mesh` that "work" with `reference_mesh`.
+        `shuffled_mesh` that "work" with `reference_mesh`, so the face ordering
+        and groups can be used with different vertices.
 
         It relies on a brute-force algorithm.
     """
