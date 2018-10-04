@@ -20,6 +20,7 @@ correspondence.
 Features
 --------
 
+- Create a composite.
 - Transfer landmarks from the surface of one mesh to the surface of another.
 - Shuffle vertices.
 - Restore correspondence of vertices.
