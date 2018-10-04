@@ -8,22 +8,21 @@ def _maybe_tqdm(iterable, progress):
 
 
 def find_correspondence(
-    a, b, atol=1e-4, elements_must_match=True, ret_unmatched_b=False, progress=True
+    a, b, atol=1e-4, all_must_match=True, ret_unmatched_b=False, progress=True
 ):
     """
-    Given `a[0], a[1], ..., a[k]` and `b[0], b[1], ..., b[j]`, find the index
-    of `b` which corresponds to each element of `a`.
+    Given `a[0], a[1], ..., a[k]` and `b[0], b[1], ..., b[j]`, match each element
+    of `a` to the corresponding element in `b`.
 
-    When `elements_must_match` is `True`, the default, `a` and `b` must
-    contain the same set of elements and `b[find_correspondence(a, b)]` will
-    equal `a`. Otherwise, return `-1` for elements in `a` having no match in
-    `b`.
+    When `all_must_match` is `True`, the default, `a` and `b` must contain the
+    same set of elements, and in that case, `b[find_correspondence(a, b)]`
+    will equal `a`. Otherwise, return `-1` for elements with no match in `b`.
 
     Args:
         a (np.arraylike): `kxn` array.
         b (np.arraylike): `jxn` array.
         atol (float): Match tolerance.
-        elements_must_match (bool): When `True`, `a` and `b` must contain the
+        all_must_match (bool): When `True`, `a` and `b` must contain the
             same elements.
         ret_unmatched_b (bool): When `True`, return a tuple which also contains
             the indices of `b` which were not matched.
@@ -39,7 +38,7 @@ def find_correspondence(
     """
     import numpy as np
 
-    if elements_must_match and len(a) != len(b):
+    if all_must_match and len(a) != len(b):
         raise ValueError("a and b do not contain the same number of elements")
 
     a_to_b = np.repeat(-1, len(a))
@@ -51,7 +50,7 @@ def find_correspondence(
             b_index = indices[0]
             b_matched[b_index] = True
             a_to_b[a_index] = b_index
-        elif elements_must_match:
+        elif all_must_match:
             raise ValueError(
                 "Couldn't find corresponding element in b for item {} in a".format(
                     a_index
