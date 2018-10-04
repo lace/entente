@@ -12,7 +12,7 @@ class TestRestoreCorrespondence(ExtraAssertions, unittest.TestCase):
         # For performance.
         self.test_mesh.keep_vertices(np.arange(1000))
 
-    def test_find_correspondence(self):
+    def test_find_correspondence_matched(self):
         b = self.test_mesh.v
         expected_correspondence = np.random.permutation(len(b))
         a = b[expected_correspondence]
@@ -21,6 +21,33 @@ class TestRestoreCorrespondence(ExtraAssertions, unittest.TestCase):
 
         np.testing.assert_array_equal(correspondence, expected_correspondence)
         np.testing.assert_array_equal(b[correspondence], a)
+
+    def test_find_correspondence_unmatched(self):
+        b = self.test_mesh.v
+        expected_correspondence = np.random.permutation(len(b))
+        a = b[expected_correspondence]
+
+        a = np.vstack([a, np.array([1.0, 2.0, 3.0])])
+        expected_correspondence = np.append(1 + expected_correspondence, np.array([-1]))
+        b = np.vstack([np.array([3.0, 2.0, 1.0]), b])
+        expected_unmatched_b = np.array([0])
+
+        with self.assertRaises(ValueError):
+            res = find_correspondence(a, b, progress=False)
+
+        correspondence, unmatched_b = find_correspondence(
+            a, b, all_must_match=False, ret_unmatched_b=True, progress=False
+        )
+
+        np.testing.assert_array_equal(correspondence, expected_correspondence)
+        np.testing.assert_array_equal(unmatched_b, expected_unmatched_b)
+        reconstructed_a = np.vstack(
+            [
+                b[correspondence[np.where(correspondence != -1)]],
+                np.array([1.0, 2.0, 3.0]),
+            ]
+        )
+        np.testing.assert_array_equal(reconstructed_a, a)
 
     def test_restore_correspondence(self):
         from .shuffle import shuffle_vertices
