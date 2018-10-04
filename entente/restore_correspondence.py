@@ -7,7 +7,9 @@ def _maybe_tqdm(iterable, progress):
         return iterable
 
 
-def find_correspondence(a, b, atol=1e-4, allow_unmatched=False, ret_unmatched_b=False, progress=True):
+def find_correspondence(
+    a, b, atol=1e-4, allow_unmatched=False, ret_unmatched_b=False, progress=True
+):
     """
     Given a `kxn` array `a[0], a[1], ...` and `jxn` array `b[0], b[1], ...`,
     for each element in `a`, find the index of `b` with the corresponding
@@ -51,7 +53,9 @@ def find_correspondence(a, b, atol=1e-4, allow_unmatched=False, ret_unmatched_b=
             a_to_b[a_index] = b_index
         elif not allow_unmatched:
             raise ValueError(
-                "Couldn't find corresponding element in b for item {} in a".format(a_index)
+                "Couldn't find corresponding element in b for item {} in a".format(
+                    a_index
+                )
             )
 
     if ret_unmatched_b:
@@ -84,6 +88,8 @@ def restore_correspondence(shuffled_mesh, reference_mesh, atol=1e-4, progress=Tr
 
         It relies on a brute-force algorithm.
     """
-    v_old_to_new = find_correspondence(shuffled_mesh.v, reference_mesh.v, atol=atol, progress=progress)
+    v_old_to_new = find_correspondence(
+        shuffled_mesh.v, reference_mesh.v, atol=atol, progress=progress
+    )
     shuffled_mesh.reorder_vertices(v_old_to_new)
     return v_old_to_new

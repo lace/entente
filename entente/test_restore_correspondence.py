@@ -31,9 +31,7 @@ class TestRestoreCorrespondence(ExtraAssertions, unittest.TestCase):
         # https://stackoverflow.com/a/11649931/893113
         expected_v_old_to_new = np.argsort(v_new_to_old)
 
-        v_old_to_new = restore_correspondence(
-            working, self.test_mesh, progress=False
-        )
+        v_old_to_new = restore_correspondence(working, self.test_mesh, progress=False)
 
         np.testing.assert_array_equal(working.v, self.test_mesh.v)
         np.testing.assert_array_equal(working.f, self.test_mesh.f)
