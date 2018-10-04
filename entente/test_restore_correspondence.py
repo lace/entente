@@ -28,6 +28,10 @@ class TestRestoreCorrespondence(ExtraAssertions, unittest.TestCase):
         a = b[expected_correspondence]
 
         a = np.vstack([a, np.array([1.0, 2.0, 3.0])])
+
+        with self.assertRaises(ValueError):
+            find_correspondence(a, b, progress=False)
+
         expected_correspondence = np.append(1 + expected_correspondence, np.array([-1]))
         b = np.vstack([np.array([3.0, 2.0, 1.0]), b])
         expected_unmatched_b = np.array([0])
