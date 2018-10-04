@@ -1,7 +1,8 @@
 def composite_meshes(mesh_paths):
     """
     Create a composite as a vertex-wise average of several meshes in
-    correspondence. Faces and groups are loaded from the first mesh given.
+    correspondence. Faces, groups, and other attributes are loaded from the
+    first mesh given.
 
     Args:
         mesh_paths (list): Paths of the meshes to average.
