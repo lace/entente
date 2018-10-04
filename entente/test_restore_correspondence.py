@@ -33,7 +33,7 @@ class TestRestoreCorrespondence(ExtraAssertions, unittest.TestCase):
         expected_unmatched_b = np.array([0])
 
         with self.assertRaises(ValueError):
-            res = find_correspondence(a, b, progress=False)
+            find_correspondence(a, b, progress=False)
 
         correspondence, unmatched_b = find_correspondence(
             a, b, all_must_match=False, ret_unmatched_b=True, progress=False
