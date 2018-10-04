@@ -12,18 +12,20 @@ def composite_meshes(mesh_paths):
     from lace.mesh import Mesh
 
     if not len(mesh_paths):
-        raise ValueError('Expected at least one mesh path')
+        raise ValueError("Expected at least one mesh path")
 
     first_mesh_path, remaining_mesh_paths = mesh_paths[0], mesh_paths[1:]
 
-    working_mesh = Mesh(filename=mesh_paths[0])
+    working_mesh = Mesh(filename=first_mesh_path)
 
-    for this_mesh_path in mesh_paths[1:]:
+    for this_mesh_path in remaining_mesh_paths:
         this_mesh = Mesh(filename=this_mesh_path)
         if not this_mesh.has_same_topology(working_mesh):
-            raise ValueError('Expected {} to have the same topology as {}'.format(
-                this_mesh_path,
-                first_mesh_path))
+            raise ValueError(
+                "Expected {} to have the same topology as {}".format(
+                    this_mesh_path, first_mesh_path
+                )
+            )
         working_mesh.v += this_mesh.v
 
     working_mesh.v /= len(mesh_paths)

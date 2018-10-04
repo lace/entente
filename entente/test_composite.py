@@ -18,8 +18,8 @@ class TestShuffle(ExtraAssertions, ScratchDirMixin, unittest.TestCase):
         working_mesh = base_mesh.copy_fv()
         mesh_paths = []
         for i, offset in enumerate(np.linspace(-25.0, 25.0, num=9)):
-            mesh_path = self.get_tmp_path('mesh_{}.obj'.format(i))
-            working_mesh.v[: 1] = base_mesh.v[: 1] + offset
+            mesh_path = self.get_tmp_path("mesh_{}.obj".format(i))
+            working_mesh.v[:1] = base_mesh.v[:1] + offset
             working_mesh.write(mesh_path)
             mesh_paths.append(mesh_path)
 
@@ -29,10 +29,9 @@ class TestShuffle(ExtraAssertions, ScratchDirMixin, unittest.TestCase):
             AssertionError,
             np.testing.assert_array_almost_equal,
             composite.v,
-            base_mesh.v)
+            base_mesh.v,
+        )
 
         composite = composite_meshes(mesh_paths)
 
-        np.testing.assert_array_almost_equal(
-            composite.v,
-            base_mesh.v)
+        np.testing.assert_array_almost_equal(composite.v, base_mesh.v)
