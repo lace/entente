@@ -1,7 +1,7 @@
 -r requirements.txt
 
 # Used in dev.py.
-metabolexecutor
+executor >= 21.0
 
 # Documentation.
 Sphinx
