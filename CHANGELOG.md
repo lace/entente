@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## 0.4.1 (Nov 3, 2018)
+
+- Remove unused dependency on pyyaml.
+
 ## 0.4.0 (Oct 4, 2018)
 
 - Rework and improve entente.restore_correspondence.find_permutation and
