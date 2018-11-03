@@ -54,6 +54,22 @@ python -m entente.cli source.obj source.pp target1.obj target2.obj ...
 ```
 
 
+Development
+-----------
+
+### Updating the Docker build for CircleCI
+
+1. Make sure Docker is installed and running.
+2. Build and push the images:
+
+```sh
+./dev.py docker-build 0.2.0  # Use the next available minor release.
+./dev.py docker-push 0.2.0
+```
+
+3. Update the `image:` references in .circleci/config.yml`.
+
+
 Contribute
 ----------
 
