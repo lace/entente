@@ -1,4 +1,4 @@
-black == 18.9b0
+black ==19.3b0
 nose2 ==0.8.0
 pyflakes >=2.0,<3.0
 
