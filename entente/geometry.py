@@ -30,7 +30,7 @@ def compute_barycentric_coordinates(vertices_of_tris, points):
     Note:
         A function with this signature probably belongs in `blmath`.
     """
-    from blmath.geometry.barycentric import barycentric_coordinates_of_projection
+    from polliwog.tri.barycentric import barycentric_coordinates_of_projection
     from .validation import validate_shape_from_ns
 
     k = validate_shape_from_ns(locals(), "vertices_of_tris", -1, 3, 3)
