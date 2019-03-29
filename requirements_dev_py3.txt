@@ -1,5 +1,5 @@
 black ==19.3b0
-nose2 ==0.8.0
+nose2 ==0.9.0
 pyflakes >=2.0,<3.0
 
 # Used in dev.py.
