@@ -1,9 +1,14 @@
 Changelog
 =========
 
+## 0.6.0 (Apr 3, 2019)
+
+- Remove `entente.geometry` which has been moved to `polliwog.tri.barycentric`.
+- Remove `entente.validation` which has been moved to `vg.shape.check`.
+
 ## 0.5.0 (Apr 3, 2019)
 
-- Landmark using spatialindex, rtree, and trimesh, instead of CGAL
+- Landmark using spatialindex, rtree, and trimesh, instead of CGAL.
 
 ## 0.4.1 (Nov 3, 2018)
 
