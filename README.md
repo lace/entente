@@ -2,7 +2,9 @@ entente
 =======
 
 [![version](https://img.shields.io/pypi/v/entente.svg?style=flat-square)][pypi]
+[![python version](https://img.shields.io/pypi/pyversions/entente.svg?style=flat-square)][pypi]
 [![license](https://img.shields.io/pypi/l/entente.svg?style=flat-square)][pypi]
+[![coverage](https://img.shields.io/coveralls/lace/entente.svg?style=flat-square)][coverage]
 [![build](https://img.shields.io/circleci/project/github/lace/entente/master.svg?style=flat-square)][build]
 [![docs build](https://img.shields.io/readthedocs/entente.svg?style=flat-square)][docs build]
 [![code style](https://img.shields.io/badge/code%20style-black-black.svg?style=flat-square)][black]
@@ -11,6 +13,7 @@ Library for working with [lace][]-style polygonal meshes which have vertex-wise
 correspondence.
 
 [pypi]: https://pypi.org/project/entente/
+[coverage]: https://coveralls.io/github/lace/entente
 [black]: https://black.readthedocs.io/en/stable/
 [lace]: https://github.com/metabolize/lace
 [build]: https://circleci.com/gh/lace/entente/tree/master
