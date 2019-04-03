@@ -2,10 +2,15 @@ version: 2
 jobs:
   python2:
     docker:
-      - image: laceproject/entente-ci-py2.7:0.4.0
+      - image: laceproject/entente-ci-py2.7:0.5.0
 
     steps:
       - checkout
+
+      - run:
+          name: Install python dependencies
+          # set -o pipefail; pip .. | cat is used to disable the progress bar.
+          command: set -o pipefail; pip install --upgrade -r requirements_dev.txt | cat
 
       - run:
           name: Show versions
@@ -36,10 +41,15 @@ jobs:
 
   python3:
     docker:
-      - image: laceproject/entente-ci-py3.6:0.4.0
+      - image: laceproject/entente-ci-py3.6:0.5.0
 
     steps:
       - checkout
+
+      - run:
+          name: Install python dependencies
+          # set -o pipefail; pip .. | cat is used to disable the progress bar.
+          command: set -o pipefail; pip install --upgrade -r requirements_dev_py3.txt | cat
 
       - run:
           name: Show versions

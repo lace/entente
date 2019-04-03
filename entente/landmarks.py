@@ -49,7 +49,7 @@ class Landmarker(object):
     def _regressor(self):
         import numpy as np
         from blmath.numerics.matlab import sparse
-        from .geometry import compute_barycentric_coordinates
+        from polliwog.tri.barycentric import compute_barycentric_coordinates
         from .trimesh_search import faces_nearest_to_points
 
         landmark_points = np.array(self.landmarks.values())

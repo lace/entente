@@ -1,6 +1,6 @@
 numpy
-metabolace >= 1.2.0, < 2.0
-metablmath >= 1.3.0, < 2.0
-click >=7.0,<8.0
+metabolace>=1.2.0,<2.0
+metablmath>=1.3.0,<2.0
+click>=7.0,<8.0
 tqdm
-polliwog
+polliwog>=0.3.0
