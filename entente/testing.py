@@ -20,9 +20,9 @@ def coord_set(a):
     return set(tuple(coords) for coords in a)
 
 
-class ExtraAssertions(object):
-    def assertSameVertexSet(self, a, b):
-        self.assertItemsEqual(coord_set(a.v), coord_set(b.v))
+def assert_same_vertex_set(a, b):
+    assert coord_set(a.v) == coord_set(b.v)
 
-    def assertSameFaceSet(self, a, b):
-        self.assertItemsEqual(coord_set(a.f), coord_set(b.f))
+
+def assert_same_face_set(a, b):
+    assert coord_set(a.f) == coord_set(b.f)
