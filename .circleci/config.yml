@@ -2,9 +2,7 @@ version: 2
 jobs:
   python2:
     docker:
-      - image: laceproject/entente-ci-py2.7:0.2.0
-
-    working_directory: ~/repo
+      - image: laceproject/entente-ci-py2.7:0.3.0
 
     steps:
       - checkout
@@ -23,17 +21,22 @@ jobs:
 
       - run:
           name: Run tests
-          command: ./dev.py test
+          when: always
+          command: ./dev.py coverage
+
+      - run:
+          name: Send results to coveralls.io
+          when: always
+          command: coveralls
 
       - run:
           name: Run the doc build
+          when: always
           command: ./dev.py doc
 
   python3:
     docker:
-      - image: laceproject/entente-ci-py3.6:0.2.0
-
-    working_directory: ~/repo
+      - image: laceproject/entente-ci-py3.6:0.3.0
 
     steps:
       - checkout
