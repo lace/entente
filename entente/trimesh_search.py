@@ -32,6 +32,7 @@ def require_trimesh_with_rtree():
         )
         raise ImportError("trimesh, rtree, and spatialindex are not installed")
 
+
 def faces_nearest_to_points(mesh, query_points, ret_points=False):
     """
     Find the triangular faces on a mesh which are nearest to the given query
