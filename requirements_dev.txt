@@ -1,5 +1,9 @@
 -r requirements.txt
 
+# Optional dependencies.
+trimesh==2.37.26
+rtree==0.8.3
+
 # Used in dev.py.
 executor >= 21.0
 

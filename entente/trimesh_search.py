@@ -50,8 +50,6 @@ def faces_nearest_to_points(mesh, query_points, ret_points=False):
         as `kx3 np.ndarray`.
     """
     import trimesh
-    import numpy as np
-    from CGAL.CGAL_Kernel import Point_3
 
     trimesh_mesh = trimesh.Mesh(vertices=mesh.v, faces=mesh.f)
     closest_points, _, face_indices = trimesh_mesh.nearest.on_surface(query_points)
