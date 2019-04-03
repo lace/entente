@@ -1,7 +1,7 @@
 """
 Functions for transferring landmarks from one mesh to another.
 
-This module requires CGAL. See note in ``entente.cgal_search``.
+This module requires libspatialindex and rtree. See note in `trimesh_search.py`.
 """
 
 from cached_property import cached_property
@@ -21,9 +21,9 @@ class Landmarker(object):
     """
 
     def __init__(self, source_mesh, landmarks):
-        from cgal_search import require_cgal
+        from .trimesh_search import require_trimesh_with_rtree
 
-        require_cgal()
+        require_trimesh_with_rtree()
         self.source_mesh = source_mesh
         self.landmarks = landmarks
 
@@ -50,7 +50,7 @@ class Landmarker(object):
         import numpy as np
         from blmath.numerics.matlab import sparse
         from .geometry import compute_barycentric_coordinates
-        from .cgal_search import faces_nearest_to_points
+        from .trimesh_search import faces_nearest_to_points
 
         landmark_points = np.array(self.landmarks.values())
         num_landmarks = len(landmark_points)

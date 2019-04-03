@@ -6,8 +6,7 @@ apt-get install -y --no-install-recommends \
   python-opencv \
   libsuitesparse-dev \
   libboost-dev \
-  libcgal-dev \
-  swig \
+  libspatialindex-dev \
   git-lfs
 rm -rf /var/lib/apt/lists/*
 
