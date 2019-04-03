@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## 0.5.0 (Apr 3, 2019)
+
+- Landmark using spatialindex, rtree, and trimesh, instead of CGAL
+
 ## 0.4.1 (Nov 3, 2018)
 
 - Remove unused dependency on pyyaml.
