@@ -1,35 +1,31 @@
-import unittest
 import numpy as np
 from .shuffle import shuffle_vertices, shuffle_faces
-from .testing import ExtraAssertions
+from .testing import vitra_mesh, assert_same_face_set, assert_same_vertex_set
 
 
-class TestShuffle(ExtraAssertions, unittest.TestCase):
-    def setUp(self):
-        from .testing import vitra_mesh
+def test_shuffle_vertices():
+    test_mesh = vitra_mesh()
+    shuffled = test_mesh.copy_fv()
 
-        self.test_mesh = vitra_mesh()
+    shuffle_vertices(shuffled)
 
-    def test_shuffle_vertices(self):
-        shuffled = self.test_mesh.copy_fv()
+    np.testing.assert_raises(
+        AssertionError, np.testing.assert_array_equal, shuffled.v, test_mesh.v
+    )
+    np.testing.assert_raises(
+        AssertionError, np.testing.assert_array_equal, shuffled.f, test_mesh.f
+    )
+    assert_same_vertex_set(test_mesh, shuffled)
 
-        shuffle_vertices(shuffled)
 
-        np.testing.assert_raises(
-            AssertionError, np.testing.assert_array_equal, shuffled.v, self.test_mesh.v
-        )
-        np.testing.assert_raises(
-            AssertionError, np.testing.assert_array_equal, shuffled.f, self.test_mesh.f
-        )
-        self.assertSameVertexSet(self.test_mesh, shuffled)
+def test_shuffle_faces():
+    test_mesh = vitra_mesh()
+    shuffled = test_mesh.copy_fv()
 
-    def test_shuffle_faces(self):
-        shuffled = self.test_mesh.copy_fv()
+    shuffle_faces(shuffled)
 
-        shuffle_faces(shuffled)
-
-        np.testing.assert_array_equal(shuffled.v, self.test_mesh.v)
-        np.testing.assert_raises(
-            AssertionError, np.testing.assert_array_equal, shuffled.f, self.test_mesh.f
-        )
-        self.assertSameFaceSet(self.test_mesh, shuffled)
+    np.testing.assert_array_equal(shuffled.v, test_mesh.v)
+    np.testing.assert_raises(
+        AssertionError, np.testing.assert_array_equal, shuffled.f, test_mesh.f
+    )
+    assert_same_face_set(test_mesh, shuffled)

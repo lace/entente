@@ -5,16 +5,6 @@ import click
 from executor import execute
 
 
-def nose_cmd():
-    # More reliably locate this command when more than one Python are
-    # installed.
-    try:
-        execute("nose2-2.7 --help", capture=True)
-        return "nose2-2.7"
-    except:
-        return "nose2"
-
-
 def python_source_files():
     import glob
 
@@ -66,7 +56,18 @@ def docker_push(tag):
 
 @cli.command()
 def test():
-    execute(nose_cmd())
+    execute("python2 -m pytest")
+
+
+@cli.command()
+def coverage():
+    execute("python2 -m pytest --cov=entente")
+
+
+@cli.command()
+def coverage_report():
+    execute("coverage html")
+    execute("open htmlcov/index.html")
 
 
 @cli.command()
