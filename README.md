@@ -24,8 +24,9 @@ Features
 - Transfer landmarks from the surface of one mesh to the surface of another.
 - Shuffle vertices.
 - Restore correspondence of vertices.
-- Spatial search, lightly wrapping CGAL.
+- Spatial search, lightly wrapping [trimesh][].
 - Complete documentation: https://entente.readthedocs.io/en/stable/
+
 
 
 Installation
@@ -37,13 +38,17 @@ Requires Python 2.7.
 pip install entente
 ```
 
-CGAL and cgal-bindings are required for landmark transfer and AABB tree. They
-are optional because cgal-bindings takes a long time to build.
+[trimesh][], [rtree][], and [libspatialindex][] are required for landmark
+transfer and AABB tree. They are optional.
 
 ```sh
-brew install cgal swig
-pip install cgal-bindings
+brew install spatialindex
+pip install rtree trimesh
 ```
+
+[trimesh]: https://trimsh.org/
+[rtree]: http://toblerity.org/rtree/
+[libspatialindex]: https://libspatialindex.org/
 
 
 Usage
