@@ -11,3 +11,4 @@ recommonmark
 # Unit tests.
 pytest==4.4.0
 pytest-cov==2.6.1
+coveralls==1.7.0
