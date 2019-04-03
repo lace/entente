@@ -1,6 +1,6 @@
 import numpy as np
 from .composite import composite_meshes
-from .testing import assert_same_vertex_set, assert_same_face_set, vitra_mesh
+from .testing import vitra_mesh
 
 
 def test_composite_meshes(tmp_path):
