@@ -52,6 +52,6 @@ def faces_nearest_to_points(mesh, query_points, ret_points=False):
     """
     import trimesh
 
-    trimesh_mesh = trimesh.Mesh(vertices=mesh.v, faces=mesh.f)
+    trimesh_mesh = trimesh.Trimesh(vertices=mesh.v, faces=mesh.f)
     closest_points, _, face_indices = trimesh_mesh.nearest.on_surface(query_points)
     return (face_indices, closest_points) if ret_points else face_indices
