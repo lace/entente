@@ -8,6 +8,11 @@ jobs:
       - checkout
 
       - run:
+          name: Install python dependencies
+          # set -o pipefail; pip .. | cat is used to disable the progress bar.
+          command: set -o pipefail; pip install --upgrade -r requirements_dev.txt | cat
+
+      - run:
           name: Show versions
           command: pip freeze
 
@@ -40,6 +45,11 @@ jobs:
 
     steps:
       - checkout
+
+      - run:
+          name: Install python dependencies
+          # set -o pipefail; pip .. | cat is used to disable the progress bar.
+          command: set -o pipefail; pip install --upgrade -r requirements_dev_py3.txt | cat
 
       - run:
           name: Show versions
