@@ -23,7 +23,7 @@ setup(
     packages=find_packages(),
     install_requires=install_requires,
     classifiers=[
-        "Development Status :: 2 - Pre-Alpha",
+        "Development Status :: 3 - Alpha",
         "Intended Audience :: Other Audience",
         "Intended Audience :: Science/Research",
         "License :: OSI Approved :: MIT License",
