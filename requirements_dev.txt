@@ -1,7 +1,7 @@
 -r requirements.txt
 
 # Optional dependencies.
-trimesh==2.37.30
+trimesh==2.38.21
 rtree==0.8.3
 
 # Used in dev.py.
