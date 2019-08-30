@@ -52,7 +52,7 @@ class Landmarker(object):
         from polliwog.tri.barycentric import compute_barycentric_coordinates
         from .trimesh_search import faces_nearest_to_points
 
-        landmark_points = np.array(self.landmarks.values())
+        landmark_points = np.array(list(self.landmarks.values()))
         num_landmarks = len(landmark_points)
 
         face_indices = faces_nearest_to_points(self.source_mesh, landmark_points)

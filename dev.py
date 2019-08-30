@@ -56,12 +56,12 @@ def docker_push(tag):
 
 @cli.command()
 def test():
-    execute("python2 -m pytest")
+    execute("python -m pytest")
 
 
 @cli.command()
 def coverage():
-    execute("python2 -m pytest --cov=entente")
+    execute("python -m pytest --cov=entente")
 
 
 @cli.command()
