@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## 0.7.0 (Aug 30, 2019)
+
+- Update for Python 3.
+
 ## 0.6.0 (Apr 3, 2019)
 
 - Remove `entente.geometry` which has been moved to `polliwog.tri.barycentric`.
