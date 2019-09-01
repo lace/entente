@@ -14,6 +14,6 @@ sphinxcontrib-apidoc
 recommonmark
 
 # Unit tests.
-pytest==4.5.0
+pytest==5.1.2
 pytest-cov==2.7.1
 coveralls==1.8.2
