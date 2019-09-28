@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## 0.7.1 (Sep 28, 2019)
+
+- Unfork dependencies.
+
 ## 0.7.0 (Aug 30, 2019)
 
 - Update for Python 3.
