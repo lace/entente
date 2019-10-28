@@ -17,9 +17,9 @@ setup(
     long_description_content_type="text/markdown",
     author="Metabolize",
     author_email="github@paulmelnikow.com",
-    url="https://github.com/metabolize/entente",
+    url="https://github.com/lace/entente",
     project_urls={
-        "Issue Tracker": "https://github.com/metabolize/entente/issues",
+        "Issue Tracker": "https://github.com/lace/entente/issues",
         "Documentation": "https://entente.readthedocs.io/en/stable/",
     },
     packages=find_packages(),
