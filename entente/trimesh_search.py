@@ -18,7 +18,7 @@ def require_trimesh_with_rtree():
         import rtree
         import trimesh
 
-        # For pyflakes.
+        # For flake8.
         assert rtree
         assert trimesh
     except ImportError:
