@@ -1,1 +1,1 @@
-__version__ = "0.7.1"
+from .package_version import __version__
