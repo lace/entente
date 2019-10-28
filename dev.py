@@ -72,7 +72,7 @@ def coverage_report():
 
 @cli.command()
 def lint():
-    execute("pyflakes", *python_source_files())
+    execute("flake8", *python_source_files())
 
 
 @cli.command()
