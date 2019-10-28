@@ -1,23 +1,25 @@
-import importlib
 from setuptools import setup, find_packages
 
-with open("README.md") as f:
-    readme = f.read()
+# Set version_info[__version__], while avoiding importing numpy, in case numpy
+# and vg are being installed concurrently.
+# https://packaging.python.org/guides/single-sourcing-package-version/
+version_info = {}
+exec(open("entente/package_version.py").read(), version_info)
 
-with open("requirements.txt") as f:
-    install_requires = f.read()
+readme = open("README.md", "rb").read().decode("utf-8")
+install_requires = open("requirements.txt", "rb").read().decode("utf-8")
 
 setup(
     name="entente",
-    version=importlib.import_module("entente").__version__,
+    version=version_info["__version__"],
     description="Work with polygonal meshes which have vertex-wise correspondence",
     long_description=readme,
     long_description_content_type="text/markdown",
     author="Metabolize",
     author_email="github@paulmelnikow.com",
-    url="https://github.com/metabolize/entente",
+    url="https://github.com/lace/entente",
     project_urls={
-        "Issue Tracker": "https://github.com/metabolize/entente/issues",
+        "Issue Tracker": "https://github.com/lace/entente/issues",
         "Documentation": "https://entente.readthedocs.io/en/stable/",
     },
     packages=find_packages(),

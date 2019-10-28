@@ -1,6 +1,10 @@
 Changelog
 =========
 
+## 0.8.0 (Oct 27, 2019)
+
+- Update dependencies.
+
 ## 0.7.1 (Sep 28, 2019)
 
 - Unfork dependencies.
