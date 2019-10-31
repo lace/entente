@@ -1,6 +1,10 @@
 import pytest
 import numpy as np
-from .restore_correspondence import find_correspondence, restore_correspondence
+from .restore_correspondence import (
+    _maybe_tqdm,
+    find_correspondence,
+    restore_correspondence,
+)
 
 
 def create_test_mesh():
@@ -10,6 +14,11 @@ def create_test_mesh():
     # For performance.
     result.keep_vertices(np.arange(1000))
     return result
+
+
+def test_helper():
+    assert [x for x in _maybe_tqdm(iter([1, 2, 3]), progress=True)] == [1, 2, 3]
+    assert [x for x in _maybe_tqdm(iter([1, 2, 3]), progress=False)] == [1, 2, 3]
 
 
 def test_find_correspondence_matched():
