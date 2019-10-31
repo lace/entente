@@ -39,5 +39,5 @@ def transfer_landmarks(source_mesh, landmarks, target_mesh, out):
         meshlab_pickedpoints.dump(landmarks_on_target_mesh, out)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     transfer_landmarks()

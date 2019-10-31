@@ -21,7 +21,7 @@ def require_trimesh_with_rtree():
         # For flake8.
         assert rtree
         assert trimesh
-    except ImportError:
+    except ImportError:  # pragma: no cover
         print(
             """
             libspatialindex, rtree, and trimesh are not installed. On Mac OS:

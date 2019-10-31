@@ -1,12 +1,18 @@
 import numpy as np
+import pytest
 from .composite import composite_meshes
 from .testing import vitra_mesh
 
 
-def test_composite_meshes(tmp_path):
-    base_mesh = vitra_mesh()
+def mesh():
+    test_mesh = vitra_mesh()
     # For performance.
-    base_mesh.keep_vertices(np.arange(1000))
+    test_mesh.keep_vertices(np.arange(1000))
+    return test_mesh
+
+
+def test_composite_meshes(tmp_path):
+    base_mesh = mesh()
 
     # Create several translations of an example mesh which, composited,
     # should return the original mesh.
@@ -27,3 +33,22 @@ def test_composite_meshes(tmp_path):
     composite = composite_meshes(mesh_paths)
 
     np.testing.assert_array_almost_equal(composite.v, base_mesh.v)
+
+
+def test_composite_meshes_error(tmp_path):
+    test_mesh = mesh().copy_fv()
+    test_mesh_path = str(tmp_path / "test_mesh.obj")
+    test_mesh.write(test_mesh_path)
+
+    # Create a mesh with a different topology.
+    test_mesh.flip_faces()
+    test_mesh_flipped_path = str(tmp_path / "test_mesh_flipped.obj")
+    test_mesh.write(test_mesh_flipped_path)
+
+    with pytest.raises(
+        ValueError, match=r"Expected .+ to have the same topology as .*"
+    ):
+        composite_meshes([test_mesh_path, test_mesh_flipped_path])
+
+    with pytest.raises(ValueError, match="Expected at least one mesh path"):
+        composite_meshes([])

@@ -30,11 +30,6 @@ jobs:
           command: ./dev.py coverage
 
       - run:
-          name: Send results to coveralls.io
-          when: always
-          command: coveralls
-
-      - run:
           name: Run the doc build
           when: always
           command: ./dev.py doc
