@@ -35,8 +35,6 @@ Features
 Installation
 ------------
 
-Requires Python 2.7.
-
 ```sh
 pip install entente
 ```
