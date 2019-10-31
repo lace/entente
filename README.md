@@ -39,8 +39,8 @@ Installation
 pip install entente
 ```
 
-[trimesh][], [rtree][], and [libspatialindex][] are required for landmark
-transfer and AABB tree. They are optional.
+[trimesh][], [rtree][], and [libspatialindex][] are required in order to use
+landmark transfer and the AABB tree.
 
 ```sh
 brew install spatialindex
@@ -73,7 +73,7 @@ Development
 ./dev.py docker-push 0.2.0
 ```
 
-3. Update the `image:` references in .circleci/config.yml`.
+3. Update the `image:` references in `.circleci/config.yml`.
 
 
 Contribute
