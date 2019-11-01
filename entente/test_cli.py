@@ -2,7 +2,7 @@ import numpy as np
 from click.testing import CliRunner
 from lace.serialization import meshlab_pickedpoints
 from .cli import transfer_landmarks
-from .test_landmarks import source_target_landmarks
+from .landmarks.test_landmarker import source_target_landmarks
 
 
 def test_cli(tmp_path):

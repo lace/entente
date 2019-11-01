@@ -126,7 +126,7 @@ autosummary_generate = True
 # https://github.com/rtfd/readthedocs.org/issues/1139
 doc_home = os.path.abspath(os.path.dirname(__file__))
 apidoc_module_dir = os.path.join(doc_home, "..", "entente")
-apidoc_excluded_paths = ["test_*"]
+apidoc_excluded_paths = ["test_*", "testing", "package_version", "**/test_*"]
 apidoc_separate_modules = True
 apidoc_toc_file = False
 apidoc_module_first = True
