@@ -21,6 +21,11 @@ def init():
     execute("pip install --upgrade -r requirements_dev.txt")
 
 
+@cli.command()
+def clean():
+    execute("find . -name '*.pyc' -or -name '__pycache__' -delete")
+
+
 def docker_repo(python_version, tag):
     return "laceproject/entente-ci-{}:{}".format(python_version, tag)
 
@@ -56,12 +61,17 @@ def docker_push(tag):
 
 @cli.command()
 def test():
-    execute("python -m pytest")
+    execute("python3 -m pytest")
 
 
 @cli.command()
 def coverage():
-    execute("python -m pytest --cov=entente")
+    execute("python3 -m pytest --cov=entente")
+
+
+@cli.command()
+def coverage_py2():
+    execute("python2 -m pytest --cov=entente")
 
 
 @cli.command()
