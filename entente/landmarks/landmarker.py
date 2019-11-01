@@ -48,8 +48,8 @@ class Landmarker(object):
     @cached_property
     def _regressor(self):
         """
-        Find the face each of the landmarks sits on, and then describe its
-        position as a linear combination of the three vetices of that face.
+        Find the face on which each landmarks sits. Then describe its
+        position as a linear combination of the three vertices of that face.
 
         Represent this as a sparse matrix with a column for each coordinate
         of the source vertices and a row for each coordinate of the
