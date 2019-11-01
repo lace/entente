@@ -2,7 +2,7 @@ FROM python:2.7.15
 
 WORKDIR /src
 
-ADD docker/entente-ci/install_container_dependencies.sh /tmp/
+ADD docker/install_container_dependencies.sh /tmp/
 RUN /tmp/install_container_dependencies.sh
 RUN rm /tmp/install_container_dependencies.sh
 
