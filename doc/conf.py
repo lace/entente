@@ -46,9 +46,8 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx.ext.autosummary",
     "sphinxcontrib.apidoc",
+    "recommonmark",
 ]
-
-source_parsers = {".md": "recommonmark.parser.CommonMarkParser"}
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
@@ -112,74 +111,6 @@ html_static_path = ["_static"]
 htmlhelp_basename = "ententedoc"
 
 
-# -- Options for LaTeX output ------------------------------------------------
-
-latex_elements = {
-    # The paper size ('letterpaper' or 'a4paper').
-    #
-    # 'papersize': 'letterpaper',
-    # The font size ('10pt', '11pt' or '12pt').
-    #
-    # 'pointsize': '10pt',
-    # Additional stuff for the LaTeX preamble.
-    #
-    # 'preamble': '',
-    # Latex figure (float) alignment
-    #
-    # 'figure_align': 'htbp',
-}
-
-# Grouping the document tree into LaTeX files. List of tuples
-# (source start file, target name, title,
-#  author, documentclass [howto, manual, or own class]).
-latex_documents = [
-    (master_doc, "entente.tex", "entente Documentation", "Metabolize", "manual")
-]
-
-
-# -- Options for manual page output ------------------------------------------
-
-# One entry per manual page. List of tuples
-# (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, "entente", "entente Documentation", [author], 1)]
-
-
-# -- Options for Texinfo output ----------------------------------------------
-
-# Grouping the document tree into Texinfo files. List of tuples
-# (source start file, target name, title, author,
-#  dir menu entry, description, category)
-texinfo_documents = [
-    (
-        master_doc,
-        "entente",
-        "entente Documentation",
-        author,
-        "entente",
-        "One line description of project.",
-        "Miscellaneous",
-    )
-]
-
-
-# -- Options for Epub output -------------------------------------------------
-
-# Bibliographic Dublin Core info.
-epub_title = project
-
-# The unique identifier of the text. This can be a ISBN number
-# or the project homepage.
-#
-# epub_identifier = ''
-
-# A unique identification for the text.
-#
-# epub_uid = ''
-
-# A list of files that should not be packed into the epub file.
-epub_exclude_files = ["search.html"]
-
-
 # -- Extension configuration -------------------------------------------------
 
 # Napoleon settings.
@@ -194,9 +125,7 @@ autosummary_generate = True
 # https://github.com/sphinx-contrib/apidoc
 # https://github.com/rtfd/readthedocs.org/issues/1139
 doc_home = os.path.abspath(os.path.dirname(__file__))
-# .encode() to avoid
-# WARNING: The config value `apidoc_module_dir' has type `unicode', expected to ['str'].
-apidoc_module_dir = os.path.join(doc_home, "..", "entente").encode("utf-8")
+apidoc_module_dir = os.path.join(doc_home, "..", "entente")
 apidoc_excluded_paths = ["test_*"]
 apidoc_separate_modules = True
 apidoc_toc_file = False
