@@ -83,7 +83,7 @@ examples:
 ```
 
 ```sh
-python -m entente.cli composite_landmarks recipe.ymll
+python -m entente.cli composite_landmarks recipe.yml
 ```
 
 
