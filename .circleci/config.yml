@@ -29,11 +29,6 @@ jobs:
           when: always
           command: ./dev.py coverage-py2
 
-      - run:
-          name: Run the doc build
-          when: always
-          command: ./dev.py doc
-
   python3:
     docker:
       - image: laceproject/entente-ci-py3.6:0.9.0
@@ -72,6 +67,12 @@ jobs:
           name: Check code format
           when: always
           command: ./dev.py black-check
+
+      - run:
+          name: Run the doc build
+          when: always
+          command: ./dev.py doc
+
 
 workflows:
   version: 2
