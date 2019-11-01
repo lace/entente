@@ -43,7 +43,7 @@ def docker_build(tag):
             "-t",
             docker_repo(python_version, tag),
             "-f",
-            "docker/entente-ci/Dockerfile.{}".format(python_version),
+            "docker/Dockerfile.{}".format(python_version),
             ".",
         )
 
