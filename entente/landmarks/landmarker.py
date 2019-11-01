@@ -47,30 +47,39 @@ class Landmarker(object):
 
     @cached_property
     def _regressor(self):
+        """
+        Find the face each of the landmarks sits on, and then describe its
+        position as a linear combination of the three vetices of that face.
+
+        Represent this as a sparse matrix with a column for each coordinate
+        of the source vertices and a row for each coordinate of the
+        landmarks.
+
+        Pushing target vertices through the matrix transfers the original
+        landmarks to the target mesh.
+        """
         import numpy as np
         from scipy.sparse import csc_matrix
         from polliwog.tri.barycentric import compute_barycentric_coordinates
         from ._trimesh_search import faces_nearest_to_points
 
-        landmark_points = np.array(list(self.landmarks.values()))
-        num_landmarks = len(landmark_points)
-
-        face_indices = faces_nearest_to_points(self.source_mesh, landmark_points)
+        landmark_coords = np.array(list(self.landmarks.values()))
+        face_indices = faces_nearest_to_points(self.source_mesh, landmark_coords)
         vertex_indices = self.source_mesh.f[face_indices]
-        coords = compute_barycentric_coordinates(
-            self.source_mesh.v[vertex_indices], landmark_points
+        vertex_coeffs = compute_barycentric_coordinates(
+            self.source_mesh.v[vertex_indices], landmark_coords
         )
 
-        tiled_coords = np.repeat(coords, 3, axis=0).ravel()
+        # Note the `.transpose()` at the end. The matrix is created here from
+        # data organized along columns of the result, not rows.
+        values = np.repeat(vertex_coeffs, 3, axis=0).ravel()
         indices = (
             (3 * vertex_indices).reshape(-1, 1, 3)
             + np.arange(3, dtype=np.uint64).reshape(-1, 1)
         ).ravel()
-        indptr = np.array([0, 3, 6, 9, 12, 15, 18])
-        return csc_matrix(
-            (tiled_coords, indices, indptr),
-            shape=(3 * len(self.source_mesh.v), 3 * num_landmarks),
-        ).transpose()
+        indptr = np.arange(len(values) + 1, step=3)
+        shape = (3 * len(self.source_mesh.v), 3 * len(landmark_coords))
+        return csc_matrix((values, indices, indptr), shape=shape).transpose()
 
     def _invoke_regressor(self, target):
         coords = self._regressor * target.v.reshape(-1)
