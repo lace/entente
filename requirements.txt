@@ -1,4 +1,5 @@
 numpy
+scipy
 cached_property
 lace>=3.0.0,<4.0
 click>=7.0,<8.0

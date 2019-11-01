@@ -48,9 +48,9 @@ class Landmarker(object):
     @cached_property
     def _regressor(self):
         import numpy as np
+        from scipy.sparse import csc_matrix
         from polliwog.tri.barycentric import compute_barycentric_coordinates
         from ._trimesh_search import faces_nearest_to_points
-        from ._sparse import sparse
 
         landmark_points = np.array(list(self.landmarks.values()))
         num_landmarks = len(landmark_points)
@@ -61,19 +61,16 @@ class Landmarker(object):
             self.source_mesh.v[vertex_indices], landmark_points
         )
 
-        row_indices = np.repeat(np.arange(3 * num_landmarks, step=3), 3).reshape(
-            -1, 1
-        ) + np.arange(3, dtype=np.uint64)
-        column_indices = 3 * np.repeat(vertex_indices, 3).reshape(-1, 3) + np.arange(
+        tiled_coords = np.repeat(coords, 3).ravel()
+        row_indices = np.repeat(np.arange(3 * num_landmarks).reshape(-1, 3), 3, axis=0)
+        column_indices = 3 * vertex_indices.reshape(-1, 1) + np.arange(
             3, dtype=np.uint64
         )
-        tiled_coords = np.tile(coords.reshape(-1, 1), 3)
-        return sparse(
-            row_indices=row_indices.flatten(),
-            column_indices=column_indices.flatten(),
-            data=tiled_coords.flatten(),
-            num_rows=3 * num_landmarks,
-            num_columns=3 * self.source_mesh.v.shape[0],
+        indices = np.concatenate([row_indices, column_indices]).reshape(2, -1)
+
+        return csc_matrix(
+            (tiled_coords, indices),
+            shape=(3 * num_landmarks, 3 * self.source_mesh.v.shape[0]),
         )
 
     def _invoke_regressor(self, target):
