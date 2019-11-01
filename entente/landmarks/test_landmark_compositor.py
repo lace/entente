@@ -1,4 +1,5 @@
 import numpy as np
+import pytest
 from .landmark_compositor import LandmarkCompositor
 
 
@@ -26,3 +27,14 @@ def test_landmark_compositor():
     np.testing.assert_array_almost_equal(
         compositor.result["near_origin"], np.zeros(3), decimal=2
     )
+
+
+def test_landmark_compositor_error():
+    base_mesh, example_mesh_1, near_origin_1, example_mesh_2, near_origin_2 = (
+        composite_landmark_examples()
+    )
+    compositor = LandmarkCompositor(base_mesh=base_mesh, landmark_names=["near_origin"])
+    with pytest.raises(
+        ValueError, match="Expected examples to contain keys near_origin"
+    ):
+        compositor.add_example(example_mesh_1, {"oops": near_origin_1})
