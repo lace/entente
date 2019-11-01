@@ -81,10 +81,6 @@ class Landmarker(object):
         shape = (3 * len(self.source_mesh.v), 3 * len(landmark_coords))
         return csc_matrix((values, indices, indptr), shape=shape).transpose()
 
-    def _invoke_regressor(self, target):
-        coords = self._regressor * target.v.reshape(-1)
-        return dict(zip(self.landmarks.keys(), coords.reshape(-1, 3)))
-
     def transfer_landmarks_onto(self, target):
         """
         Transfer landmarks onto the given target mesh, which must be in the same
@@ -100,4 +96,6 @@ class Landmarker(object):
 
         if not have_same_topology(self.source_mesh, target):
             raise ValueError("Target mesh must have the same topology")
-        return self._invoke_regressor(target)
+
+        target_landmark_coords = (self._regressor * target.v.reshape(-1)).reshape(-1, 3)
+        return dict(zip(self.landmarks.keys(), target_landmark_coords))
