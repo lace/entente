@@ -63,7 +63,27 @@ Usage
 -----
 
 ```sh
-python -m entente.cli source.obj source.pp target1.obj target2.obj ...
+python -m entente.cli transfer_landmarks source.obj source.pp target1.obj target2.obj ...
+```
+
+```yml
+base_mesh: examples/average.obj
+landmarks:
+  - knee_left
+  - knee_right
+examples:
+  - id: example01
+    mesh: examples/example01.obj
+    knee_left: [-10.0, 15.0, 4.0]
+    knee_right: [10.0, 14.8, 4.1]
+  - id: example02
+    mesh: examples/example02.obj
+    knee_left: [-11.0, 13.0, 3.5]
+    knee_right: [12.0, 12.8, 3.4]
+```
+
+```
+python -m entente.cli composite_landmarks recipe.ymll
 ```
 
 
