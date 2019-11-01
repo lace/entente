@@ -4,8 +4,6 @@ from .test_landmark_compositor import composite_landmark_examples
 
 
 def write_recipe_assets(relative_to):
-    import yaml
-
     base_mesh, example_mesh_1, near_origin_1, example_mesh_2, near_origin_2 = (
         composite_landmark_examples()
     )

@@ -22,4 +22,3 @@ def test_add_landmark_points():
             ]
         ),
     )
-
