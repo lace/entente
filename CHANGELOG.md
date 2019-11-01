@@ -9,6 +9,10 @@ Changelog
   `entente.landmarks.landmarker.Landmarker`.
 - Make `trimesh_search` private.
 
+### New features
+
+- Add tool for compositing landmarks.
+
 ### Bug fixes
 
 - Remove an undeclared dependency on `blmath`.
