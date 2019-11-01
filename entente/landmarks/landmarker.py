@@ -47,38 +47,39 @@ class Landmarker(object):
 
     @cached_property
     def _regressor(self):
+        """
+        Find the face on which each landmarks sits. Then describe its
+        position as a linear combination of the three vertices of that face.
+
+        Represent this as a sparse matrix with a column for each coordinate
+        of the source vertices and a row for each coordinate of the
+        landmarks.
+
+        Pushing target vertices through the matrix transfers the original
+        landmarks to the target mesh.
+        """
         import numpy as np
-        from blmath.numerics.matlab import sparse
+        from scipy.sparse import csc_matrix
         from polliwog.tri.barycentric import compute_barycentric_coordinates
         from ._trimesh_search import faces_nearest_to_points
 
-        landmark_points = np.array(list(self.landmarks.values()))
-        num_landmarks = len(landmark_points)
-
-        face_indices = faces_nearest_to_points(self.source_mesh, landmark_points)
+        landmark_coords = np.array(list(self.landmarks.values()))
+        face_indices = faces_nearest_to_points(self.source_mesh, landmark_coords)
         vertex_indices = self.source_mesh.f[face_indices]
-        coords = compute_barycentric_coordinates(
-            self.source_mesh.v[vertex_indices], landmark_points
+        vertex_coeffs = compute_barycentric_coordinates(
+            self.source_mesh.v[vertex_indices], landmark_coords
         )
 
-        row_indices = np.repeat(np.arange(3 * num_landmarks, step=3), 3).reshape(
-            -1, 1
-        ) + np.arange(3, dtype=np.uint64)
-        column_indices = 3 * np.repeat(vertex_indices, 3).reshape(-1, 3) + np.arange(
-            3, dtype=np.uint64
-        )
-        tiled_coords = np.tile(coords.reshape(-1, 1), 3)
-        return sparse(
-            row_indices.flatten(),
-            column_indices.flatten(),
-            tiled_coords.flatten(),
-            3 * num_landmarks,
-            3 * self.source_mesh.v.shape[0],
-        )
-
-    def _invoke_regressor(self, target):
-        coords = self._regressor * target.v.reshape(-1)
-        return dict(zip(self.landmarks.keys(), coords.reshape(-1, 3)))
+        # Note the `.transpose()` at the end. The matrix is initially created
+        # from data organized along columns of the result, not rows.
+        values = np.repeat(vertex_coeffs, 3, axis=0).ravel()
+        indices = (
+            (3 * vertex_indices).reshape(-1, 1, 3)
+            + np.arange(3, dtype=np.uint64).reshape(-1, 1)
+        ).ravel()
+        indptr = np.arange(len(values) + 1, step=3)
+        shape = (3 * len(self.source_mesh.v), 3 * len(landmark_coords))
+        return csc_matrix((values, indices, indptr), shape=shape).transpose()
 
     def transfer_landmarks_onto(self, target):
         """
@@ -95,4 +96,6 @@ class Landmarker(object):
 
         if not have_same_topology(self.source_mesh, target):
             raise ValueError("Target mesh must have the same topology")
-        return self._invoke_regressor(target)
+
+        target_landmark_coords = (self._regressor * target.v.reshape(-1)).reshape(-1, 3)
+        return dict(zip(self.landmarks.keys(), target_landmark_coords))
