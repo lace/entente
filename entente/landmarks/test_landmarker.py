@@ -2,7 +2,7 @@ import numpy as np
 import pytest
 from lace.serialization import meshlab_pickedpoints
 from lace.shapes import create_cube
-from .landmarks import Landmarker
+from .landmarker import Landmarker
 
 
 def source_target_landmarks():
