@@ -82,7 +82,7 @@ examples:
     knee_right: [12.0, 12.8, 3.4]
 ```
 
-```
+```sh
 python -m entente.cli composite_landmarks recipe.ymll
 ```
 
