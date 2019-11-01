@@ -4,9 +4,9 @@ from .landmarker import Landmarker
 
 class LandmarkCompositor(object):
     """
-    A tool for compositing landmarks from examples on several subjects in
-    relation to a base mesh. Each example is projected onto the base mesh,
-    and then the points are averaged.
+    A tool for compositing landmarks from several examples in relation to
+    a base mesh. Each example is projected onto the base mesh, then the
+    points are averaged.
 
     The tool takes as input:
 
