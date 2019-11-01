@@ -60,75 +60,17 @@ class Landmarker(object):
         coords = compute_barycentric_coordinates(
             self.source_mesh.v[vertex_indices], landmark_points
         )
-        # coords = (np.arange(6) + 1).reshape(-1, 3)
-
-        tiled_coords = np.repeat(coords, 3).ravel()
-        row_indices = np.repeat(np.arange(3 * num_landmarks).reshape(-1, 3), 3, axis=0)
-        column_indices = 3 * vertex_indices.reshape(-1, 1) + np.arange(
-            3, dtype=np.uint64
-        )
-        indices = np.concatenate([row_indices, column_indices]).reshape(2, -1)
-
-        csc1 = csc_matrix(
-            (tiled_coords, indices),
-            shape=(3 * num_landmarks, 3 * len(self.source_mesh.v)),
-        )
-
-        row_indices = np.repeat(np.arange(3 * num_landmarks).reshape(-1, 3), 3, axis=0)
-        column_indices = 3 * vertex_indices.reshape(-1, 1) + np.arange(
-            3, dtype=np.uint64
-        )
-        indices = np.concatenate([column_indices, row_indices]).reshape(2, -1)
-
-        csc2 = csc_matrix(
-            (tiled_coords, indices),
-            shape=(3 * len(self.source_mesh.v), 3 * num_landmarks),
-        ).transpose()
-        np.testing.assert_array_equal(csc1.toarray(), csc2.toarray())
 
         tiled_coords = np.repeat(coords, 3, axis=0).ravel()
-        column_indices = np.repeat(
-            np.arange(3 * num_landmarks).reshape(-1, 3), 3, axis=0
-        )
-        row_indices = 3 * vertex_indices.reshape(-1, 1) + np.arange(3, dtype=np.uint64)
-        indices = np.concatenate([row_indices, column_indices]).reshape(2, -1)
-
-        # import pdb
-
-        # pdb.set_trace()
-
-        # indices = np.array(
-        #     [
-        #         [9, 12, 0],
-        #         [10, 13, 1],
-        #         [11, 14, 2],
-        #         [18, 21, 9],
-        #         [19, 22, 10],
-        #         [20, 23, 11],
-        #     ]
-        # ).ravel()
-
-        indices = (
-            np.repeat(3 * vertex_indices, 3, axis=0).reshape(-1, 3, 3)
-            + np.repeat(np.arange(3, dtype=np.uint64), 3).reshape(-1, 3)
-        ).ravel()
         indices = (
             (3 * vertex_indices).reshape(-1, 1, 3)
             + np.arange(3, dtype=np.uint64).reshape(-1, 1)
         ).ravel()
-        # import pdb
-
-        # pdb.set_trace()
-
         indptr = np.array([0, 3, 6, 9, 12, 15, 18])
-
-        csc3 = csc_matrix(
+        return csc_matrix(
             (tiled_coords, indices, indptr),
             shape=(3 * len(self.source_mesh.v), 3 * num_landmarks),
         ).transpose()
-        np.testing.assert_array_equal(csc1.toarray(), csc2.toarray())
-        np.testing.assert_array_equal(csc2.toarray(), csc3.toarray())
-        return csc2
 
     def _invoke_regressor(self, target):
         coords = self._regressor * target.v.reshape(-1)
