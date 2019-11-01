@@ -48,9 +48,10 @@ class Landmarker(object):
     @cached_property
     def _regressor(self):
         import numpy as np
-        from blmath.numerics.matlab import sparse
+        from scipy.sparse import csc_matrix
         from polliwog.tri.barycentric import compute_barycentric_coordinates
         from ._trimesh_search import faces_nearest_to_points
+        from ._sparse import sparse
 
         landmark_points = np.array(list(self.landmarks.values()))
         num_landmarks = len(landmark_points)
@@ -69,11 +70,11 @@ class Landmarker(object):
         )
         tiled_coords = np.tile(coords.reshape(-1, 1), 3)
         return sparse(
-            row_indices.flatten(),
-            column_indices.flatten(),
-            tiled_coords.flatten(),
-            3 * num_landmarks,
-            3 * self.source_mesh.v.shape[0],
+            row_indices=row_indices.flatten(),
+            column_indices=column_indices.flatten(),
+            data=tiled_coords.flatten(),
+            num_rows=3 * num_landmarks,
+            num_columns=3 * self.source_mesh.v.shape[0],
         )
 
     def _invoke_regressor(self, target):
