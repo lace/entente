@@ -1,4 +1,5 @@
 def sparse(row_indices, column_indices, data, num_rows, num_columns):
+    # Adapted from blmath.
     import numpy as np
     from scipy.sparse import csc_matrix
 
