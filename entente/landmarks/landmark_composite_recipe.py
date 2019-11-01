@@ -2,9 +2,10 @@ from cached_property import cached_property
 import numpy as np
 from .landmarker import Landmarker
 from .landmark_compositor import LandmarkCompositor
+from ._mesh import DEFAULT_RADIUS
 
 
-class LandmarkCompositeReceipe(object):
+class LandmarkCompositeRecipe(object):
     def __init__(self, recipe):
         """
         Example recipe:
@@ -50,8 +51,7 @@ class LandmarkCompositeReceipe(object):
         )
         for example in self.examples:
             example_mesh = Mesh(filename=example["mesh"])
-            # `id` and `mesh` attrs are ignored.
-            landmarks = example
+            landmarks = {k: example[k] for k in self.landmark_names}
             compositor.add_example(mesh=example_mesh, landmarks=landmarks)
         return compositor.result
 
@@ -66,10 +66,12 @@ class LandmarkCompositeReceipe(object):
         reprojected = {}
         for example in self.examples:
             mesh = Mesh(filename=example["mesh"])
-            result[example["id"]] = inverse_landmarker.transfer_landmarks_onto()
+            reprojected[example["id"]] = inverse_landmarker.transfer_landmarks_onto(
+                mesh
+            )
         return reprojected
 
-    def write_reprojected_landmarks(self, output_dir, radius=0.1):
+    def write_reprojected_landmarks(self, output_dir, radius=DEFAULT_RADIUS):
         import os
         from lace.mesh import Mesh
         from ._mesh import add_landmark_points
@@ -77,7 +79,7 @@ class LandmarkCompositeReceipe(object):
         for example in self.examples:
             mesh = Mesh(filename=example["mesh"])
             example_id = example["id"]
-            landmarks = np.array(self.reprojected_landmarks[example_id].values())
+            landmarks = np.array(list(self.reprojected_landmarks[example_id].values()))
             add_landmark_points(mesh, landmarks, radius=radius)
             out = os.path.join(output_dir, "{}.dae".format(example_id))
             mesh.write_dae(out)

@@ -28,7 +28,7 @@ class LandmarkCompositor(object):
     def add_example(self, mesh, landmarks):
         # By processing one mesh at a time, they don't all need to be loaded
         # into memory.
-        if set(landmarks.keys()) != self.landmark_names:
+        if not set(landmarks.keys()).issuperset(self.landmark_names):
             raise ValueError(
                 "Expected examples to contain keys {}".format(
                     ", ".join(self.landmark_names)

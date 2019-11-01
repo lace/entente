@@ -11,6 +11,7 @@ Example:
 """
 
 import click
+from .landmarks._mesh import DEFAULT_RADIUS
 
 
 @click.group()
@@ -47,7 +48,8 @@ def transfer_landmarks(source_mesh, landmarks, target_mesh, out):
 @cli.command()
 @click.argument("recipe")
 @click.argument("output_dir", default="./composite_result")
-def composite_landmarks(recipe, output_dir):
+@click.option("--indicator-radius", default=DEFAULT_RADIUS, show_default=True)
+def composite_landmarks(recipe, output_dir, indicator_radius):
     """
     Run the landmark composite recipe in the YAML file RECIPE and write it
     to OUTPUT_DIR.
@@ -55,17 +57,20 @@ def composite_landmarks(recipe, output_dir):
     import os
     import yaml
     from lace.serialization import meshlab_pickedpoints
-    from .landmarks.landmark_composite_recipe import LandmarkCompositeReceipe
+    from .landmarks.landmark_composite_recipe import LandmarkCompositeRecipe
 
-    recipe_obj = LandmarkCompositeReceipe.load(recipe)
+    recipe_obj = LandmarkCompositeRecipe.load(recipe)
 
     composite_landmarks = recipe_obj.composite_landmarks
     out_landmarks = os.path.join(output_dir, "landmarks")
-    yaml.dump(composite_landmarks, "{}.yml".format(out_landmarks))
     meshlab_pickedpoints.dump(composite_landmarks, "{}.pp".format(out_landmarks))
+    with open("{}.yml".format(out_landmarks), "w") as f:
+        yaml.dump(composite_landmarks, f)
 
-    reprojected_landmraks = recipe_obj.reprojected_landmarks
+    recipe_obj.write_reprojected_landmarks(
+        output_dir=output_dir, radius=indicator_radius
+    )
 
 
 if __name__ == "__main__":  # pragma: no cover
-    transfer_landmarks()
+    cli()

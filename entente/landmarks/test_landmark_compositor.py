@@ -1,0 +1,28 @@
+import numpy as np
+from .landmark_compositor import LandmarkCompositor
+
+
+def composite_landmark_examples():
+    """
+    Create three meshes in correspondence.
+    """
+    from lace.shapes import create_cube
+
+    base_mesh = create_cube(np.zeros(3), 1.0)
+    example_mesh_1 = create_cube(np.repeat(-3.0, 3), 8.0)
+    near_origin_1 = [-2.98, -2.98, -3.0]
+    example_mesh_2 = create_cube(np.repeat(4.0, 3), 0.3)
+    near_origin_2 = [4.006, 4.001, 4.0]
+    return base_mesh, example_mesh_1, near_origin_1, example_mesh_2, near_origin_2
+
+
+def test_landmark_compositor():
+    base_mesh, example_mesh_1, near_origin_1, example_mesh_2, near_origin_2 = (
+        composite_landmark_examples()
+    )
+    compositor = LandmarkCompositor(base_mesh=base_mesh, landmark_names=["near_origin"])
+    compositor.add_example(example_mesh_1, {"near_origin": near_origin_1})
+    compositor.add_example(example_mesh_2, {"near_origin": near_origin_2})
+    np.testing.assert_array_almost_equal(
+        compositor.result["near_origin"], np.zeros(3), decimal=2
+    )
