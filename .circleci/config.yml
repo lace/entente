@@ -27,7 +27,7 @@ jobs:
       - run:
           name: Run tests
           when: always
-          command: ./dev.py coverage
+          command: ./dev.py coverage-py2
 
       - run:
           name: Run the doc build

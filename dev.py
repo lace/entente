@@ -70,6 +70,11 @@ def coverage():
 
 
 @cli.command()
+def coverage_py2():
+    execute("python2 -m pytest --cov=entente")
+
+
+@cli.command()
 def coverage_report():
     execute("coverage html")
     execute("open htmlcov/index.html")
