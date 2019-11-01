@@ -21,7 +21,7 @@ class Landmarker(object):
     """
 
     def __init__(self, source_mesh, landmarks):
-        from .trimesh_search import require_trimesh_with_rtree
+        from ._trimesh_search import require_trimesh_with_rtree
 
         require_trimesh_with_rtree()
         self.source_mesh = source_mesh
@@ -50,7 +50,7 @@ class Landmarker(object):
         import numpy as np
         from blmath.numerics.matlab import sparse
         from polliwog.tri.barycentric import compute_barycentric_coordinates
-        from .trimesh_search import faces_nearest_to_points
+        from ._trimesh_search import faces_nearest_to_points
 
         landmark_points = np.array(list(self.landmarks.values()))
         num_landmarks = len(landmark_points)

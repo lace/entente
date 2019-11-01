@@ -23,7 +23,7 @@ def init():
 
 @cli.command()
 def clean():
-    execute("find . -name '*.pyc' -delete")
+    execute("find . -name '*.pyc' -or -name '__pycache__' -delete")
 
 
 def docker_repo(python_version, tag):
