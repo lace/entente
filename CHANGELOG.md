@@ -1,6 +1,25 @@
 Changelog
 =========
 
+## 0.9.0 (Nov 1, 2019)
+
+### BREAKING CHANGES
+
+- Move `entente.landmarks.Landmarker` to
+  `entente.landmarks.landmarker.Landmarker`.
+- Make `trimesh_search` private.
+
+### Bug fixes
+
+- Remove an undeclared dependency on `blmath`.
+- Declare some missing dependencies.
+
+### Other improvements
+
+- 100% test coverage.
+- Avoid generating documentation for test modules.
+- Ensure test files are not shipped.
+
 ## 0.8.0 (Oct 27, 2019)
 
 - Update dependencies.
