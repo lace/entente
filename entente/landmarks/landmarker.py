@@ -70,7 +70,7 @@ class Landmarker(object):
 
         return csc_matrix(
             (tiled_coords, indices),
-            shape=(3 * num_landmarks, 3 * self.source_mesh.v.shape[0]),
+            shape=(3 * num_landmarks, 3 * len(self.source_mesh.v)),
         )
 
     def _invoke_regressor(self, target):
