@@ -2,7 +2,7 @@ version: 2
 jobs:
   python2:
     docker:
-      - image: laceproject/entente-ci-py2.7:0.9.0
+      - image: laceproject/entente-ci-py2.7:0.10.0
 
     steps:
       - checkout
@@ -31,7 +31,7 @@ jobs:
 
   python3:
     docker:
-      - image: laceproject/entente-ci-py3.6:0.9.0
+      - image: laceproject/entente-ci-py3.6:0.10.0
 
     steps:
       - checkout
@@ -72,7 +72,6 @@ jobs:
           name: Run the doc build
           when: always
           command: ./dev.py doc
-
 
 workflows:
   version: 2

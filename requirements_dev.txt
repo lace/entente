@@ -1,9 +1,13 @@
 -r requirements.txt
--r requirements_doc.txt
+
+# Used in dev.py.
+executor >= 21.0
+click >=7.0,<8.0
 
 # Optional dependencies.
 trimesh==3.2.12
 rtree==0.8.3
+pycollada==0.6.0
 
 # Unit tests.
 pytest==4.5.0
