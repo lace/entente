@@ -70,8 +70,8 @@ class Landmarker(object):
             self.source_mesh.v[vertex_indices], landmark_coords
         )
 
-        # Note the `.transpose()` at the end. The matrix is created here from
-        # data organized along columns of the result, not rows.
+        # Note the `.transpose()` at the end. The matrix is initially created
+        # from data organized along columns of the result, not rows.
         values = np.repeat(vertex_coeffs, 3, axis=0).ravel()
         indices = (
             (3 * vertex_indices).reshape(-1, 1, 3)
