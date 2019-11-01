@@ -48,7 +48,6 @@ class Landmarker(object):
     @cached_property
     def _regressor(self):
         import numpy as np
-        from scipy.sparse import csc_matrix
         from polliwog.tri.barycentric import compute_barycentric_coordinates
         from ._trimesh_search import faces_nearest_to_points
         from ._sparse import sparse
