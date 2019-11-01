@@ -4,6 +4,7 @@
 # Optional dependencies.
 trimesh==3.2.12
 rtree==0.8.3
+pycollada==0.6.0
 
 # Unit tests.
 pytest==4.5.0

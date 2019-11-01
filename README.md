@@ -47,9 +47,16 @@ brew install spatialindex
 pip install rtree trimesh
 ```
 
+[pycollada][] is required for the landmark compositor.
+
+```sh
+pip install rtree trimesh
+```
+
 [trimesh]: https://trimsh.org/
 [rtree]: http://toblerity.org/rtree/
 [libspatialindex]: https://libspatialindex.org/
+[pycollada]: https://github.com/pycollada/pycollada
 
 
 Usage
