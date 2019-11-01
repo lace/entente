@@ -5,3 +5,4 @@ blmath>=1.6.3,<2.0
 click>=7.0,<8.0
 tqdm
 polliwog>=0.11.0
+pyyaml

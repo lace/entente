@@ -13,7 +13,12 @@ Example:
 import click
 
 
-@click.command()
+@click.group()
+def cli():
+    pass
+
+
+@cli.command()
 @click.argument("source_mesh")
 @click.argument("landmarks")
 @click.argument("target_mesh", nargs=-1, required=True)
@@ -37,6 +42,29 @@ def transfer_landmarks(source_mesh, landmarks, target_mesh, out):
             filename, _ = os.path.splitext(os.path.basename(target_mesh_path))
             out = filename + ".pp"
         meshlab_pickedpoints.dump(landmarks_on_target_mesh, out)
+
+
+@cli.command()
+@click.argument("recipe")
+@click.argument("output_dir", default="./composite_result")
+def composite_landmarks(recipe, output_dir):
+    """
+    Run the landmark composite recipe in the YAML file RECIPE and write it
+    to OUTPUT_DIR.
+    """
+    import os
+    import yaml
+    from lace.serialization import meshlab_pickedpoints
+    from .landmarks.landmark_composite_recipe import LandmarkCompositeReceipe
+
+    recipe_obj = LandmarkCompositeReceipe.load(recipe)
+
+    composite_landmarks = recipe_obj.composite_landmarks
+    out_landmarks = os.path.join(output_dir, "landmarks")
+    yaml.dump(composite_landmarks, "{}.yml".format(out_landmarks))
+    meshlab_pickedpoints.dump(composite_landmarks, "{}.pp".format(out_landmarks))
+
+    reprojected_landmraks = recipe_obj.reprojected_landmarks
 
 
 if __name__ == "__main__":  # pragma: no cover
