@@ -45,7 +45,7 @@ def find_correspondence(
     b_matched = np.zeros(len(b), dtype=np.bool_)
 
     for a_index, item in _maybe_tqdm(enumerate(a), progress):
-        indices, = np.nonzero(np.all(np.isclose(b, item, atol=atol), axis=1))
+        (indices,) = np.nonzero(np.all(np.isclose(b, item, atol=atol), axis=1))
         if len(indices) >= 1:
             b_index = indices[0]
             b_matched[b_index] = True
@@ -58,7 +58,7 @@ def find_correspondence(
             )
 
     if ret_unmatched_b:
-        unmatched_b, = np.where(b_matched == 0)
+        (unmatched_b,) = np.where(b_matched == 0)
         return a_to_b, unmatched_b
     else:
         return a_to_b
