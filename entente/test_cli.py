@@ -37,9 +37,13 @@ def test_transfer_landmarks_cli(tmp_path):
 
 
 def test_composite_landmarks_cli(tmp_path):
-    base_mesh, example_mesh_1, near_origin_1, example_mesh_2, near_origin_2 = (
-        composite_landmark_examples()
-    )
+    (
+        base_mesh,
+        example_mesh_1,
+        near_origin_1,
+        example_mesh_2,
+        near_origin_2,
+    ) = composite_landmark_examples()
 
     base_mesh_path = str(tmp_path / "base.obj")
     example_mesh_path_1 = str(tmp_path / "example1.obj")
