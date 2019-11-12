@@ -1,5 +1,6 @@
 from cached_property import cached_property
 import numpy as np
+import vg
 from .landmarker import Landmarker
 from .landmark_compositor import LandmarkCompositor
 from ._mesh import DEFAULT_RADIUS
@@ -11,6 +12,7 @@ class LandmarkCompositeRecipe(object):
         Example recipe:
 
         base_mesh: examples/average.obj
+        decimals: 2
         landmarks:
           - knee_left
           - knee_right
@@ -25,6 +27,7 @@ class LandmarkCompositeRecipe(object):
             knee_right: [12.0, 12.8, 3.4]
         """
         self.base_mesh_path = recipe["base_mesh"]
+        self.decimals = recipe["decimals"]
         self.landmark_names = recipe["landmarks"]
         self.examples = recipe["examples"]
 
@@ -71,23 +74,49 @@ class LandmarkCompositeRecipe(object):
             )
         return reprojected
 
+    @property
+    def original_and_reprojected_landmarks(self):
+        result = {}
+        for example in self.examples:
+            example_id = example["id"]
+            reprojected = self.reprojected_landmarks[example_id]
+            result[example_id] = {
+                k: {
+                    "original": example[k],
+                    "reprojected": reprojected[k].tolist(),
+                    'distance': round(vg.euclidean_distance(np.array(example[k]), reprojected[k]), ndigits=self.decimals),
+                }
+                for i, k in enumerate(self.landmark_names)
+            }
+        return result
+
+    def to_json(self):
+        return {
+            "composited": self.composite_landmarks,
+            "examples": self.original_and_reprojected_landmarks,
+        }
+
     def write_reprojected_landmarks(self, output_dir, radius=DEFAULT_RADIUS):
         import os
         from lace.mesh import Mesh
         from ._mesh import add_landmark_points
 
+        original_and_reprojected_landmarks = self.original_and_reprojected_landmarks
+
         for example in self.examples:
             mesh = Mesh(filename=example["mesh"])
             example_id = example["id"]
 
-            original_landmarks = np.array([example[k] for k in self.landmark_names])
-            reprojected_landmarks = np.array(
-                list(self.reprojected_landmarks[example_id].values())
-            )
+            these_original = [
+                item["original"]
+                for item in original_and_reprojected_landmarks[example_id].values()
+            ]
+            these_reprojected = [
+                item["reprojected"]
+                for item in original_and_reprojected_landmarks[example_id].values()
+            ]
             add_landmark_points(
-                mesh,
-                np.vstack([original_landmarks, reprojected_landmarks]),
-                radius=radius,
+                mesh, np.vstack([these_original, these_reprojected]), radius=radius,
             )
             # Make the original landmarks blue, and the reprojected landmarks
             # the default red.

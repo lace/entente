@@ -61,11 +61,12 @@ def composite_landmarks(recipe, output_dir, indicator_radius):
 
     recipe_obj = LandmarkCompositeRecipe.load(recipe)
 
-    composite_landmarks = recipe_obj.composite_landmarks
     out_landmarks = os.path.join(output_dir, "landmarks")
-    meshlab_pickedpoints.dump(composite_landmarks, "{}.pp".format(out_landmarks))
+    meshlab_pickedpoints.dump(
+        recipe_obj.composite_landmarks, "{}.pp".format(out_landmarks)
+    )
     with open("{}.yml".format(out_landmarks), "w") as f:
-        yaml.dump(composite_landmarks, f)
+        yaml.dump(recipe_obj.to_json(), f)
 
     recipe_obj.write_reprojected_landmarks(
         output_dir=output_dir, radius=indicator_radius
