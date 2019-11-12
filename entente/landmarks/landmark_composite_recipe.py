@@ -84,7 +84,15 @@ class LandmarkCompositeRecipe(object):
                 k: {
                     "original": example[k],
                     "reprojected": reprojected[k].tolist(),
-                    'distance': round(vg.euclidean_distance(np.array(example[k]), reprojected[k]), ndigits=self.decimals),
+                    "displacement": np.round(
+                        reprojected[k] - np.array(example[k]), decimals=self.decimals
+                    ).tolist(),
+                    "euclidean_distance": float(
+                        round(
+                            vg.euclidean_distance(np.array(example[k]), reprojected[k]),
+                            ndigits=self.decimals,
+                        )
+                    ),
                 }
                 for i, k in enumerate(self.landmark_names)
             }
