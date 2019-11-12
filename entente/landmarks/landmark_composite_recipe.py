@@ -79,7 +79,24 @@ class LandmarkCompositeRecipe(object):
         for example in self.examples:
             mesh = Mesh(filename=example["mesh"])
             example_id = example["id"]
-            landmarks = np.array(list(self.reprojected_landmarks[example_id].values()))
-            add_landmark_points(mesh, landmarks, radius=radius)
+
+            original_landmarks = np.array([example[k] for k in self.landmark_names])
+            reprojected_landmarks = np.array(
+                list(self.reprojected_landmarks[example_id].values())
+            )
+            add_landmark_points(
+                mesh,
+                np.vstack([original_landmarks, reprojected_landmarks]),
+                radius=radius,
+            )
+            # Make the original landmarks blue, and the reprojected landmarks
+            # the default red.
+            e_color = [
+                {
+                    "color": (0, 0, 1),
+                    "e_indices": np.arange(len(mesh.e) / 2, dtype=np.uint64),
+                }
+            ]
+
             out = os.path.join(output_dir, "{}.dae".format(example_id))
-            mesh.write_dae(out)
+            mesh.write_dae(out, e_color)
