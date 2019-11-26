@@ -1,5 +1,0 @@
--r requirements_dev.txt
--r requirements_doc.txt
-
-black ==19.10b0
-flake8 >=3.7.7,<4.0
