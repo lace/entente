@@ -1,8 +1,8 @@
 version: 2
 jobs:
-  python2:
+  main:
     docker:
-      - image: laceproject/entente-ci-py2.7:0.11.0
+      - image: laceproject/entente-ci-py3.6:0.11.0
 
     steps:
       - checkout
@@ -27,9 +27,19 @@ jobs:
       - run:
           name: Run tests
           when: always
-          command: ./dev.py coverage-py2
+          command: ./dev.py coverage
 
-  python3:
+      - run:
+          name: Check lint
+          when: always
+          command: ./dev.py lint
+
+      - run:
+          name: Run the doc build
+          when: always
+          command: ./dev.py doc
+
+  format:
     docker:
       - image: laceproject/entente-ci-py3.6:0.11.0
 
@@ -39,47 +49,24 @@ jobs:
       - run:
           name: Install python dependencies
           # set -o pipefail; pip .. | cat is used to disable the progress bar.
-          command: set -o pipefail; pip install --upgrade -r requirements_dev_py3.txt | cat
+          command: set -o pipefail; pip install --upgrade -r requirements_dev.txt | cat
 
       - run:
           name: Show versions
           command: pip freeze
-
-      - run:
-          name: Pull test assets from Git LFS
-          command: |
-            mkdir -p ~/.ssh
-            ssh-keyscan -H github.com >> ~/.ssh/known_hosts
-            ssh git@github.com git-lfs-authenticate "${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}" download
-            git lfs pull
-
-      - run:
-          name: Run tests
-          when: always
-          command: ./dev.py coverage
-
-      - run:
-          name: Check lint
-          when: always
-          command: ./dev.py lint
-
       - run:
           name: Check code format
           when: always
           command: ./dev.py black-check
 
-      - run:
-          name: Run the doc build
-          when: always
-          command: ./dev.py doc
 
 workflows:
   version: 2
 
   on-commit:
     jobs:
-      - python2
-      - python3
+      - main
+      - format
 
   daily:
     triggers:
@@ -89,5 +76,5 @@ workflows:
             branches:
               only: master
     jobs:
-      - python2
-      - python3
+      - main
+      - format
