@@ -30,22 +30,18 @@ def docker_repo(python_version, tag):
     return "laceproject/entente-ci-{}:{}".format(python_version, tag)
 
 
-python_versions = ["py3.6", "py2.7"]
-
-
 @cli.command()
 @click.argument("tag")
 def docker_build(tag):
-    for python_version in python_versions:
-        execute(
-            "docker",
-            "build",
-            "-t",
-            docker_repo(python_version, tag),
-            "-f",
-            "docker/Dockerfile.{}".format(python_version),
-            ".",
-        )
+    execute(
+        "docker",
+        "build",
+        "-t",
+        docker_repo("3.6", tag),
+        "-f",
+        "docker/Dockerfile",
+        ".",
+    )
 
 
 @cli.command()
@@ -55,23 +51,17 @@ def docker_push(tag):
     When pushing a new version, bump the minor version. It's okay to re-push,
     though once it's being used in master, you should leave it alone.
     """
-    for python_version in python_versions:
-        execute("docker", "push", docker_repo(python_version, tag))
+    execute("docker", "push", docker_repo("3.6", tag))
 
 
 @cli.command()
 def test():
-    execute("python3 -m pytest")
+    execute("pytest")
 
 
 @cli.command()
 def coverage():
-    execute("python3 -m pytest --cov=entente")
-
-
-@cli.command()
-def coverage_py2():
-    execute("python2 -m pytest --cov=entente")
+    execute("pytest --cov=entente")
 
 
 @cli.command()
@@ -109,7 +99,7 @@ def doc_open():
 @cli.command()
 def publish():
     execute("rm -rf dist/")
-    execute("python setup.py sdist")
+    execute("python3 setup.py sdist bdist_wheel")
     execute("twine upload dist/*")
 
 

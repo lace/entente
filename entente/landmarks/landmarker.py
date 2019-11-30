@@ -60,13 +60,13 @@ class Landmarker(object):
         """
         import numpy as np
         from scipy.sparse import csc_matrix
-        from polliwog.tri.barycentric import compute_barycentric_coordinates
+        from polliwog.tri.functions import barycentric_coordinates_of_points
         from ._trimesh_search import faces_nearest_to_points
 
         landmark_coords = np.array(list(self.landmarks.values()))
         face_indices = faces_nearest_to_points(self.source_mesh, landmark_coords)
         vertex_indices = self.source_mesh.f[face_indices]
-        vertex_coeffs = compute_barycentric_coordinates(
+        vertex_coeffs = barycentric_coordinates_of_points(
             self.source_mesh.v[vertex_indices], landmark_coords
         )
 

@@ -1,6 +1,14 @@
 Changelog
 =========
 
+## 0.10.0 (Nov 25, 2019)
+
+### BREAKING CHANGES
+
+- Require Python 3.
+- Require polliwog 0.12.0.
+
+
 ## 0.9.0 (Nov 1, 2019)
 
 ### BREAKING CHANGES
