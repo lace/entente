@@ -85,7 +85,7 @@ def test_composite_landmarks_cli(tmp_path):
         assert result.exit_code == 0
 
         with open("composite_result/landmarks.yml", "r") as f:
-            result = yaml.load(f)
+            result = yaml.safe_load(f)
         np.testing.assert_array_almost_equal(
             result["composited"]["near_origin"], np.zeros(3), decimal=2
         )

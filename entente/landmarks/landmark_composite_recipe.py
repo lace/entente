@@ -36,7 +36,7 @@ class LandmarkCompositeRecipe(object):
         import yaml
 
         with open(recipe_path, "r") as f:
-            recipe_data = yaml.load(f)
+            recipe_data = yaml.safe_load(f)
         return cls(recipe_data)
 
     @property
