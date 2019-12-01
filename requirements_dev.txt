@@ -7,7 +7,7 @@ click >=7.0,<8.0
 
 # Optional dependencies.
 trimesh==3.2.12
-rtree==0.8.3
+rtree==0.9.1
 pycollada==0.6.0
 
 # Linting and formatting.
