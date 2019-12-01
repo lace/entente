@@ -55,6 +55,7 @@ def test_composite_landmarks_cli(tmp_path):
 
     recipe = {
         "base_mesh": base_mesh_path,
+        "decimals": 2,
         "landmarks": ["near_origin"],
         "examples": [
             # Define a "near origin" point close to the origin of each cube.
@@ -78,10 +79,13 @@ def test_composite_landmarks_cli(tmp_path):
     runner = CliRunner()
     with runner.isolated_filesystem():
         result = runner.invoke(cli, ["composite-landmarks", recipe_path])
+        if result.exception:
+            raise result.exception
+
         assert result.exit_code == 0
 
         with open("composite_result/landmarks.yml", "r") as f:
-            composited = yaml.load(f)
+            result = yaml.load(f)
         np.testing.assert_array_almost_equal(
-            composited["near_origin"], np.zeros(3), decimal=2
+            result["composited"]["near_origin"], np.zeros(3), decimal=2
         )
