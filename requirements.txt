@@ -1,7 +1,7 @@
 numpy
 scipy
 cached_property
-lace>=3.1.0,<4.0
+lace>=4.0,<5.0
 click>=7.0,<8.0
 tqdm
 polliwog>=0.12.0,<0.13.0
