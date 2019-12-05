@@ -1,5 +1,16 @@
-Changelog
-=========
+# Changelog
+
+
+## 0.10.0 (Dec 5, 2019)
+
+### BREAKING CHANGES
+
+- Require polliwog 1.0.0-beta.1.
+
+### New features
+
+- Add `find_rigid_transform()` and `find_rigid_rotation()` from [polliwog][].
+
 
 ## 0.10.0 (Nov 25, 2019)
 
@@ -87,3 +98,6 @@ Changelog
 ## 0.1.0 (Sep 29, 2018)
 
 Initial release.
+
+
+[polliwog]: https://github.com/lace/polliwog/
