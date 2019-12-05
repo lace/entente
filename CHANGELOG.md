@@ -1,7 +1,7 @@
 # Changelog
 
 
-## 0.10.0 (Dec 5, 2019)
+## 0.11.0 (Dec 5, 2019)
 
 ### BREAKING CHANGES
 
@@ -10,6 +10,12 @@
 ### New features
 
 - Add `find_rigid_transform()` and `find_rigid_rotation()` from [polliwog][].
+- Landmark composite: Compare reprojected landmarks to the original, and
+  output stats.
+
+### Other improvements
+
+- Use `yaml.safe_load()` and avoid PyYAML deprecation warning.
 
 
 ## 0.10.0 (Nov 25, 2019)
