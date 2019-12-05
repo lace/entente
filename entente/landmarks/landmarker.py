@@ -60,7 +60,7 @@ class Landmarker(object):
         """
         import numpy as np
         from scipy.sparse import csc_matrix
-        from polliwog.tri.functions import barycentric_coordinates_of_points
+        from polliwog.tri import barycentric_coordinates_of_points
         from ._trimesh_search import faces_nearest_to_points
 
         landmark_coords = np.array(list(self.landmarks.values()))
