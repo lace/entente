@@ -40,9 +40,8 @@ def test_find_opposite_vertices():
         atol=1.1 * atol,
     )
 
+
 def test_find_opposite_vertices_validation():
     mesh = create_seat_and_arm_mesh()
     with pytest.raises(ValueError, match=r"Expected a Plane"):
-        find_opposite_vertices(
-            vertices=mesh.v, plane_of_symmetry="not a plane"
-        )
+        find_opposite_vertices(vertices=mesh.v, plane_of_symmetry="not a plane")
