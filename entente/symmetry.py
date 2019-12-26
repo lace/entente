@@ -1,5 +1,3 @@
-import numpy as np
-from lace.mesh import Mesh
 import vg
 
 

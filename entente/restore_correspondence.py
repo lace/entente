@@ -20,7 +20,7 @@ def find_correspondence(
 
     If `a` contains elements which do not exist in `b` and
     `all_must_match=True`, raise an error. With `all_must_match=True`, unless
-    either contains duplicates, `b` is a shuffled copy of `a`, and 
+    either contains duplicates, `b` is a shuffled copy of `a`, and
     `b[find_correspondence(a, b)]` equals `a`.
 
     Args:

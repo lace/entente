@@ -1,8 +1,6 @@
-import pytest
 import numpy as np
 from polliwog import Plane
 from .symmetry import find_opposite_vertices
-from .testing import vitra_mesh
 
 FAST = True
 
