@@ -21,9 +21,12 @@ def test_symmetrize_landamrks():
     distances_to_mirrored = vg.euclidean_distance(np.flipud(symmetrized), mirrored)
     np.testing.assert_allclose(distances_to_original, distances_to_mirrored, atol=1e-1)
 
+
 def test_symmetrize_landamrks_asymmetrical():
     mesh = create_seat_and_arm_mesh()
     original = np.array([[-18.5657, 54.7161, -19.5649], [20.0896, 54.919, -19.5738]])
     mesh.translate(np.array([50.0, 0.0, 0.0]))
-    with pytest.raises(ValueError, match=r"Some landmarks are near triangles which are not mirrored"):
+    with pytest.raises(
+        ValueError, match=r"Some landmarks are near triangles which are not mirrored"
+    ):
         symmetrize_landmarks(mesh, original, atol=1e-1)
