@@ -19,6 +19,7 @@ class LandmarkCompositeRecipe(object):
         symmetrize:
           reference_point: [0.5, 0.0, 0.0]
           normal: [1.0, 0.0, 0.0]
+          atol: !!float 1e-6
         examples:
           - id: example01
             mesh: examples/example01.obj
@@ -81,6 +82,7 @@ class LandmarkCompositeRecipe(object):
                 mesh,
                 self._plane_of_symmetry,
                 np.array([landmarks[k] for k in sided_names]),
+                atol=self.symmetrize["atol"],
             )
             for k, v in zip(sided_names, symmetrized):
                 result[k] = v

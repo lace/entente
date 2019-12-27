@@ -122,6 +122,7 @@ def test_composite_landmarks_cli_symmetrized(tmp_path):
         "symmetrize": {
             "reference_point": [0.5, 0.0, 0.0],
             "normal": vg.basis.x.tolist(),
+            "atol": 1e-6,
         },
         "examples": [
             {
