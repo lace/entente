@@ -3,7 +3,12 @@ from polliwog import Plane
 
 
 def find_opposite_vertices(
-    vertices, plane_of_symmetry, all_must_match=False, atol=1e-4, progress=True
+    vertices,
+    plane_of_symmetry,
+    all_must_match=False,
+    ret_unmatched=False,
+    atol=1e-4,
+    progress=True,
 ):
     """
     Given a plane of symmetry and a point cloud, match each vertex to its
@@ -32,18 +37,18 @@ def find_opposite_vertices(
 
         For the interpretation of `atol`, see documentation for `np.isclose`.
     """
-    from polliwog.plane import mirror_point_across_plane
     from .restore_correspondence import find_correspondence
 
     vg.shape.check(locals(), "vertices", (-1, 3))
     if not isinstance(plane_of_symmetry, Plane):
         raise ValueError("Expected a Plane")
 
-    mirrored_vertices = mirror_point_across_plane(vertices, plane_of_symmetry.equation)
+    mirrored_vertices = plane_of_symmetry.mirror_point(vertices)
     return find_correspondence(
         vertices,
         mirrored_vertices,
-        atol=atol,
+        ret_unmatched_b=ret_unmatched,
         all_must_match=all_must_match,
+        atol=atol,
         progress=progress,
     )

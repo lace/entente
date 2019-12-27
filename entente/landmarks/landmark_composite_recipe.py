@@ -19,7 +19,6 @@ class LandmarkCompositeRecipe(object):
         symmetrize:
           reference_point: [0.5, 0.0, 0.0]
           normal: [1.0, 0.0, 0.0]
-          atol: !!float 1e-6
         examples:
           - id: example01
             mesh: examples/example01.obj
@@ -70,19 +69,16 @@ class LandmarkCompositeRecipe(object):
             unit_normal=vg.normalize(np.array(self.symmetrize["normal"])),
         )
 
-    def _symmetrize_landmarks(self, mesh, landmarks):
-        from .symmetrize_landmarks import symmetrize_landmarks
+    def _symmetrize_landmarks(self, landmarks):
+        from .symmetrize_landmarks import symmetrize_landmarks_using_plane
 
         result = {}
         for unsided_name in self._unsided_landmark_names:
             sided_names = [
                 "{}_{}".format(unsided_name, side) for side in ["left", "right"]
             ]
-            symmetrized = symmetrize_landmarks(
-                mesh,
-                self._plane_of_symmetry,
-                np.array([landmarks[k] for k in sided_names]),
-                atol=self.symmetrize["atol"],
+            symmetrized = symmetrize_landmarks_using_plane(
+                self._plane_of_symmetry, np.array([landmarks[k] for k in sided_names]),
             )
             for k, v in zip(sided_names, symmetrized):
                 result[k] = v
@@ -106,9 +102,7 @@ class LandmarkCompositeRecipe(object):
     def symmetrized_landmarks(self):
         return {
             k: v.tolist()
-            for k, v in self._symmetrize_landmarks(
-                mesh=self.base_mesh, landmarks=self.composite_landmarks
-            ).items()
+            for k, v in self._symmetrize_landmarks(self.composite_landmarks).items()
         }
 
     @cached_property
