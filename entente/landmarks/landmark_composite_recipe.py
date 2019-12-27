@@ -16,6 +16,7 @@ class LandmarkCompositeRecipe(object):
         landmarks:
           - knee_left
           - knee_right
+        symmetrize: true
         examples:
           - id: example01
             mesh: examples/example01.obj
@@ -30,6 +31,7 @@ class LandmarkCompositeRecipe(object):
         self.decimals = recipe["decimals"]
         self.landmark_names = recipe["landmarks"]
         self.examples = recipe["examples"]
+        self.symmetrize = recipe.get("symmetrize", None)
 
     @classmethod
     def load(cls, recipe_path):
@@ -39,18 +41,56 @@ class LandmarkCompositeRecipe(object):
             recipe_data = yaml.safe_load(f)
         return cls(recipe_data)
 
-    @property
+    @cached_property
     def base_mesh(self):
         from lace.mesh import Mesh
 
         return Mesh(filename=self.base_mesh_path)
 
+    @property
+    def _unsided_landmark_names(self):
+        return list(
+            set(
+                [
+                    x.replace("_right", "").replace("_left", "")
+                    for x in self.landmark_names
+                ]
+            )
+        )
+
+    @cached_property
+    def _plane_of_symmetry(self):
+        from polliwog import Plane
+
+        return Plane(
+            point_on_plane=np.array(self.symmetrize["reference_point"]),
+            unit_normal=vg.normalize(np.array(self.symmetrize["normal"])),
+        )
+
+    def _symmetrize_landmarks(self, mesh, landmarks):
+        from .symmetrize_landmarks import symmetrize_landmarks
+
+        result = {}
+        for unsided_name in self._unsided_landmark_names:
+            sided_names = [
+                "{}_{}".format(unsided_name, side) for side in ["left", "right"]
+            ]
+            symmetrized = symmetrize_landmarks(
+                mesh,
+                self._plane_of_symmetry,
+                np.array([landmarks[k] for k in sided_names]),
+            )
+            for k, v in zip(sided_names, symmetrized):
+                result[k] = v
+        return result
+
     @cached_property
     def composite_landmarks(self):
         from lace.mesh import Mesh
 
+        base_mesh = self.base_mesh
         compositor = LandmarkCompositor(
-            base_mesh=self.base_mesh, landmark_names=self.landmark_names
+            base_mesh=base_mesh, landmark_names=self.landmark_names
         )
         for example in self.examples:
             example_mesh = Mesh(filename=example["mesh"])
@@ -59,12 +99,24 @@ class LandmarkCompositeRecipe(object):
         return compositor.result
 
     @cached_property
+    def symmetrized_landmarks(self):
+        return {
+            k: v.tolist()
+            for k, v in self._symmetrize_landmarks(
+                mesh=self.base_mesh, landmarks=self.composite_landmarks
+            ).items()
+        }
+
+    @cached_property
     def reprojected_landmarks(self):
         from lace.mesh import Mesh
 
-        inverse_landmarker = Landmarker(
-            source_mesh=self.base_mesh, landmarks=self.composite_landmarks
-        )
+        if self.symmetrize is None:
+            landmarks = self.composite_landmarks
+        else:
+            landmarks = self.symmetrized_landmarks
+
+        inverse_landmarker = Landmarker(source_mesh=self.base_mesh, landmarks=landmarks)
 
         reprojected = {}
         for example in self.examples:
@@ -99,10 +151,13 @@ class LandmarkCompositeRecipe(object):
         return result
 
     def to_json(self):
-        return {
+        result = {
             "composited": self.composite_landmarks,
             "examples": self.original_and_reprojected_landmarks,
         }
+        if self.symmetrize is not None:
+            result["composited_and_symmetrized"] = self.symmetrized_landmarks
+        return result
 
     def write_reprojected_landmarks(self, output_dir, radius=DEFAULT_RADIUS):
         import os
