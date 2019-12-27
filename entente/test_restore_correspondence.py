@@ -7,7 +7,7 @@ from .restore_correspondence import (
 )
 
 
-def create_test_mesh():
+def create_truncated_test_mesh():
     from .testing import vitra_mesh
 
     result = vitra_mesh()
@@ -22,7 +22,7 @@ def test_helper():
 
 
 def test_find_correspondence_matched():
-    b = create_test_mesh().v
+    b = create_truncated_test_mesh().v
     expected_correspondence = np.random.permutation(len(b))
     a = b[expected_correspondence]
 
@@ -33,7 +33,7 @@ def test_find_correspondence_matched():
 
 
 def test_find_correspondence_unmatched():
-    b = create_test_mesh().v
+    b = create_truncated_test_mesh().v
     expected_correspondence = np.random.permutation(len(b))
     a = b[expected_correspondence]
 
@@ -64,7 +64,7 @@ def test_find_correspondence_unmatched():
 def test_restore_correspondence():
     from .shuffle import shuffle_vertices
 
-    test_mesh = create_test_mesh()
+    test_mesh = create_truncated_test_mesh()
     working = test_mesh.copy_fv()
     v_new_to_old = shuffle_vertices(working)
     # Compute the inverse of the permutation.

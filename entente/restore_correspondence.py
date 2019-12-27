@@ -14,9 +14,14 @@ def find_correspondence(
     Given `a[0], a[1], ..., a[k]` and `b[0], b[1], ..., b[j]`, match each element
     of `a` to the corresponding element of `b`.
 
-    When `all_must_match` is `True` `a` and `b` must contain the same set of
-    elements. `b[find_correspondence(a, b)]` equals `a`. Otherwise, return
-    `-1` for elements with no match in `b`.
+    If `a` contains elements which do not exist in `b` and
+    `all_must_match=False`, return an index of `-1` for the unmatched elements
+    in `a`.
+
+    If `a` contains elements which do not exist in `b` and
+    `all_must_match=True`, raise an error. With `all_must_match=True`, unless
+    either contains duplicates, `b` is a shuffled copy of `a`, and
+    `b[find_correspondence(a, b)]` equals `a`.
 
     Args:
         a (np.arraylike): `kxn` array.
@@ -29,7 +34,7 @@ def find_correspondence(
         progress (bool): When `True`, show a progress bar.
 
     Return:
-        np.ndarray: Indices of `b` as `kx1`
+        np.ndarray: Indices of `b` with shape `(k,)`.
 
     Note:
         This relies on a brute-force algorithm.
@@ -83,8 +88,8 @@ def restore_correspondence(shuffled_mesh, reference_mesh, atol=1e-4, progress=Tr
 
     Note:
         This was designed to assist in extracting face ordering and groups from a
-        `shuffled_mesh` that "work" with `reference_mesh`, so the face ordering
-        and groups can be used with different vertices.
+        `shuffled_mesh` that "work" with `reference_mesh`, such that face
+        ordering and groups can be used on shuffled sets of vertices.
 
         It relies on a brute-force algorithm.
     """

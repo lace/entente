@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 from polliwog import Box
-from polliwog.transform.rotation import euler
+from polliwog.transform import euler
 from .rigid_transform import find_rigid_rotation, find_rigid_transform
 
 
