@@ -1,4 +1,5 @@
 import vg
+from polliwog import Plane
 
 
 def find_opposite_vertices(
@@ -31,7 +32,6 @@ def find_opposite_vertices(
 
         For the interpretation of `atol`, see documentation for `np.isclose`.
     """
-    from polliwog import Plane
     from polliwog.plane import mirror_point_across_plane
     from .restore_correspondence import find_correspondence
 
