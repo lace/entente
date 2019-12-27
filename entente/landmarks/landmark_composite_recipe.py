@@ -16,7 +16,9 @@ class LandmarkCompositeRecipe(object):
         landmarks:
           - knee_left
           - knee_right
-        symmetrize: true
+        symmetrize:
+          reference_point: [0.5, 0.0, 0.0]
+          normal: [1.0, 0.0, 0.0]
         examples:
           - id: example01
             mesh: examples/example01.obj
