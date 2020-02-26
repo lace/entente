@@ -6,7 +6,7 @@ executor >= 21.0
 click >=7.0,<8.0
 
 # Optional dependencies.
-trimesh==3.4.4
+trimesh==3.5.25
 rtree==0.9.1
 pycollada==0.7.1
 
