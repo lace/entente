@@ -4,5 +4,5 @@ cached_property
 lace==5.0.0-beta.1
 click>=7.0,<8.0
 tqdm
-polliwog==1.0.0-beta.4
+polliwog==1.0.0b6
 pyyaml>=5.1
