@@ -1,3 +1,6 @@
+import vg
+
+
 def _maybe_tqdm(iterable, progress):
     if progress:
         from tqdm import tqdm
@@ -52,7 +55,11 @@ def find_correspondence(
     for a_index, item in _maybe_tqdm(enumerate(a), progress):
         (indices,) = np.nonzero(np.all(np.isclose(b, item, atol=atol), axis=1))
         if len(indices) >= 1:
-            b_index = indices[0]
+            if len(indices) > 1:
+                closest_index = np.argmin(vg.euclidean_distance(b[indices], item))
+                b_index = indices[closest_index]
+            else:
+                b_index = indices[0]
             b_matched[b_index] = True
             a_to_b[a_index] = b_index
         elif all_must_match:
