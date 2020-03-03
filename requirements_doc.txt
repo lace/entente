@@ -1,6 +1,7 @@
 # Imported from code.
 numpy
 cached_property
+meshlab-pickedpoints @ git+https://github.com/lace/meshlab-pickedpoints.git@initial
 
 # Used in dev.py.
 executor >= 21.0
