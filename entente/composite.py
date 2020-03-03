@@ -8,19 +8,19 @@ def composite_meshes(mesh_paths):
         mesh_paths (list): Paths of the meshes to average.
 
     Returns:
-        lace.mesh.Mesh: The composite mesh.
+        lacecore.Mesh: The composite mesh.
     """
-    from lace.mesh import Mesh
+    import lacecore
 
     if not len(mesh_paths):
         raise ValueError("Expected at least one mesh path")
 
     first_mesh_path, remaining_mesh_paths = mesh_paths[0], mesh_paths[1:]
 
-    working_mesh = Mesh(filename=first_mesh_path)
+    working_mesh = lacecore.load_obj(first_mesh_path, triangulate=True)
 
     for this_mesh_path in remaining_mesh_paths:
-        this_mesh = Mesh(filename=this_mesh_path)
+        this_mesh = lacecore.load_obj(this_mesh_path, triangulate=True)
         if not this_mesh.has_same_topology(working_mesh):
             raise ValueError(
                 "Expected {} to have the same topology as {}".format(

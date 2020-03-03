@@ -15,7 +15,7 @@ class Landmarker(object):
     The resultant landmarks will always be on or near the surface of the mesh.
 
     Args:
-        source_mesh (lace.mesh.Mesh): The source mesh
+        source_mesh (lacecore.Mesh): The source mesh
         landmarks (dict): A mapping of landmark names to the points, which are
             `3x1` arraylike objects.
     """
@@ -37,11 +37,11 @@ class Landmarker(object):
             landmark_path (str): File path to a meshlab ``.pp`` file containing
                 the landmark points.
         """
-        from lace.mesh import Mesh
+        import lacecore
         from lace.serialization import meshlab_pickedpoints
 
         return cls(
-            source_mesh=Mesh(filename=source_mesh_path),
+            source_mesh=lacecore.load_obj(source_mesh_path, triangulate=True),
             landmarks=meshlab_pickedpoints.load(landmark_path),
         )
 
@@ -87,7 +87,7 @@ class Landmarker(object):
         topology as the source mesh.
 
         Args:
-            target (lace.mesh.Mesh): Target mesh
+            target (lacecore.Mesh): Target mesh
 
         Returns:
             dict: A mapping of landmark names to a np.ndarray with shape `3x1`.

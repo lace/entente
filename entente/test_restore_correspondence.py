@@ -10,10 +10,8 @@ from .restore_correspondence import (
 def create_truncated_test_mesh():
     from .testing import vitra_mesh
 
-    result = vitra_mesh()
     # For performance.
-    result.keep_vertices(np.arange(1000))
-    return result
+    return vitra_mesh().picking_vertices(np.arange(1000))
 
 
 def test_helper():
@@ -65,8 +63,7 @@ def test_restore_correspondence():
     from .shuffle import shuffle_vertices
 
     test_mesh = create_truncated_test_mesh()
-    working = test_mesh.copy_fv()
-    v_new_to_old = shuffle_vertices(working)
+    working, v_new_to_old = shuffle_vertices(test_mesh)
     # Compute the inverse of the permutation.
     # https://stackoverflow.com/a/11649931/893113
     expected_v_old_to_new = np.argsort(v_new_to_old)

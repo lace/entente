@@ -5,13 +5,13 @@ def relative_to_project(*components):
 
 
 def mesh_asset(*components):
-    from lace.mesh import Mesh
+    import lacecore
 
-    return Mesh(filename=relative_to_project(*components))
+    return lacecore.load_obj(relative_to_project(*components), triangulate=True)
 
 
 def vitra_mesh():
-    result = mesh_asset("examples/vitra/vitra_without_materials.obj")
+    result = mesh_asset("examples/vitra/vitra_without_materials_triangulated.obj")
     assert len(result.v) > 100
     return result
 

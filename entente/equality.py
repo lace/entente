@@ -52,8 +52,8 @@ def have_same_topology(first_mesh, second_mesh):
     In other words, check if they have the same topology.
 
     Args:
-        first_mesh (lace.mesh.Mesh): A mesh.
-        second_mesh (lace.mesh.Mesh): Another mesh.
+        first_mesh (lacecore.Mesh): A mesh.
+        second_mesh (lacecore.Mesh): Another mesh.
 
     Returns:
         bool: `True` if meshes have the same topology

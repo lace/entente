@@ -5,10 +5,8 @@ from .testing import vitra_mesh
 
 
 def mesh():
-    test_mesh = vitra_mesh()
     # For performance.
-    test_mesh.keep_vertices(np.arange(1000))
-    return test_mesh
+    return vitra_mesh().picking_vertices(np.arange(1000))
 
 
 def test_composite_meshes(tmp_path):

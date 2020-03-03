@@ -1,5 +1,7 @@
 from cached_property import cached_property
+import lacecore
 import numpy as np
+from polliwog import Plane
 import vg
 from .landmarker import Landmarker
 from .landmark_compositor import LandmarkCompositor
@@ -45,9 +47,7 @@ class LandmarkCompositeRecipe(object):
 
     @cached_property
     def base_mesh(self):
-        from lace.mesh import Mesh
-
-        return Mesh(filename=self.base_mesh_path)
+        return lacecore.load_obj(self.base_mesh_path, triangulate=True)
 
     @property
     def _unsided_landmark_names(self):
@@ -62,8 +62,6 @@ class LandmarkCompositeRecipe(object):
 
     @cached_property
     def _plane_of_symmetry(self):
-        from polliwog import Plane
-
         return Plane(
             point_on_plane=np.array(self.symmetrize["reference_point"]),
             unit_normal=vg.normalize(np.array(self.symmetrize["normal"])),
@@ -86,14 +84,12 @@ class LandmarkCompositeRecipe(object):
 
     @cached_property
     def composite_landmarks(self):
-        from lace.mesh import Mesh
-
         base_mesh = self.base_mesh
         compositor = LandmarkCompositor(
             base_mesh=base_mesh, landmark_names=self.landmark_names
         )
         for example in self.examples:
-            example_mesh = Mesh(filename=example["mesh"])
+            example_mesh = lacecore.load_obj(example["mesh"], triangulate=True)
             landmarks = {k: example[k] for k in self.landmark_names}
             compositor.add_example(mesh=example_mesh, landmarks=landmarks)
         return compositor.result
@@ -107,8 +103,6 @@ class LandmarkCompositeRecipe(object):
 
     @cached_property
     def reprojected_landmarks(self):
-        from lace.mesh import Mesh
-
         if self.symmetrize is None:
             landmarks = self.composite_landmarks
         else:
@@ -118,7 +112,7 @@ class LandmarkCompositeRecipe(object):
 
         reprojected = {}
         for example in self.examples:
-            mesh = Mesh(filename=example["mesh"])
+            mesh = lacecore.load_obj(example["mesh"], triangulate=True)
             reprojected[example["id"]] = inverse_landmarker.transfer_landmarks_onto(
                 mesh
             )
@@ -159,13 +153,12 @@ class LandmarkCompositeRecipe(object):
 
     def write_reprojected_landmarks(self, output_dir, radius=DEFAULT_RADIUS):
         import os
-        from lace.mesh import Mesh
         from ._mesh import add_landmark_points
 
         original_and_reprojected_landmarks = self.original_and_reprojected_landmarks
 
         for example in self.examples:
-            mesh = Mesh(filename=example["mesh"])
+            mesh = lacecore.load_obj(example["mesh"], triangulate=True)
             example_id = example["id"]
 
             these_original = [

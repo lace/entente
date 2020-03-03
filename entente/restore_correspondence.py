@@ -84,9 +84,9 @@ def restore_correspondence(shuffled_mesh, reference_mesh, atol=1e-4, progress=Tr
     `reference_mesh`. Ignore faces but preserves their integrity.
 
     Args:
-        reference_mesh (lace.mesh.Mesh): A mesh with the vertices in the
+        reference_mesh (lacecore.Mesh): A mesh with the vertices in the
             desired order.
-        shuffled_mesh (lace.mesh.Mesh): A mesh with the same vertex set as
+        shuffled_mesh (lacecore.Mesh): A mesh with the same vertex set as
             `reference_mesh`.
         progress (bool): When `True`, show a progress bar.
 

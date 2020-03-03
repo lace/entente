@@ -51,9 +51,8 @@ def test_symmetrize_landmarks_using_topology():
 
 
 def test_symmetrize_landmarks_using_topology_asymmetrical():
-    mesh = create_seat_and_arm_mesh()
+    mesh = create_seat_and_arm_mesh().translated(np.array([50.0, 0.0, 0.0]))
     original = np.array([[-18.5657, 54.7161, -19.5649], [20.0896, 54.919, -19.5738]])
-    mesh.translate(np.array([50.0, 0.0, 0.0]))
     with pytest.raises(
         ValueError, match=r"Some landmarks are near triangles which are not mirrored"
     ):
@@ -61,8 +60,7 @@ def test_symmetrize_landmarks_using_topology_asymmetrical():
 
 
 def test_symmetrize_landmarks_using_topology_non_plane():
-    mesh = create_seat_and_arm_mesh()
+    mesh = create_seat_and_arm_mesh().translated(np.array([50.0, 0.0, 0.0]))
     original = np.array([[-18.5657, 54.7161, -19.5649], [20.0896, 54.919, -19.5738]])
-    mesh.translate(np.array([50.0, 0.0, 0.0]))
     with pytest.raises(ValueError, match=r"plane_of_symmetry should be a Plane"):
         symmetrize_landmarks_using_topology(mesh, "not_a_plane", original, atol=1e-1)

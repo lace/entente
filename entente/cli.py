@@ -5,7 +5,9 @@ Example:
 
     .. code-block:: sh
 
-        python -m entente.cli examples/vitra/vitra.obj examples/vitra/vitra.pp \\
+        python -m entente.cli \\
+            examples/vitra/vitra_without_materials_triangulated.obj \\
+            examples/vitra/vitra.pp \\
             examples/vitra/vitra_stretched.obj
 
 """
@@ -30,14 +32,14 @@ def transfer_landmarks(source_mesh, landmarks, target_mesh, out):
     meshes, which must have vertexwise correspondence.
     """
     import os
-    from lace.mesh import Mesh
+    import lacecore
     from lace.serialization import meshlab_pickedpoints
     from .landmarks.landmarker import Landmarker
 
     landmarker = Landmarker.load(source_mesh_path=source_mesh, landmark_path=landmarks)
 
     for target_mesh_path in target_mesh:
-        m = Mesh(filename=target_mesh_path)
+        m = lacecore.load_obj(target_mesh_path, triangulate=True)
         landmarks_on_target_mesh = landmarker.transfer_landmarks_onto(m)
         if out is None:
             filename, _ = os.path.splitext(os.path.basename(target_mesh_path))

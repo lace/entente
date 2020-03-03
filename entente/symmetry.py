@@ -22,7 +22,7 @@ def find_opposite_vertices(
     Vertices on the plane of symmetry correspond to themselves.
 
     Args:
-        mesh (lace.mesh.Mesh): A mesh with `k` vertices.
+        mesh (lacecore.Mesh): A mesh with `k` vertices.
         atol (float): Match tolerance.
         all_must_match (bool): When `True`, `mesh` must contain a mirror-image
             vertex for each of its vertices.

@@ -9,13 +9,19 @@ FAST = True
 def create_seat_and_arm_mesh():
     from .testing import vitra_mesh
 
-    result = vitra_mesh()
     if FAST:
         # For performance, work with part of the chair back instead of the
         # whole thing.
-        result.cut_across_axis(1, minval=42, maxval=57)
-        result.cut_across_axis(2, maxval=-17)
-    return result
+        return (
+            vitra_mesh()
+            .select()
+            .vertices_at_or_above(dim=1, point=np.array([0.0, 42.0, 0.0]))
+            .vertices_at_or_below(dim=1, point=np.array([0.0, 57.0, 0.0]))
+            .vertices_at_or_below(dim=2, point=np.array([0.0, 0.0, -17.0]))
+            .end()
+        )
+    else:
+        return vitra_mesh()
 
 
 def test_find_opposite_vertices():
