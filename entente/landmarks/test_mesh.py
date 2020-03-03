@@ -1,10 +1,10 @@
 import numpy as np
-from lace.shapes import create_cube
+from lacecore import shapes
 from ._mesh import add_landmark_points
 
 
 def test_add_landmark_points():
-    mesh = create_cube(np.zeros(3), 1.0)
+    mesh = shapes.cube(np.zeros(3), 1.0)
     add_landmark_points(
         mesh, np.array([[0.25, 0.25, 0.0], [0.75, 0.75, 0.0]]), radius=0.1
     )
