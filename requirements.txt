@@ -2,6 +2,7 @@ numpy
 scipy
 cached_property
 lacecore[obj] @ git+https://github.com/lace/lacecore.git@reindex-vertices
+meshlab-pickedpoints @ git+https://github.com/lace/meshlab-pickedpoints.git@initial
 click>=7.0,<8.0
 tqdm
 polliwog==1.0.0b7

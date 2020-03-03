@@ -34,14 +34,14 @@ def test_composite_meshes(tmp_path):
 
 
 def test_composite_meshes_error(tmp_path):
-    test_mesh = mesh().copy_fv()
+    test_mesh = mesh()
     test_mesh_path = str(tmp_path / "test_mesh.obj")
     test_mesh.write(test_mesh_path)
 
     # Create a mesh with a different topology.
-    test_mesh.flip_faces()
+    flipped = test_mesh.faces_flipped()
     test_mesh_flipped_path = str(tmp_path / "test_mesh_flipped.obj")
-    test_mesh.write(test_mesh_flipped_path)
+    flipped.write(test_mesh_flipped_path)
 
     with pytest.raises(
         ValueError, match=r"Expected .+ to have the same topology as .*"

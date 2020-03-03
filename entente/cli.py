@@ -33,7 +33,7 @@ def transfer_landmarks(source_mesh, landmarks, target_mesh, out):
     """
     import os
     import lacecore
-    from lace.serialization import meshlab_pickedpoints
+    import meshlab_pickedpoints
     from .landmarks.landmarker import Landmarker
 
     landmarker = Landmarker.load(source_mesh_path=source_mesh, landmark_path=landmarks)
@@ -58,15 +58,15 @@ def composite_landmarks(recipe, output_dir, indicator_radius):
     """
     import os
     import yaml
-    from lace.serialization import meshlab_pickedpoints
+    import meshlab_pickedpoints
     from .landmarks.landmark_composite_recipe import LandmarkCompositeRecipe
 
     recipe_obj = LandmarkCompositeRecipe.load(recipe)
 
     out_landmarks = os.path.join(output_dir, "landmarks")
-    meshlab_pickedpoints.dump(
-        recipe_obj.composite_landmarks, "{}.pp".format(out_landmarks)
-    )
+    os.makedirs(out_landmarks, exist_ok=True)
+    with open("{}.pp".format(out_landmarks), "w") as f:
+        meshlab_pickedpoints.dump(recipe_obj.composite_landmarks, f)
     with open("{}.yml".format(out_landmarks), "w") as f:
         yaml.dump(recipe_obj.to_json(), f)
 

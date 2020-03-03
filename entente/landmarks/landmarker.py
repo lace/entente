@@ -38,7 +38,7 @@ class Landmarker(object):
                 the landmark points.
         """
         import lacecore
-        from lace.serialization import meshlab_pickedpoints
+        import meshlab_pickedpoints
 
         return cls(
             source_mesh=lacecore.load_obj(source_mesh_path, triangulate=True),

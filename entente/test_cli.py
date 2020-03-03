@@ -1,7 +1,7 @@
 import numpy as np
+import meshlab_pickedpoints
 import yaml
 from click.testing import CliRunner
-from lace.serialization import meshlab_pickedpoints
 import vg
 from .cli import cli
 from .landmarks.test_landmarker import source_target_landmarks

@@ -41,8 +41,6 @@ class LandmarkCompositor(object):
     @property
     def result(self):
         return {
-            name: np.average(
-                [example[name] for example in self.examples], axis=0
-            ).tolist()
+            name: np.average([example[name] for example in self.examples], axis=0)
             for name in self.landmark_names
         }
