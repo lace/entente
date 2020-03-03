@@ -63,7 +63,7 @@ def test_restore_correspondence():
     from .shuffle import shuffle_vertices
 
     test_mesh = create_truncated_test_mesh()
-    working, v_new_to_old = shuffle_vertices(test_mesh)
+    working, v_new_to_old = shuffle_vertices(test_mesh, ret_new_ordering=True)
     # Compute the inverse of the permutation.
     # https://stackoverflow.com/a/11649931/893113
     expected_v_old_to_new = np.argsort(v_new_to_old)
