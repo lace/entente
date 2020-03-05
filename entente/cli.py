@@ -44,7 +44,8 @@ def transfer_landmarks(source_mesh, landmarks, target_mesh, out):
         if out is None:
             filename, _ = os.path.splitext(os.path.basename(target_mesh_path))
             out = filename + ".pp"
-        meshlab_pickedpoints.dump(landmarks_on_target_mesh, out)
+        with open(out, "w") as f:
+            meshlab_pickedpoints.dump(landmarks_on_target_mesh, f)
 
 
 @cli.command()

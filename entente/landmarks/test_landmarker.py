@@ -41,8 +41,9 @@ def test_landmarker(tmp_path):
     source_mesh_path = str(tmp_path / "source.obj")
     landmark_path = str(tmp_path / "landmarks.pp")
 
-    source_mesh.write(source_mesh_path)
-    meshlab_pickedpoints.dump(landmarks, landmark_path)
+    source_mesh.write_obj(source_mesh_path)
+    with open(landmark_path, "w") as f:
+        meshlab_pickedpoints.dump(landmarks, f)
 
     landmarker = Landmarker.load(
         source_mesh_path=source_mesh_path, landmark_path=landmark_path

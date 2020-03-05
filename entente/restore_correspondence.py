@@ -1,3 +1,5 @@
+import lacecore
+import numpy as np
 import vg
 
 
@@ -44,8 +46,6 @@ def find_correspondence(
 
         For the interpretation of `atol`, see documentation for `np.isclose`.
     """
-    import numpy as np
-
     if all_must_match and len(a) != len(b):
         raise ValueError("a and b do not contain the same number of elements")
 
@@ -91,7 +91,8 @@ def restore_correspondence(shuffled_mesh, reference_mesh, atol=1e-4, progress=Tr
         progress (bool): When `True`, show a progress bar.
 
     Returns:
-        np.ndarray: `vx1` which maps old vertices in `shuffled_mesh` to new.
+        tuple: The reordered mesh, and an array which maps old vertices in
+        `shuffled_mesh` to new.
 
     Note:
         This was designed to assist in extracting face ordering and groups from a
@@ -103,5 +104,6 @@ def restore_correspondence(shuffled_mesh, reference_mesh, atol=1e-4, progress=Tr
     v_old_to_new = find_correspondence(
         shuffled_mesh.v, reference_mesh.v, atol=atol, progress=progress
     )
-    shuffled_mesh.reorder_vertices(v_old_to_new)
-    return v_old_to_new
+    ordering = np.argsort(v_old_to_new)
+    new_mesh = lacecore.reindex_vertices(shuffled_mesh, ordering)
+    return new_mesh, v_old_to_new
