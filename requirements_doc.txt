@@ -1,6 +1,7 @@
 # Imported from code.
 numpy
 cached_property
+lacecore[obj] @ git+https://github.com/lace/lacecore.git@a6b9b14757b9aba9620656ee74b9d207d0072bcd
 meshlab-pickedpoints @ git+https://github.com/lace/meshlab-pickedpoints.git@initial
 
 # Used in dev.py.
