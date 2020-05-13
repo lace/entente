@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.0.0b0 (May 13, 2020)
+
+### BREAKING CHANGES
+
+- Replace lace with lacecore.
+- Switch landmarker dependency from trimesh to proximity. libspatialindex is
+  still required but rtree will be installed for you when you run
+  `pip install entente[landmarker]`.
+- Switch collada dependency to tri-again. pycollada is installed for you.
+- Require polliwog 1.0.0b9.
+- `shuffle_vertices()` and `shuffle_faces()` return new meshes. Optionally
+  they also return the new ordering of the old elements, which is
+  _the inverse of the index arrays these functions used to return_.
+
+### New features
+
+- Add `find_opposite_vertices()`.
+- Add `symmetrize_landmarks()`.
+
 
 ## 0.11.0 (Dec 5, 2019)
 
