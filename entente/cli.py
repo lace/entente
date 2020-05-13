@@ -13,7 +13,7 @@ Example:
 """
 
 import click
-from .landmarks._mesh import DEFAULT_RADIUS
+from .landmarks.landmark_composite_recipe import DEFAULT_RADIUS
 
 
 @click.group()

@@ -5,7 +5,8 @@ from polliwog import Plane
 import vg
 from .landmarker import Landmarker
 from .landmark_compositor import LandmarkCompositor
-from ._mesh import DEFAULT_RADIUS
+
+DEFAULT_RADIUS = 0.1
 
 
 class LandmarkCompositeRecipe(object):
@@ -144,7 +145,7 @@ class LandmarkCompositeRecipe(object):
 
     def to_json(self):
         result = {
-            "composited": self.composite_landmarks,
+            "composited": {k: v.tolist() for k, v in self.composite_landmarks.items()},
             "examples": self.original_and_reprojected_landmarks,
         }
         if self.symmetrize is not None:
@@ -153,33 +154,28 @@ class LandmarkCompositeRecipe(object):
 
     def write_reprojected_landmarks(self, output_dir, radius=DEFAULT_RADIUS):
         import os
-        from ._mesh import add_landmark_points
+        from tri_again import Scene
 
         original_and_reprojected_landmarks = self.original_and_reprojected_landmarks
 
         for example in self.examples:
-            mesh = lacecore.load_obj(example["mesh"], triangulate=True)
             example_id = example["id"]
-
-            these_original = [
-                item["original"]
-                for item in original_and_reprojected_landmarks[example_id].values()
-            ]
-            these_reprojected = [
-                item["reprojected"]
-                for item in original_and_reprojected_landmarks[example_id].values()
-            ]
-            add_landmark_points(
-                mesh, np.vstack([these_original, these_reprojected]), radius=radius,
-            )
-            # Make the original landmarks blue, and the reprojected landmarks
-            # the default red.
-            e_color = [
-                {
-                    "color": (0, 0, 1),
-                    "e_indices": np.arange(len(mesh.e) / 2, dtype=np.uint64),
-                }
-            ]
-
             out = os.path.join(output_dir, "{}.dae".format(example_id))
-            mesh.write_dae(out, e_color)
+
+            Scene(point_radius=radius).add_meshes(
+                lacecore.load_obj(example["mesh"], triangulate=True)
+            ).add_points(
+                *[
+                    item["original"]
+                    for item in original_and_reprojected_landmarks[example_id].values()
+                ],
+                color="blue"
+            ).add_points(
+                *[
+                    item["reprojected"]
+                    for item in original_and_reprojected_landmarks[example_id].values()
+                ],
+                color="darkgreen"
+            ).write(
+                out
+            )
