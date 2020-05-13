@@ -1,19 +1,18 @@
 from setuptools import setup, find_packages
 
-# Set version_info[__version__], while avoiding importing numpy, in case numpy
-# and vg are being installed concurrently.
-# https://packaging.python.org/guides/single-sourcing-package-version/
 version_info = {}
 exec(open("entente/package_version.py").read(), version_info)
 
-readme = open("README.md", "rb").read().decode("utf-8")
-install_requires = open("requirements.txt", "rb").read().decode("utf-8")
+
+def load(filename):
+    return open(filename, "rb").read().decode("utf-8")
+
 
 setup(
     name="entente",
     version=version_info["__version__"],
     description="Work with polygonal meshes which have vertex-wise correspondence",
-    long_description=readme,
+    long_description=load("README.md"),
     long_description_content_type="text/markdown",
     author="Metabolize",
     author_email="github@paulmelnikow.com",
@@ -23,7 +22,8 @@ setup(
         "Documentation": "https://entente.readthedocs.io/en/stable/",
     },
     packages=find_packages(),
-    install_requires=install_requires,
+    install_requires=load("requirements.txt"),
+    extras_require={"landmarker": load("requirements_landmarker.txt")},
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Other Audience",
