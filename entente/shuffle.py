@@ -1,32 +1,45 @@
+import lacecore
 import numpy as np
 
 
-def shuffle_vertices(mesh):
+def shuffle_vertices(mesh, ret_new_ordering=False):
     """
     Shuffle the mesh's vertex ordering, preserving the integrity of the faces.
     The mesh is mutated.
 
     Args:
-        mesh (lace.mesh.Mesh): A mesh.
+        mesh (lacecore.Mesh): A mesh.
+        ret_new_ordering (bool): When `True`, return the new vertex ordering.
 
     Returns:
-        np.ndarray: `vx1` mapping of old vertex indices to new.
+        object: When `ret_new_ordering` is `True`, return a tuple containing
+            the new mesh and the new vertex ordering. When `False`, return only
+            the new mesh.
     """
-    v_old_to_new = np.random.permutation(len(mesh.v))
-    mesh.reorder_vertices(v_old_to_new)
-    return v_old_to_new
+    ordering = np.random.permutation(len(mesh.v))
+    new_mesh = lacecore.reindex_vertices(mesh, ordering)
+    if ret_new_ordering:
+        return new_mesh, ordering
+    else:
+        return new_mesh
 
 
-def shuffle_faces(mesh):
+def shuffle_faces(mesh, ret_new_ordering=False):
     """
     Shuffle the mesh's face ordering. The mesh is mutated.
 
     Args:
-        mesh (lace.mesh.Mesh): A mesh.
+        mesh (lacecore.Mesh): A mesh.
+        ret_new_ordering (bool): When `True`, return the new face ordering.
 
     Returns:
-        np.ndarray: `fx1` mapping of old face indices to new.
+        object: When `ret_new_ordering` is `True`, return a tuple containing
+            the new mesh and the new vertex ordering. When `False`, return only
+            the new mesh.
     """
-    f_old_to_new = np.random.permutation(len(mesh.f))
-    mesh.f = mesh.f[f_old_to_new]
-    return f_old_to_new
+    ordering = np.random.permutation(len(mesh.f))
+    new_mesh = lacecore.reindex_faces(mesh, ordering)
+    if ret_new_ordering:
+        return new_mesh, ordering
+    else:
+        return new_mesh

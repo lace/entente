@@ -35,9 +35,9 @@ def write_recipe_assets(relative_to):
         ],
     }
 
-    base_mesh.write(base_mesh_path)
-    example_mesh_1.write(example_mesh_path_1)
-    example_mesh_2.write(example_mesh_path_2)
+    base_mesh.write_obj(base_mesh_path)
+    example_mesh_1.write_obj(example_mesh_path_1)
+    example_mesh_2.write_obj(example_mesh_path_2)
 
     return recipe
 

@@ -1,7 +1,7 @@
 import numpy as np
+import meshlab_pickedpoints
 import yaml
 from click.testing import CliRunner
-from lace.serialization import meshlab_pickedpoints
 import vg
 from .cli import cli
 from .landmarks.test_landmarker import source_target_landmarks
@@ -15,9 +15,10 @@ def test_transfer_landmarks_cli(tmp_path):
     landmark_path = str(tmp_path / "landmarks.pp")
     target_mesh_path = str(tmp_path / "target.obj")
 
-    source_mesh.write(source_mesh_path)
-    meshlab_pickedpoints.dump(landmarks, landmark_path)
-    target_mesh.write(target_mesh_path)
+    source_mesh.write_obj(source_mesh_path)
+    with open(landmark_path, "w") as f:
+        meshlab_pickedpoints.dump(landmarks, f)
+    target_mesh.write_obj(target_mesh_path)
 
     runner = CliRunner()
     with runner.isolated_filesystem():
@@ -50,9 +51,9 @@ def test_composite_landmarks_cli(tmp_path):
     example_mesh_path_1 = str(tmp_path / "example1.obj")
     example_mesh_path_2 = str(tmp_path / "example2.obj")
 
-    base_mesh.write(base_mesh_path)
-    example_mesh_1.write(example_mesh_path_1)
-    example_mesh_2.write(example_mesh_path_2)
+    base_mesh.write_obj(base_mesh_path)
+    example_mesh_1.write_obj(example_mesh_path_1)
+    example_mesh_2.write_obj(example_mesh_path_2)
 
     recipe = {
         "base_mesh": base_mesh_path,
@@ -105,9 +106,9 @@ def test_composite_landmarks_cli_symmetrized(tmp_path):
     example_mesh_path_1 = str(tmp_path / "example1.obj")
     example_mesh_path_2 = str(tmp_path / "example2.obj")
 
-    base_mesh.write(base_mesh_path)
-    example_mesh_1.write(example_mesh_path_1)
-    example_mesh_2.write(example_mesh_path_2)
+    base_mesh.write_obj(base_mesh_path)
+    example_mesh_1.write_obj(example_mesh_path_1)
+    example_mesh_2.write_obj(example_mesh_path_2)
 
     bottom_left_1 = near_origin_1
     bottom_right_1 = np.array([5.22, -3.08, -3.1]).tolist()

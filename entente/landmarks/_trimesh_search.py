@@ -6,7 +6,6 @@ On Mac OS:
     brew install spatialindex
     pip install rtree trimesh
 """
-from __future__ import print_function
 
 
 def require_trimesh_with_rtree():

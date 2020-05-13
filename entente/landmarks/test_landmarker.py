@@ -1,15 +1,18 @@
+from lacecore import shapes
 import numpy as np
+import meshlab_pickedpoints
 import pytest
-from lace.serialization import meshlab_pickedpoints
-from lace.shapes import create_cube
 from .landmarker import Landmarker
 
 
 def source_target_landmarks():
-    source_mesh = create_cube(np.zeros(3), 1.0)
-
-    target_mesh = create_cube(np.zeros(3), 5.0)
-    target_mesh.translate(np.array([0, 3.5, 1.0]))
+    source_mesh = shapes.cube(np.zeros(3), 1.0)
+    target_mesh = (
+        source_mesh.transform()
+        .uniform_scale(5.0)
+        .translate(np.array([0, 3.5, 1.0]))
+        .end()
+    )
 
     landmarks = {
         "origin": np.zeros(3),
@@ -38,8 +41,9 @@ def test_landmarker(tmp_path):
     source_mesh_path = str(tmp_path / "source.obj")
     landmark_path = str(tmp_path / "landmarks.pp")
 
-    source_mesh.write(source_mesh_path)
-    meshlab_pickedpoints.dump(landmarks, landmark_path)
+    source_mesh.write_obj(source_mesh_path)
+    with open(landmark_path, "w") as f:
+        meshlab_pickedpoints.dump(landmarks, f)
 
     landmarker = Landmarker.load(
         source_mesh_path=source_mesh_path, landmark_path=landmark_path
@@ -52,11 +56,10 @@ def test_landmarker(tmp_path):
 
 
 def test_landmarker_wrong_topology():
-    source_mesh = create_cube(np.zeros(3), 1.0)
+    source_mesh = shapes.cube(np.zeros(3), 1.0)
 
     # Create a second mesh with a different topology.
-    target_mesh = source_mesh.copy()
-    target_mesh.flip_faces()
+    target_mesh = source_mesh.faces_flipped()
 
     # Landmarks are empty; we don't get that far.
     landmarker = Landmarker(source_mesh, {})

@@ -5,13 +5,15 @@ Example:
 
     .. code-block:: sh
 
-        python -m entente.cli examples/vitra/vitra.obj examples/vitra/vitra.pp \\
+        python -m entente.cli \\
+            examples/vitra/vitra_without_materials_triangulated.obj \\
+            examples/vitra/vitra.pp \\
             examples/vitra/vitra_stretched.obj
 
 """
 
 import click
-from .landmarks._mesh import DEFAULT_RADIUS
+from .landmarks.landmark_composite_recipe import DEFAULT_RADIUS
 
 
 @click.group()
@@ -30,19 +32,20 @@ def transfer_landmarks(source_mesh, landmarks, target_mesh, out):
     meshes, which must have vertexwise correspondence.
     """
     import os
-    from lace.mesh import Mesh
-    from lace.serialization import meshlab_pickedpoints
+    import lacecore
+    import meshlab_pickedpoints
     from .landmarks.landmarker import Landmarker
 
     landmarker = Landmarker.load(source_mesh_path=source_mesh, landmark_path=landmarks)
 
     for target_mesh_path in target_mesh:
-        m = Mesh(filename=target_mesh_path)
+        m = lacecore.load_obj(target_mesh_path, triangulate=True)
         landmarks_on_target_mesh = landmarker.transfer_landmarks_onto(m)
         if out is None:
             filename, _ = os.path.splitext(os.path.basename(target_mesh_path))
             out = filename + ".pp"
-        meshlab_pickedpoints.dump(landmarks_on_target_mesh, out)
+        with open(out, "w") as f:
+            meshlab_pickedpoints.dump(landmarks_on_target_mesh, f)
 
 
 @cli.command()
@@ -56,15 +59,15 @@ def composite_landmarks(recipe, output_dir, indicator_radius):
     """
     import os
     import yaml
-    from lace.serialization import meshlab_pickedpoints
+    import meshlab_pickedpoints
     from .landmarks.landmark_composite_recipe import LandmarkCompositeRecipe
 
     recipe_obj = LandmarkCompositeRecipe.load(recipe)
 
     out_landmarks = os.path.join(output_dir, "landmarks")
-    meshlab_pickedpoints.dump(
-        recipe_obj.composite_landmarks, "{}.pp".format(out_landmarks)
-    )
+    os.makedirs(out_landmarks, exist_ok=True)
+    with open("{}.pp".format(out_landmarks), "w") as f:
+        meshlab_pickedpoints.dump(recipe_obj.composite_landmarks, f)
     with open("{}.yml".format(out_landmarks), "w") as f:
         yaml.dump(recipe_obj.to_json(), f)
 
@@ -74,4 +77,15 @@ def composite_landmarks(recipe, output_dir, indicator_radius):
 
 
 if __name__ == "__main__":  # pragma: no cover
+
+    def set_path():
+        """
+        Magically add this project to the module path.
+        """
+        import os
+        import sys
+
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+
+    set_path()
     cli()

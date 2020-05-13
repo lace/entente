@@ -17,6 +17,8 @@ def attr_has_same_shape(first_obj, second_obj, attr):
     Returns:
         bool: `True` if attributes are the same shape
     """
+    # Support legacy `lace.mesh.Mesh`, where attrs are set to `None` instead
+    # of empty arrays.
     first, second = getattr(first_obj, attr), getattr(second_obj, attr)
     if first is None or second is None:
         return first is second
@@ -52,8 +54,8 @@ def have_same_topology(first_mesh, second_mesh):
     In other words, check if they have the same topology.
 
     Args:
-        first_mesh (lace.mesh.Mesh): A mesh.
-        second_mesh (lace.mesh.Mesh): Another mesh.
+        first_mesh (lacecore.Mesh): A mesh.
+        second_mesh (lacecore.Mesh): Another mesh.
 
     Returns:
         bool: `True` if meshes have the same topology

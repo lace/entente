@@ -9,13 +9,13 @@ entente
 [![docs build](https://img.shields.io/readthedocs/entente?style=flat-square)][docs build]
 [![code style](https://img.shields.io/badge/code%20style-black-black?style=flat-square)][black]
 
-Library for working with [lace][]-style polygonal meshes which have vertex-wise
-correspondence.
+Library for working with [lacecore][]-style polygonal meshes which have
+vertex-wise correspondence.
 
 [pypi]: https://pypi.org/project/entente/
 [coverage]: https://github.com/lace/entente/blob/master/.coveragerc
 [black]: https://black.readthedocs.io/en/stable/
-[lace]: https://github.com/metabolize/lace
+[lacecore]: https://github.com/metabolize/lacecore
 [build]: https://circleci.com/gh/lace/entente/tree/master
 [docs build]: https://entente.readthedocs.io/en/latest/
 
