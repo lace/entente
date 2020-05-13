@@ -76,7 +76,7 @@ def composite_landmarks(recipe, output_dir, indicator_radius):
     )
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
 
     def set_path():
         """

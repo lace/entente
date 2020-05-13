@@ -17,6 +17,8 @@ def attr_has_same_shape(first_obj, second_obj, attr):
     Returns:
         bool: `True` if attributes are the same shape
     """
+    # Support legacy `lace.mesh.Mesh`, where attrs are set to `None` instead
+    # of empty arrays.
     first, second = getattr(first_obj, attr), getattr(second_obj, attr)
     if first is None or second is None:
         return first is second
