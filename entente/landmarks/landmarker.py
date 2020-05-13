@@ -63,7 +63,9 @@ class Landmarker(object):
         from proximity import faces_nearest_to_points
 
         landmark_coords = np.array(list(self.landmarks.values()))
-        face_indices = faces_nearest_to_points(self.source_mesh, landmark_coords)
+        face_indices = faces_nearest_to_points(
+            self.source_mesh.vertices, self.source_mesh.faces, landmark_coords
+        )
         vertex_indices = self.source_mesh.f[face_indices]
         vertex_coeffs = barycentric_coordinates_of_points(
             self.source_mesh.v[vertex_indices], landmark_coords
