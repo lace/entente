@@ -2,7 +2,6 @@ import numpy as np
 import vg
 from polliwog import Plane
 from ..symmetry import find_opposite_vertices
-from ._trimesh_search import faces_nearest_to_points
 
 
 def symmetrize_landmarks_using_plane(plane_of_symmetry, landmark_coords):
@@ -22,13 +21,14 @@ def symmetrize_landmarks_using_topology(
     mesh, plane_of_symmetry, landmark_coords, atol=1e-4
 ):
     from polliwog.tri import barycentric_coordinates_of_points
+    from proximity import faces_nearest_to_points
 
     vg.shape.check(locals(), "landmark_coords", (2, 3))
     if not isinstance(plane_of_symmetry, Plane):
         raise ValueError("plane_of_symmetry should be a Plane")
 
     # Compute the barycentric coordinates of each landmark.
-    indices_of_nearest_faces = faces_nearest_to_points(mesh, landmark_coords)
+    indices_of_nearest_faces = faces_nearest_to_points(mesh.v, mesh.f, landmark_coords)
     vertex_indices = mesh.f[indices_of_nearest_faces]
     vertex_coeffs = barycentric_coordinates_of_points(
         mesh.v[vertex_indices], landmark_coords

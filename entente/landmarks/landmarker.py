@@ -1,7 +1,9 @@
 """
 Functions for transferring landmarks from one mesh to another.
 
-This module requires libspatialindex and rtree. See note in `trimesh_search.py`.
+This module requires entente to be installed with the `landmarker` extras:
+
+    pip install entente[landmarker]
 """
 
 from cached_property import cached_property
@@ -21,9 +23,6 @@ class Landmarker(object):
     """
 
     def __init__(self, source_mesh, landmarks):
-        from ._trimesh_search import require_trimesh_with_rtree
-
-        require_trimesh_with_rtree()
         self.source_mesh = source_mesh
         self.landmarks = landmarks
 
@@ -61,10 +60,12 @@ class Landmarker(object):
         import numpy as np
         from scipy.sparse import csc_matrix
         from polliwog.tri import barycentric_coordinates_of_points
-        from ._trimesh_search import faces_nearest_to_points
+        from proximity import faces_nearest_to_points
 
         landmark_coords = np.array(list(self.landmarks.values()))
-        face_indices = faces_nearest_to_points(self.source_mesh, landmark_coords)
+        face_indices = faces_nearest_to_points(
+            self.source_mesh.v, self.source_mesh.f, landmark_coords
+        )
         vertex_indices = self.source_mesh.f[face_indices]
         vertex_coeffs = barycentric_coordinates_of_points(
             self.source_mesh.v[vertex_indices], landmark_coords

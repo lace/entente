@@ -35,28 +35,20 @@ Features
 Installation
 ------------
 
-```sh
-pip install entente
-```
-
-[trimesh][], [rtree][], and [libspatialindex][] are required in order to use
-landmark transfer and the AABB tree.
+To use the landmark compositor, first install [libspatialindex][]:
 
 ```sh
 brew install spatialindex
-pip install rtree trimesh
 ```
-
-[pycollada][] is required for the landmark compositor.
 
 ```sh
-pip install rtree trimesh
+apt-get install libspatialindex-dev
 ```
 
-[trimesh]: https://trimsh.org/
-[rtree]: http://toblerity.org/rtree/
+Then run `pip install entente[landmarker]` which installs [proximity][].
+
 [libspatialindex]: https://libspatialindex.org/
-[pycollada]: https://github.com/pycollada/pycollada
+[proximity]: https://github.com/lace/proximity
 
 
 Usage
