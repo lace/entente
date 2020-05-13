@@ -29,7 +29,7 @@ def symmetrize_landmarks_using_topology(
 
     # Compute the barycentric coordinates of each landmark.
     indices_of_nearest_faces = faces_nearest_to_points(
-        mesh.vertices, mesh.faces, landmark_coords
+        mesh.v, mesh.f, landmark_coords
     )
     vertex_indices = mesh.f[indices_of_nearest_faces]
     vertex_coeffs = barycentric_coordinates_of_points(
