@@ -1,1 +1,1 @@
-proximity @ git+https://github.com/lace/proximity.git@fed5f10a96984b9163d5ef80ca11c82fae91e5d3
+proximity @ git+https://github.com/lace/proximity.git@ae60e2d83b90d30679256baed5017425b55e1b83
