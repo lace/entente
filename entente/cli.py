@@ -77,9 +77,15 @@ def composite_landmarks(recipe, output_dir, indicator_radius):
 
 
 if __name__ == "__main__":
-    # Magically add this project to the module path.
-    import os
-    import sys
 
-    sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+    def set_path():
+        """
+        Magically add this project to the module path.
+        """
+        import os
+        import sys
+
+        sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
+
+    set_path()
     cli()
