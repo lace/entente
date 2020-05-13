@@ -76,5 +76,9 @@ def composite_landmarks(recipe, output_dir, indicator_radius):
     )
 
 
-if __name__ == "__main__":  # pragma: no cover
+if __name__ == "__main__":
+    # Magically add this project to the module path.
+    import os, sys
+
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
     cli()
