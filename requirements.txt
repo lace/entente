@@ -8,3 +8,4 @@ tqdm
 polliwog==1.0.0b9
 pyyaml>=5.1
 tri-again>=0.1.1,<0.2
+proximity==0.1.0
