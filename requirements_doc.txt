@@ -3,7 +3,7 @@ numpy
 cached_property
 lacecore[obj]==0.3.0
 meshlab-pickedpoints==1.0.0b0
-polliwog==1.0.0b9
+polliwog==1.0.0b10
 
 # Used in dev.py.
 executor >= 21.0
