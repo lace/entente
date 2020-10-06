@@ -40,7 +40,10 @@ def symmetrize_landmarks_using_topology(
     # points we need (i.e. `mesh.v[vertex_indices.flatten()]``). Then use
     # `all_must_match=True`.
     indices_of_opposite_vs = find_opposite_vertices(
-        mesh.v, plane_of_symmetry=plane_of_symmetry, all_must_match=False, atol=atol,
+        mesh.v,
+        plane_of_symmetry=plane_of_symmetry,
+        all_must_match=False,
+        atol=atol,
     )[vertex_indices]
     if np.any(indices_of_opposite_vs == -1):
         raise ValueError("Some landmarks are near triangles which are not mirrored")

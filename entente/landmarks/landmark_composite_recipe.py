@@ -77,7 +77,8 @@ class LandmarkCompositeRecipe(object):
                 "{}_{}".format(unsided_name, side) for side in ["left", "right"]
             ]
             symmetrized = symmetrize_landmarks_using_plane(
-                self._plane_of_symmetry, np.array([landmarks[k] for k in sided_names]),
+                self._plane_of_symmetry,
+                np.array([landmarks[k] for k in sided_names]),
             )
             for k, v in zip(sided_names, symmetrized):
                 result[k] = v
