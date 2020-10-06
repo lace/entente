@@ -76,11 +76,15 @@ def test_landmark_compositor(tmp_path):
     result1 = original_and_reprojected_landmarks["example1"]["near_origin"]
     np.testing.assert_array_equal(result1["original"], near_origin_1)
     np.testing.assert_array_almost_equal(
-        result1["reprojected"], example_mesh_1.v[0], decimal=1,
+        result1["reprojected"],
+        example_mesh_1.v[0],
+        decimal=1,
     )
 
     result2 = original_and_reprojected_landmarks["example2"]["near_origin"]
     np.testing.assert_array_equal(result2["original"], near_origin_2)
     np.testing.assert_array_almost_equal(
-        result2["reprojected"], example_mesh_2.v[0], decimal=1,
+        result2["reprojected"],
+        example_mesh_2.v[0],
+        decimal=1,
     )
