@@ -1,5 +1,5 @@
 # Imported from code.
-numpy
+numpy<1.19
 cached_property
 lacecore[obj]==0.4.1
 meshlab-pickedpoints==1.0.0
