@@ -26,34 +26,6 @@ def clean():
     execute("find . -name '*.pyc' -or -name '__pycache__' -delete")
 
 
-def docker_repo(python_version, tag):
-    return "laceproject/entente-ci-{}:{}".format(python_version, tag)
-
-
-@cli.command()
-@click.argument("tag")
-def docker_build(tag):
-    execute(
-        "docker",
-        "build",
-        "-t",
-        docker_repo("3.6", tag),
-        "-f",
-        "docker/Dockerfile",
-        ".",
-    )
-
-
-@cli.command()
-@click.argument("tag")
-def docker_push(tag):
-    """
-    When pushing a new version, bump the minor version. It's okay to re-push,
-    though once it's being used in master, you should leave it alone.
-    """
-    execute("docker", "push", docker_repo("3.6", tag))
-
-
 @cli.command()
 def test():
     execute("pytest")
