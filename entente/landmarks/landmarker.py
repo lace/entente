@@ -23,6 +23,9 @@ class Landmarker(object):
     """
 
     def __init__(self, source_mesh, landmarks):
+        if not source_mesh.is_tri:
+            raise ValueError("Source mesh should be triangulated")
+
         self.source_mesh = source_mesh
         self.landmarks = landmarks
 
@@ -94,6 +97,9 @@ class Landmarker(object):
             dict: A mapping of landmark names to a np.ndarray with shape `3x1`.
         """
         from ..equality import have_same_topology
+
+        if not target.is_tri:
+            raise ValueError("Target mesh must be triangulated")
 
         if not have_same_topology(self.source_mesh, target):
             raise ValueError("Target mesh must have the same topology")
