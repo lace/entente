@@ -1,4 +1,4 @@
-from lacecore import shapes
+from lacecore import shapes, Mesh
 import numpy as np
 import meshlab_pickedpoints
 import pytest
@@ -66,3 +66,16 @@ def test_landmarker_wrong_topology():
 
     with pytest.raises(ValueError, match="Target mesh must have the same topology"):
         landmarker.transfer_landmarks_onto(target_mesh)
+
+
+def test_landmarker_quad():
+    tri_mesh = shapes.cube(np.zeros(3), 1.0)
+    quad_mesh = Mesh(v=np.zeros((0, 3)), f=np.zeros((0, 4)))
+
+    with pytest.raises(ValueError, match="Source mesh should be triangulated"):
+        # Landmarks are empty; we don't get that far.
+        Landmarker(quad_mesh, {})
+
+    landmarker = Landmarker(tri_mesh, {})
+    with pytest.raises(ValueError, match="Target mesh must be triangulated"):
+        landmarker.transfer_landmarks_onto(quad_mesh)
