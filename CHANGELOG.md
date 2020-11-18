@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.0.0b1 (Nov. 18, 2020)
+
+### New features
+
+- Landmarker: Improve error message when passing in quad source or target
+  meshes.
+
+### Other changes
+
+- Pin NumPy to avoid a regression in NumPy 1.19.
+- Update meshlab-pickedpoints, lacecore, and polliwog dependencies.
+
+
 ## 1.0.0b0 (May 13, 2020)
 
 ### BREAKING CHANGES
