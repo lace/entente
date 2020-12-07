@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.0b2 (Dec. 3, 2020)
+
+- Update lacecore dependency.
+
+
 ## 1.0.0b1 (Nov. 18, 2020)
 
 ### New features
