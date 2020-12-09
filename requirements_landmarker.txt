@@ -1,1 +1,1 @@
-proximity>=0.1.0,<0.2
+proximity>=0.2.0,<0.3
