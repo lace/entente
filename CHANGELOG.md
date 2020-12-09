@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.0b3 (Dec. 8, 2020)
+
+- Update proximity dependency.
+
+
 ## 1.0.0b2 (Dec. 3, 2020)
 
 - Update lacecore dependency.
