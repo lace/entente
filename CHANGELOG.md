@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.0b4 (Dec. 8, 2020)
+
+- Update proximity dependency to experimental 0.3.0b0.
+- Update lacecore dependency to 0.6.0.
+
+
 ## 1.0.0b3 (Dec. 8, 2020)
 
 - Update proximity dependency.
