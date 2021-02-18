@@ -11,7 +11,7 @@ jobs:
           name: Install container dependencies
           command: |
             sudo apt-get update
-            sudo apt-get install -qq -y git-lfs libspatialindex-dev
+            sudo apt-get install -qq -y git-lfs
 
       - run:
           name: Install python dependencies
@@ -53,7 +53,7 @@ jobs:
           name: Install container dependencies
           command: |
             sudo apt-get update
-            sudo apt-get install -qq -y git-lfs libspatialindex-dev
+            sudo apt-get install -qq -y git-lfs
 
       - run:
           name: Install python dependencies
@@ -94,7 +94,7 @@ jobs:
           name: Install container dependencies
           command: |
             sudo apt-get update
-            sudo apt-get install -qq -y git-lfs libspatialindex-dev
+            sudo apt-get install -qq -y git-lfs
 
       - run:
           name: Install python dependencies

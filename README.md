@@ -35,19 +35,10 @@ Features
 Installation
 ------------
 
-To use the landmark compositor, first install [libspatialindex][]:
+To use the landmark compositor, run `pip install entente[landmarker]` which
+installs [proximity][].
 
-```sh
-brew install spatialindex
-```
 
-```sh
-apt-get install libspatialindex-dev
-```
-
-Then run `pip install entente[landmarker]` which installs [proximity][].
-
-[libspatialindex]: https://libspatialindex.org/
 [proximity]: https://github.com/lace/proximity
 
 
