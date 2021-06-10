@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.0b5 (Dec. 8, 2020)
+
+- Update proximity dependency to 0.3.0.
+- Update lacecore dependency to 0.9.0.
+- Update polliwog dependency to 1.0.b13.
+
+
 ## 1.0.0b4 (Dec. 8, 2020)
 
 - Update proximity dependency to experimental 0.3.0b0, which does not require
