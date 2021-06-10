@@ -1,10 +1,10 @@
 numpy<1.19
 scipy
 cached_property
-lacecore[obj]==0.6.0
+lacecore[obj]==0.8.0
 meshlab-pickedpoints >=1.0,<2
 click>=7.0,<8.0
 tqdm
-polliwog==1.0.0b10
+polliwog==1.0.0b13
 pyyaml>=5.1
 tri-again>=0.1.1,<0.2
