@@ -1,6 +1,11 @@
 # Changelog
 
-## 1.0.0b5 (Dec. 8, 2020)
+## 1.0.0b6 (Jun. 23, 2021)
+
+- Update lacecore dependency to 0.10.0.
+
+
+## 1.0.0b5 (Jun. 10, 2021)
 
 - Update proximity dependency to 0.3.0.
 - Update lacecore dependency to 0.9.0.
