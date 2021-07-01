@@ -1,4 +1,4 @@
-numpy<1.19
+numpy<1.22
 scipy
 cached_property
 lacecore[obj]==0.10.0
