@@ -23,7 +23,10 @@ setup(
     },
     packages=find_packages(),
     install_requires=load("requirements.txt"),
-    extras_require={"landmarker": load("requirements_landmarker.txt")},
+    extras_require={
+        "cli": load("requirements_cli.txt"),
+        "landmarker": load("requirements_landmarker.txt"),
+    },
     classifiers=[
         "Development Status :: 3 - Alpha",
         "Intended Audience :: Other Audience",

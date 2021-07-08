@@ -38,8 +38,12 @@ Installation
 To use the landmark compositor, run `pip install entente[landmarker]` which
 installs [proximity][].
 
+To use the CLI, run `pip install entente[landmarker,cli]` which
+also installs [tri-again][] and pyyaml.
+
 
 [proximity]: https://github.com/lace/proximity
+[tri-again]: https://github.com/lace/tri-again
 
 
 Usage
