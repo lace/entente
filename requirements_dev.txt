@@ -8,7 +8,7 @@ executor >= 21.0
 click >=7.0,<8.0
 
 # Linting and formatting.
-black ==21.5b2
+black ==21.6b0
 flake8 >=3.7.7,<4.0
 
 # Unit tests.
