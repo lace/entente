@@ -5,7 +5,7 @@
 
 # Used in dev.py.
 executor >= 21.0
-click >=7.0,<8.0
+click >=7.0,<9.0
 
 # Linting and formatting.
 black ==21.6b0
