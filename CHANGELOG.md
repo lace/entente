@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.0b7 (Jun. 23, 2021)
+
+- Make CLI dependencies available through an extra.
+  (`pip install entente[landmarker,cli]`)
+
+
 ## 1.0.0b6 (Jun. 23, 2021)
 
 - Update lacecore dependency to 0.10.0.
