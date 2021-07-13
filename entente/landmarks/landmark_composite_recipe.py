@@ -3,8 +3,8 @@ import lacecore
 import numpy as np
 from polliwog import Plane
 import vg
-from .landmarker import Landmarker
 from .landmark_compositor import LandmarkCompositor
+from .landmarker import Landmarker
 
 DEFAULT_RADIUS = 0.1
 

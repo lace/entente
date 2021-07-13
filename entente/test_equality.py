@@ -1,6 +1,6 @@
+from entente.equality import have_same_topology
 from lacecore import shapes
 import numpy as np
-from .equality import have_same_topology
 
 
 def test_have_same_topology():

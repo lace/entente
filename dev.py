@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S poetry run python
 
 import os
 import click
@@ -17,8 +17,8 @@ def cli():
 
 
 @cli.command()
-def init():
-    execute("pip install --upgrade -r requirements_dev.txt")
+def install():
+    execute("poetry install --remove-untracked --extras landmarker --extras cli")
 
 
 @cli.command()
@@ -71,7 +71,7 @@ def doc_open():
 @cli.command()
 def publish():
     execute("rm -rf dist/")
-    execute("python3 setup.py sdist bdist_wheel")
+    execute("poetry build")
     execute("twine upload dist/*")
 
 

@@ -1,121 +1,101 @@
-version: 2
+version: 2.1
+
+with_python: &with_python
+  docker:
+    - image: circleci/python:3.7
+
+install_poetry: &install_poetry
+  run:
+    name: Install Poetry
+    command: |
+      pip install poetry==1.2.0a1
+      poetry --version
+
+install_python_deps: &install_python_deps
+  run:
+    name: Install python dependencies
+    command: poetry install --no-ansi --no-interaction
+
+show_versions: &show_versions
+  run:
+    name: Show versions
+    command: poetry show
+
+install_git_lfs: &install_git_lfs
+  run:
+    name: Install Git LFS
+    command: |
+      sudo apt-get update
+      sudo apt-get install -qq -y git-lfs
+
+pull_git_lfs_assets: &pull_git_lfs_assets
+  run:
+    name: Pull assets from Git LFS
+    command: |
+      mkdir -p ~/.ssh
+      ssh-keyscan -H github.com >> ~/.ssh/known_hosts
+      ssh git@github.com git-lfs-authenticate "${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}" download
+      git lfs pull
+
 jobs:
   test:
-    docker:
-      - image: circleci/python:3.8
+    <<: *with_python
 
     steps:
       - checkout
 
-      - run:
-          name: Install container dependencies
-          command: |
-            sudo apt-get update
-            sudo apt-get install -qq -y git-lfs
+      - *install_poetry
+      - *install_python_deps
+      - *show_versions
 
-      - run:
-          name: Install python dependencies
-          command: |
-            mkdir -p venv
-            virtualenv venv
-            . venv/bin/activate
-            set -o pipefail; pip install --upgrade -r requirements_dev.txt | cat
-
-      - run:
-          name: Show versions
-          command: |
-            . venv/bin/activate
-            pip freeze
-
-      - run:
-          name: Pull test assets from Git LFS
-          command: |
-            mkdir -p ~/.ssh
-            ssh-keyscan -H github.com >> ~/.ssh/known_hosts
-            ssh git@github.com git-lfs-authenticate "${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}" download
-            git lfs pull
+      - *install_git_lfs
+      - *pull_git_lfs_assets
 
       - run:
           name: Run tests
           when: always
-          command: |
-            . venv/bin/activate
-            ./dev.py coverage
+          command: ./dev.py coverage
 
   lint:
-    docker:
-      - image: circleci/python:3.8
+    <<: *with_python
 
     steps:
       - checkout
 
-      - run:
-          name: Install container dependencies
-          command: |
-            sudo apt-get update
-            sudo apt-get install -qq -y git-lfs
+      - *install_poetry
+      - *install_python_deps
+      - *show_versions
 
-      - run:
-          name: Install python dependencies
-          command: |
-            mkdir -p venv
-            virtualenv venv
-            . venv/bin/activate
-            set -o pipefail; pip install --upgrade -r requirements_dev.txt | cat
-
-      - run:
-          name: Show versions
-          command: |
-            . venv/bin/activate
-            pip freeze
+      - *install_git_lfs
+      - *pull_git_lfs_assets
 
       - run:
           name: Check lint
           when: always
-          command: |
-            . venv/bin/activate
-            ./dev.py lint
+          command: ./dev.py lint
 
       - run:
           name: Run the doc build
           when: always
-          command: |
-            . venv/bin/activate
-            ./dev.py doc
+          command: ./dev.py doc
 
   format:
-    docker:
-      - image: circleci/python:3.8
+    <<: *with_python
 
     steps:
       - checkout
 
-      - run:
-          name: Install container dependencies
-          command: |
-            sudo apt-get update
-            sudo apt-get install -qq -y git-lfs
+      - *install_poetry
+      - *install_python_deps
+      - *show_versions
 
-      - run:
-          name: Install python dependencies
-          command: |
-            mkdir -p venv
-            virtualenv venv
-            . venv/bin/activate
-            set -o pipefail; pip install --upgrade -r requirements_dev.txt | cat
-
-      - run:
-          name: Show versions
-          command: |
-            . venv/bin/activate
-            pip freeze
+      - *install_git_lfs
+      - *pull_git_lfs_assets
 
       - run:
           name: Check code format
           when: always
-          command: |
-            . venv/bin/activate
-            ./dev.py black-check
+          command: ./dev.py black-check
 
 
 workflows:

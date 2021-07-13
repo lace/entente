@@ -1,6 +1,6 @@
 import numpy as np
-import vg
 from polliwog import Plane
+import vg
 from ..symmetry import find_opposite_vertices
 
 

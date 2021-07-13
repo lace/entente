@@ -1,8 +1,8 @@
+from entente.rigid_transform import find_rigid_rotation, find_rigid_transform
 import numpy as np
-import pytest
 from polliwog import Box
 from polliwog.transform import euler
-from .rigid_transform import find_rigid_rotation, find_rigid_transform
+import pytest
 
 
 def test_rigid_transform_from_simple_translation():

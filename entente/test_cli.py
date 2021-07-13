@@ -1,11 +1,11 @@
-import numpy as np
-import meshlab_pickedpoints
-import yaml
 from click.testing import CliRunner
+from entente.cli import cli
+import meshlab_pickedpoints
+import numpy as np
 import vg
-from .cli import cli
-from .landmarks.test_landmarker import source_target_landmarks
+import yaml
 from .landmarks.test_landmark_compositor import composite_landmark_examples
+from .landmarks.test_landmarker import source_target_landmarks
 
 
 def test_transfer_landmarks_cli(tmp_path):

@@ -1,0 +1,62 @@
+[tool.poetry]
+name = "entente"
+version = "1.0.0b7"
+description = "Work with polygonal meshes which have vertex-wise correspondence"
+authors = ["Paul Melnikow <github@paulmelnikow.com>", "Metabolize"]
+license = "MIT"
+include = ["CHANGELOG.md"]
+exclude = ["**/test_*.py"]
+homepage = "https://github.com/lace/entente"
+repository = "https://github.com/lace/entente"
+documentation = "https://entente.readthedocs.io/en/stable/"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Other Audience",
+    "Intended Audience :: Science/Research",
+    "Topic :: Artistic Software",
+    "Topic :: Multimedia :: Graphics :: 3D Modeling",
+    "Topic :: Scientific/Engineering :: Visualization",
+    "Operating System :: OS Independent",
+]
+
+[tool.poetry.dependencies]
+python = ">= 3.7, <4"
+cached_property = "*"
+numpy = "< 1.19.0"
+ounce = ">=1.1.0,<2.0"
+scipy = "*"
+tqdm = "*"
+vg = ">= 1.5.0"
+lacecore = {version = "0.10.0", extras = ["obj"]}
+meshlab-pickedpoints = ">=1.0,<2"
+click = {version = ">7.0,<9.0", optional = true}
+proximity = {version = ">=0.3.0", optional = true}
+PyYAML = {version = ">=5.1", optional = true}
+tri-again = {version = ">=0.1.1,<0.2", optional = true}
+
+[tool.poetry.extras]
+cli = ["click", "pyyaml", "tri-again"]
+landmarker = ["proximity"]
+
+[tool.poetry.dev-dependencies]
+black = "21.6b0"
+click = "8.0.1"
+coverage = "5.5"
+executor = "23.2"
+flake8 = "3.9.2"
+flake8-import-order = "0.18.1"
+myst-parser = "0.15.1"
+pytest = "6.2.4"
+pytest-cov = "2.12.1"
+Sphinx = "4.1.0"
+sphinxcontrib-apidoc = "0.3.0"
+
+
+[build-system]
+# Lint requires setuptools.
+requires = ["setuptools", "poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.coverage.report]
+fail_under = 100.0
+omit = ["**/test_*.py"]
