@@ -1,5 +1,15 @@
 # entente
 
+## Equality testing
+
+```{eval-rst}
+
+.. py:currentmodule:: entente
+
+.. automodule:: entente.equality
+    :members:
+```
+
 ## Compositing
 
 ```{eval-rst}
@@ -73,15 +83,5 @@
 .. py:currentmodule:: entente
 
 .. automodule:: entente.rigid_transform
-    :members:
-```
-
-## Equality testing
-
-```{eval-rst}
-
-.. py:currentmodule:: entente
-
-.. automodule:: entente.equality
     :members:
 ```
