@@ -2,7 +2,7 @@ from entente.composite import composite_meshes
 import lacecore
 import numpy as np
 import pytest
-import vg
+from vg.compat import v1 as vg
 from .testing import vitra_mesh
 
 

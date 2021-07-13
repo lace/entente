@@ -5,7 +5,7 @@ from entente.landmarks.symmetrize_landmarks import (
 import numpy as np
 from polliwog import Plane
 import pytest
-import vg
+from vg.compat import v1 as vg
 from ..test_symmetry import create_seat_and_arm_mesh
 
 

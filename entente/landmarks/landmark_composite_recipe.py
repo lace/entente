@@ -2,7 +2,7 @@ from cached_property import cached_property
 import lacecore
 import numpy as np
 from polliwog import Plane
-import vg
+from vg.compat import v1 as vg
 from .landmark_compositor import LandmarkCompositor
 from .landmarker import Landmarker
 
