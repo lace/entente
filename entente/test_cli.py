@@ -2,7 +2,7 @@ from click.testing import CliRunner
 from entente.cli import cli
 import meshlab_pickedpoints
 import numpy as np
-import vg
+from vg.compat import v1 as vg
 import yaml
 from .landmarks.test_landmark_compositor import composite_landmark_examples
 from .landmarks.test_landmarker import source_target_landmarks
