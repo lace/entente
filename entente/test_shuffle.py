@@ -1,6 +1,6 @@
+from entente.shuffle import shuffle_faces, shuffle_vertices
 import numpy as np
-from .shuffle import shuffle_vertices, shuffle_faces
-from .testing import vitra_mesh, assert_same_face_set, assert_same_vertex_set
+from .testing import assert_same_face_set, assert_same_vertex_set, vitra_mesh
 
 
 def test_shuffle_vertices():

@@ -77,32 +77,14 @@ python -m entente.cli composite_landmarks recipe.yml
 Development
 -----------
 
-### Updating the Docker build for CircleCI
+First, [install Poetry][].
 
-1. Make sure Docker is installed and running.
-2. Build and push the images:
+After cloning the repo, run `./bootstrap.zsh` to initialize a virtual
+environment with the project's dependencies.
 
-```sh
-./dev.py docker-build 0.2.0  # Use the next available minor release.
-./dev.py docker-push 0.2.0
-```
+Subsequently, run `./dev.py install` to update the dependencies.
 
-3. Update the `image:` references in `.circleci/config.yml`.
-
-
-Contribute
-----------
-
-- Issue Tracker: https://github.com/metabolize/entente/issues
-- Source Code: https://github.com/metabolize/entente
-
-Pull requests welcome!
-
-
-Support
--------
-
-If you are having issues, please let me know.
+[install poetry]: https://python-poetry.org/docs/#installation
 
 
 License

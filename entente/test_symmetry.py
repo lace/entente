@@ -1,7 +1,7 @@
-import pytest
+from entente.symmetry import find_opposite_vertices
 import numpy as np
 from polliwog import Plane
-from .symmetry import find_opposite_vertices
+import pytest
 
 FAST = True
 

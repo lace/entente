@@ -1,7 +1,7 @@
+from entente.landmarks.landmark_compositor import LandmarkCompositor
 from lacecore import shapes
 import numpy as np
 import pytest
-from .landmark_compositor import LandmarkCompositor
 
 
 def composite_landmark_examples():
