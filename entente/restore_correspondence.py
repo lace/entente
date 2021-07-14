@@ -1,6 +1,6 @@
 import lacecore
 import numpy as np
-import vg
+from vg.compat import v1 as vg
 
 
 def _maybe_tqdm(iterable, progress):

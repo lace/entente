@@ -1,4 +1,4 @@
-import vg
+from vg.compat import v1 as vg
 
 
 def find_rigid_transform(a, b, compute_scale=False, fail_in_degenerate_cases=True):
