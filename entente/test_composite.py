@@ -1,8 +1,8 @@
+from entente.composite import composite_meshes
 import lacecore
 import numpy as np
 import pytest
 import vg
-from .composite import composite_meshes
 from .testing import vitra_mesh
 
 

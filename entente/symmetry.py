@@ -1,5 +1,5 @@
-import vg
 from polliwog import Plane
+import vg
 
 
 def find_opposite_vertices(

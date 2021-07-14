@@ -1,4 +1,9 @@
 [build]
-  base = "doc"
-  publish = "build"
-  command = "../dev.py doc"
+  publish = "doc/build"
+  # https://github.com/netlify/build-image/issues/221#issuecomment-504385202
+  # https://github.com/netlify/build-image/issues/221#issuecomment-644662189
+  command = """
+pip install -q poetry==1.2.0a1 &&
+poetry install &&
+sphinx-build -W -b singlehtml doc doc/build
+"""

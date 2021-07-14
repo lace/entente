@@ -1,10 +1,7 @@
-import pytest
+from entente.restore_correspondence import find_correspondence, restore_correspondence
 import numpy as np
-from .restore_correspondence import (
-    _maybe_tqdm,
-    find_correspondence,
-    restore_correspondence,
-)
+import pytest
+from .restore_correspondence import _maybe_tqdm
 
 
 def create_truncated_test_mesh():

@@ -1,8 +1,8 @@
-from lacecore import shapes, Mesh
-import numpy as np
+from entente.landmarks.landmarker import Landmarker
+from lacecore import Mesh, shapes
 import meshlab_pickedpoints
+import numpy as np
 import pytest
-from .landmarker import Landmarker
 
 
 def source_target_landmarks():

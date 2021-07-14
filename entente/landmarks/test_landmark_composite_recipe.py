@@ -1,5 +1,5 @@
+from entente.landmarks.landmark_composite_recipe import LandmarkCompositeRecipe
 import numpy as np
-from .landmark_composite_recipe import LandmarkCompositeRecipe
 from .test_landmark_compositor import composite_landmark_examples
 
 

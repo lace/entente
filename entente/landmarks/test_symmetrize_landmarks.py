@@ -1,12 +1,12 @@
-import pytest
-import numpy as np
-from polliwog import Plane
-import vg
-from ..test_symmetry import create_seat_and_arm_mesh
-from .symmetrize_landmarks import (
+from entente.landmarks.symmetrize_landmarks import (
     symmetrize_landmarks_using_plane,
     symmetrize_landmarks_using_topology,
 )
+import numpy as np
+from polliwog import Plane
+import pytest
+import vg
+from ..test_symmetry import create_seat_and_arm_mesh
 
 
 def test_symmetrize_landmarks_using_plane():
