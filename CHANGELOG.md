@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.0b8 (Jul. 13, 2021)
+
+- Remove `entente.__version__`.
+- Update vg dependency to >= 1.11.0.
+- Update polliwog dependency to 1.0.b14.
+- Add documentation for a couple missing function signatures.
+
+
 ## 1.0.0b7 (Jun. 23, 2021)
 
 - Make CLI dependencies available through an extra.
