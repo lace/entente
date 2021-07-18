@@ -89,7 +89,7 @@ python-versions = "*"
 
 [[package]]
 name = "charset-normalizer"
-version = "2.0.1"
+version = "2.0.3"
 description = "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet."
 category = "dev"
 optional = false
@@ -270,18 +270,18 @@ i18n = ["Babel (>=2.7)"]
 
 [[package]]
 name = "lacecore"
-version = "0.10.0"
-description = "Polygonal mesh library optimized for cloud computation."
+version = "0.11.0"
+description = "Polygonal meshes optimized for cloud computation"
 category = "main"
 optional = false
-python-versions = "*"
+python-versions = ">=3.7,<4"
 
 [package.dependencies]
-numpy = "*"
+numpy = "<1.19.0"
 ounce = ">=1.1.0,<2.0"
-polliwog = "1.0.0b13"
+polliwog = "1.0.0b14"
 tinymetabobjloader = {version = "2.0.0a0", optional = true, markers = "extra == \"obj\""}
-vg = ">=1.7.0,<2.0"
+vg = ">=1.11.1"
 
 [package.extras]
 obj = ["tinymetabobjloader (==2.0.0a0)"]
@@ -390,11 +390,11 @@ python-versions = ">=3.5"
 
 [[package]]
 name = "ounce"
-version = "1.1.0"
-description = "A simple Python package to manipulate units"
+version = "1.1.1"
+description = "Fast, simple, non-fancy, and non-magical package for manipulating units of measure"
 category = "main"
 optional = false
-python-versions = "*"
+python-versions = ">=3.7,<4"
 
 [[package]]
 name = "packaging"
@@ -439,16 +439,16 @@ dev = ["pre-commit", "tox"]
 
 [[package]]
 name = "polliwog"
-version = "1.0.0b13"
-description = "2D and 3D computational geometry library which scales from prototyping to production"
+version = "1.0.0b14"
+description = "2D and 3D computational geometry library"
 category = "main"
 optional = false
-python-versions = "*"
+python-versions = ">=3.7,<4"
 
 [package.dependencies]
 numpy = "<1.19.0"
 ounce = ">=1.1.0,<2.0"
-vg = ">=1.5.0"
+vg = ">=1.11.1"
 
 [[package]]
 name = "property-manager"
@@ -464,18 +464,18 @@ verboselogs = ">=1.1"
 
 [[package]]
 name = "proximity"
-version = "0.3.0"
-description = "Simple scenegraph for quickly debugging 3D meshes, polylines, and points"
+version = "0.4.0"
+description = "Mesh proximity queries based on libspatialindex and rtree, extracted from Trimesh"
 category = "main"
 optional = true
-python-versions = "*"
+python-versions = ">=3.7,<4"
 
 [package.dependencies]
 numpy = "*"
-polliwog = "1.0.0b13"
+polliwog = "1.0.0b14"
 rtree = "0.9.7"
 scipy = "*"
-vg = ">=1.7.0,<2.0.0"
+vg = ">=1.11.1"
 
 [[package]]
 name = "py"
@@ -641,14 +641,14 @@ python-versions = "*"
 
 [[package]]
 name = "scipy"
-version = "1.6.1"
+version = "1.7.0"
 description = "SciPy: Scientific Library for Python"
 category = "main"
 optional = false
-python-versions = ">=3.7"
+python-versions = ">=3.7,<3.10"
 
 [package.dependencies]
-numpy = ">=1.16.5"
+numpy = ">=1.16.5,<1.23.0"
 
 [[package]]
 name = "six"
@@ -822,18 +822,19 @@ telegram = ["requests"]
 
 [[package]]
 name = "tri-again"
-version = "0.1.3"
-description = "Simple scenegraph for quickly debugging 3D meshes, polylines, and points"
+version = "0.1.5"
+description = "Work with polygonal meshes which have vertex-wise correspondence"
 category = "main"
 optional = true
-python-versions = "*"
+python-versions = ">=3.7,<3.9"
 
 [package.dependencies]
 numpy = "*"
-pycollada = "0.7.1"
+polliwog = "1.0.0b14"
+pycollada = ">=0.7.1,<0.8"
 toolz = ">=0.10.0,<0.12.0"
-vg = ">=1.7.0,<2.0"
-webcolors = "1.11.1"
+vg = ">=1.11.1"
+webcolors = ">=1.11.1,<2"
 
 [[package]]
 name = "typed-ast"
@@ -909,8 +910,8 @@ landmarker = ["proximity"]
 
 [metadata]
 lock-version = "1.1"
-python-versions = ">= 3.7, <4"
-content-hash = "dd2a268176ec381fee1cfc08ee4f1bcbefc03f0fadcdf04ebad2bbfbcded649c"
+python-versions = ">=3.7,<3.9"
+content-hash = "4289c0b2d8b112d8c83fd0534b87083000b2ed4694c495747fcf7df374203b3f"
 
 [metadata.files]
 alabaster = [
@@ -946,8 +947,8 @@ certifi = [
     {file = "certifi-2021.5.30.tar.gz", hash = "sha256:2bbf76fd432960138b3ef6dda3dde0544f27cbf8546c458e60baf371917ba9ee"},
 ]
 charset-normalizer = [
-    {file = "charset-normalizer-2.0.1.tar.gz", hash = "sha256:ad0da505736fc7e716a8da15bf19a985db21ac6415c26b34d2fafd3beb3d927e"},
-    {file = "charset_normalizer-2.0.1-py3-none-any.whl", hash = "sha256:b68b38179052975093d71c1b5361bf64afd80484697c1f27056e50593e695ceb"},
+    {file = "charset-normalizer-2.0.3.tar.gz", hash = "sha256:c46c3ace2d744cfbdebceaa3c19ae691f53ae621b39fd7570f59d14fb7f2fd12"},
+    {file = "charset_normalizer-2.0.3-py3-none-any.whl", hash = "sha256:88fce3fa5b1a84fdcb3f603d889f723d1dd89b26059d0123ca435570e848d5e1"},
 ]
 click = [
     {file = "click-8.0.1-py3-none-any.whl", hash = "sha256:fba402a4a47334742d782209a7c79bc448911afe1149d07bdabdf480b3e2f4b6"},
@@ -1060,7 +1061,8 @@ jinja2 = [
     {file = "Jinja2-3.0.1.tar.gz", hash = "sha256:703f484b47a6af502e743c9122595cc812b0271f661722403114f71a79d0f5a4"},
 ]
 lacecore = [
-    {file = "lacecore-0.10.0-py3-none-any.whl", hash = "sha256:9a81be26537fe82c0437d9153e3a50bb79ae64046b6a63232e87ef40bb3b8a57"},
+    {file = "lacecore-0.11.0-py3-none-any.whl", hash = "sha256:049a503ca347a801b0ace47e4cef9586c6f2c3f591b427ad02fcf712d50a39c0"},
+    {file = "lacecore-0.11.0.tar.gz", hash = "sha256:a743eee877cbd36c17cc388ca82afb5d84080754cca2230319952638ed3f9946"},
 ]
 markdown-it-py = [
     {file = "markdown-it-py-1.1.0.tar.gz", hash = "sha256:36be6bb3ad987bfdb839f5ba78ddf094552ca38ccbd784ae4f74a4e1419fc6e3"},
@@ -1146,8 +1148,8 @@ numpy = [
     {file = "numpy-1.18.5.zip", hash = "sha256:34e96e9dae65c4839bd80012023aadd6ee2ccb73ce7fdf3074c62f301e63120b"},
 ]
 ounce = [
-    {file = "ounce-1.1.0-py3-none-any.whl", hash = "sha256:2d1337079ce3987574d1d2e895928e44c25542b0db5b98829e1718e5d5e61922"},
-    {file = "ounce-1.1.0.tar.gz", hash = "sha256:e8f158e90392ea6e6c15127672f53edabe290f670deaf931bd9cd40379a37d75"},
+    {file = "ounce-1.1.1-py3-none-any.whl", hash = "sha256:5273cf7b609ed1b9fb814af6cc3000476262ccd327bd20c0e799f6ed5052f638"},
+    {file = "ounce-1.1.1.tar.gz", hash = "sha256:b0d71780666793942aeb7e929121dad1ef709c187ee398d505544d97f89bf4a8"},
 ]
 packaging = [
     {file = "packaging-21.0-py3-none-any.whl", hash = "sha256:c86254f9220d55e31cc94d69bade760f0847da8000def4dfe1c6b872fd14ff14"},
@@ -1166,16 +1168,16 @@ pluggy = [
     {file = "pluggy-0.13.1.tar.gz", hash = "sha256:15b2acde666561e1298d71b523007ed7364de07029219b604cf808bfa1c765b0"},
 ]
 polliwog = [
-    {file = "polliwog-1.0.0b13-py3-none-any.whl", hash = "sha256:a6d8dec48faa5604b5fea6cf6f472894927885f020a9dc9bca3ff463511ddce6"},
-    {file = "polliwog-1.0.0b13.tar.gz", hash = "sha256:3fdca920aad4abc2c2aed88df52c5b7ac19f91515ebb271f95a762044d3bc3d9"},
+    {file = "polliwog-1.0.0b14-py3-none-any.whl", hash = "sha256:eb575710d706c1ebe4dd3c6f577a48a3e99bd9600247880d48d7a3471ccaebb1"},
+    {file = "polliwog-1.0.0b14.tar.gz", hash = "sha256:10ce6b3a907cde1a45a39ff02852ba2bd85e5c35b2f4a00df63b73323bd5e8ee"},
 ]
 property-manager = [
     {file = "property-manager-3.0.tar.gz", hash = "sha256:93e76da9ae7af13cccc2cd1e3b47219950c56c125cd962aaed693894af267c54"},
     {file = "property_manager-3.0-py2.py3-none-any.whl", hash = "sha256:d5d648053e669cf9cb2f157e4a41ef46174eaa8ee13bfa49e1530c17d65bfe45"},
 ]
 proximity = [
-    {file = "proximity-0.3.0-py3-none-any.whl", hash = "sha256:9e765108de984d0bc5311e94cf90b264d9f6a589a7914059f6be8cd461e47992"},
-    {file = "proximity-0.3.0.tar.gz", hash = "sha256:c87e751d440a6d93fea452f2dd2fd90a30575706379c8b53078bd94e5bc5f057"},
+    {file = "proximity-0.4.0-py3-none-any.whl", hash = "sha256:fdc5231ebe32ae2fb911b435ada9c03a96cec08b3ec5825c6338a0073369bbe7"},
+    {file = "proximity-0.4.0.tar.gz", hash = "sha256:b5d3592026834c1e96c48bd0b9563089651c545b6202a7605261ccd66872f72a"},
 ]
 py = [
     {file = "py-1.10.0-py2.py3-none-any.whl", hash = "sha256:3b80836aa6d1feeaa108e046da6423ab8f6ceda6468545ae8d02d9d58d18818a"},
@@ -1329,25 +1331,25 @@ rtree = [
     {file = "Rtree-0.9.7.tar.gz", hash = "sha256:be8772ca34699a9ad3fb4cfe2cfb6629854e453c10b3328039301bbfc128ca3e"},
 ]
 scipy = [
-    {file = "scipy-1.6.1-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:a15a1f3fc0abff33e792d6049161b7795909b40b97c6cc2934ed54384017ab76"},
-    {file = "scipy-1.6.1-cp37-cp37m-manylinux1_i686.whl", hash = "sha256:e79570979ccdc3d165456dd62041d9556fb9733b86b4b6d818af7a0afc15f092"},
-    {file = "scipy-1.6.1-cp37-cp37m-manylinux1_x86_64.whl", hash = "sha256:a423533c55fec61456dedee7b6ee7dce0bb6bfa395424ea374d25afa262be261"},
-    {file = "scipy-1.6.1-cp37-cp37m-manylinux2014_aarch64.whl", hash = "sha256:33d6b7df40d197bdd3049d64e8e680227151673465e5d85723b3b8f6b15a6ced"},
-    {file = "scipy-1.6.1-cp37-cp37m-win32.whl", hash = "sha256:6725e3fbb47da428794f243864f2297462e9ee448297c93ed1dcbc44335feb78"},
-    {file = "scipy-1.6.1-cp37-cp37m-win_amd64.whl", hash = "sha256:5fa9c6530b1661f1370bcd332a1e62ca7881785cc0f80c0d559b636567fab63c"},
-    {file = "scipy-1.6.1-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:bd50daf727f7c195e26f27467c85ce653d41df4358a25b32434a50d8870fc519"},
-    {file = "scipy-1.6.1-cp38-cp38-manylinux1_i686.whl", hash = "sha256:f46dd15335e8a320b0fb4685f58b7471702234cba8bb3442b69a3e1dc329c345"},
-    {file = "scipy-1.6.1-cp38-cp38-manylinux1_x86_64.whl", hash = "sha256:0e5b0ccf63155d90da576edd2768b66fb276446c371b73841e3503be1d63fb5d"},
-    {file = "scipy-1.6.1-cp38-cp38-manylinux2014_aarch64.whl", hash = "sha256:2481efbb3740977e3c831edfd0bd9867be26387cacf24eb5e366a6a374d3d00d"},
-    {file = "scipy-1.6.1-cp38-cp38-win32.whl", hash = "sha256:68cb4c424112cd4be886b4d979c5497fba190714085f46b8ae67a5e4416c32b4"},
-    {file = "scipy-1.6.1-cp38-cp38-win_amd64.whl", hash = "sha256:5f331eeed0297232d2e6eea51b54e8278ed8bb10b099f69c44e2558c090d06bf"},
-    {file = "scipy-1.6.1-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:0c8a51d33556bf70367452d4d601d1742c0e806cd0194785914daf19775f0e67"},
-    {file = "scipy-1.6.1-cp39-cp39-manylinux1_i686.whl", hash = "sha256:83bf7c16245c15bc58ee76c5418e46ea1811edcc2e2b03041b804e46084ab627"},
-    {file = "scipy-1.6.1-cp39-cp39-manylinux1_x86_64.whl", hash = "sha256:794e768cc5f779736593046c9714e0f3a5940bc6dcc1dba885ad64cbfb28e9f0"},
-    {file = "scipy-1.6.1-cp39-cp39-manylinux2014_aarch64.whl", hash = "sha256:5da5471aed911fe7e52b86bf9ea32fb55ae93e2f0fac66c32e58897cfb02fa07"},
-    {file = "scipy-1.6.1-cp39-cp39-win32.whl", hash = "sha256:8e403a337749ed40af60e537cc4d4c03febddcc56cd26e774c9b1b600a70d3e4"},
-    {file = "scipy-1.6.1-cp39-cp39-win_amd64.whl", hash = "sha256:a5193a098ae9f29af283dcf0041f762601faf2e595c0db1da929875b7570353f"},
-    {file = "scipy-1.6.1.tar.gz", hash = "sha256:c4fceb864890b6168e79b0e714c585dbe2fd4222768ee90bc1aa0f8218691b11"},
+    {file = "scipy-1.7.0-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:821e75f5c16cd7b0ab0ffe7eb9917e5af7b48c25306b4777287de8d792a5f7f3"},
+    {file = "scipy-1.7.0-cp37-cp37m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:3e7df79b42c3015058a5554bfeab6fd4c9906c46560c9ddebb5c652840f3e182"},
+    {file = "scipy-1.7.0-cp37-cp37m-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:0572256c10ddd058e3d315c555538671ddb2737f27eb56189bfbc3483391403f"},
+    {file = "scipy-1.7.0-cp37-cp37m-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:b77ee5e3a9507622e7f98b16122242a3903397f98d1fe3bc269d904a9025e2bc"},
+    {file = "scipy-1.7.0-cp37-cp37m-win32.whl", hash = "sha256:53116abd5060a5b4a58489cf689bee259b779e6b7ecd4ce366e7147aa7c9626e"},
+    {file = "scipy-1.7.0-cp37-cp37m-win_amd64.whl", hash = "sha256:e7b733d4d98e604109715e11f2ab9340eb45d53f803634ed730039070fc3bc11"},
+    {file = "scipy-1.7.0-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:4ef3d4df8af40cb6f4d4eaf7b02780109ebabeec334cda26a7899ec9d8de9176"},
+    {file = "scipy-1.7.0-cp38-cp38-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:bd4399d4388ca0239a4825e312b3e61b60f743dd6daf49e5870837716502a92a"},
+    {file = "scipy-1.7.0-cp38-cp38-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:80df8af7039bce92fb4cd1ceb056258631b11b3c627384e2d29bb48d44c0cae7"},
+    {file = "scipy-1.7.0-cp38-cp38-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:6130e22bf6ee506f7cddde7e0515296d97eb6c6c94f7ef5103c2b77aec5833a7"},
+    {file = "scipy-1.7.0-cp38-cp38-win32.whl", hash = "sha256:97ca4552ace1c313707058e774609af59644321e278c3a539322fab2fb09b943"},
+    {file = "scipy-1.7.0-cp38-cp38-win_amd64.whl", hash = "sha256:c5d012cb82cc1dcfa72609abaabb4a4ed8113e3e8ac43464508a418c146be57d"},
+    {file = "scipy-1.7.0-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:5eb8f054eebb351af7490bbb57465ba9662c4e16e1786655c6c7ed530eb9a74e"},
+    {file = "scipy-1.7.0-cp39-cp39-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:7f4b89c223bd09460b52b669e2e642cab73c28855b540e6ed029692546a86f8d"},
+    {file = "scipy-1.7.0-cp39-cp39-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:2e685fdbfa5b989af4338b29c408b9157ea6addec15d661104c437980c292be5"},
+    {file = "scipy-1.7.0-cp39-cp39-manylinux_2_5_x86_64.manylinux1_x86_64.whl", hash = "sha256:3595c8b64970c9e5a3f137fa1a9eb64da417e78fb7991d0b098b18a00b776d88"},
+    {file = "scipy-1.7.0-cp39-cp39-win32.whl", hash = "sha256:5a983d3cebc27294897951a494cebd78af2eae37facf75d9e4ad4f1f62229860"},
+    {file = "scipy-1.7.0-cp39-cp39-win_amd64.whl", hash = "sha256:aef6e922aea6f2e6bbb539b413c85210a9ee32757535b84204ebd22723e69704"},
+    {file = "scipy-1.7.0.tar.gz", hash = "sha256:998c5e6ea649489302de2c0bc026ed34284f531df89d2bdc8df3a0d44d165739"},
 ]
 six = [
     {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
@@ -1431,8 +1433,8 @@ tqdm = [
     {file = "tqdm-4.61.2.tar.gz", hash = "sha256:8bb94db0d4468fea27d004a0f1d1c02da3cdedc00fe491c0de986b76a04d6b0a"},
 ]
 tri-again = [
-    {file = "tri-again-0.1.3.tar.gz", hash = "sha256:5c68fc344b665e3be2b555cdf03cbde07481d5d5c2f625959a209045d8e2c4f4"},
-    {file = "tri_again-0.1.3-py3-none-any.whl", hash = "sha256:278441bbb8e80f099731c6f83ee65e53a2367fbf1757e3d75080d5b8cddd287e"},
+    {file = "tri-again-0.1.5.tar.gz", hash = "sha256:8a513b0ec7550375cd03b445aa754f7c2dd2109923745c03c0d6d0c2f5bcf1bb"},
+    {file = "tri_again-0.1.5-py3-none-any.whl", hash = "sha256:4ef91d78b476b362013cf9acec81c03f8b52c04055ad9a68a5592433f0e3492e"},
 ]
 typed-ast = [
     {file = "typed_ast-1.4.3-cp35-cp35m-manylinux1_i686.whl", hash = "sha256:2068531575a125b87a41802130fa7e29f26c09a2833fea68d9a40cf33902eba6"},
