@@ -9,7 +9,7 @@ entente
 [![docs build](https://img.shields.io/readthedocs/entente?style=flat-square)][docs build]
 [![code style](https://img.shields.io/badge/code%20style-black-black?style=flat-square)][black]
 
-Library for working with [lacecore][]-style polygonal meshes which have
+Library for working with [lacecore][]-style polygonal meshes which are in
 vertex-wise correspondence.
 
 [pypi]: https://pypi.org/project/entente/
