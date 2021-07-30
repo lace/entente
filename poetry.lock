@@ -89,7 +89,7 @@ python-versions = "*"
 
 [[package]]
 name = "charset-normalizer"
-version = "2.0.3"
+version = "2.0.4"
 description = "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet."
 category = "dev"
 optional = false
@@ -270,7 +270,7 @@ i18n = ["Babel (>=2.7)"]
 
 [[package]]
 name = "lacecore"
-version = "0.11.0"
+version = "1.0.0"
 description = "Polygonal meshes optimized for cloud computation"
 category = "main"
 optional = false
@@ -279,9 +279,9 @@ python-versions = ">=3.7,<4"
 [package.dependencies]
 numpy = "<1.19.0"
 ounce = ">=1.1.0,<2.0"
-polliwog = "1.0.0b14"
+polliwog = ">=1.0.0,<2.0"
 tinymetabobjloader = {version = "2.0.0a0", optional = true, markers = "extra == \"obj\""}
-vg = ">=1.11.1"
+vg = ">=2.0.0"
 
 [package.extras]
 obj = ["tinymetabobjloader (==2.0.0a0)"]
@@ -340,7 +340,7 @@ testing = ["coverage", "pytest (>=3.6,<4)", "pytest-cov", "pytest-regressions"]
 
 [[package]]
 name = "meshlab-pickedpoints"
-version = "1.0.0"
+version = "2.0.0"
 description = "Read and write MeshLab picked point (.pp) files"
 category = "main"
 optional = false
@@ -348,7 +348,7 @@ python-versions = "*"
 
 [package.dependencies]
 numpy = "*"
-vg = ">=1.7.0,<2.0"
+vg = ">=2.0.0"
 
 [[package]]
 name = "mypy-extensions"
@@ -409,11 +409,11 @@ pyparsing = ">=2.0.2"
 
 [[package]]
 name = "pathspec"
-version = "0.8.1"
+version = "0.9.0"
 description = "Utility library for gitignore style pattern matching of file paths."
 category = "dev"
 optional = false
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
 
 [[package]]
 name = "pbr"
@@ -439,7 +439,7 @@ dev = ["pre-commit", "tox"]
 
 [[package]]
 name = "polliwog"
-version = "1.0.0b14"
+version = "1.0.0"
 description = "2D and 3D computational geometry library"
 category = "main"
 optional = false
@@ -448,7 +448,7 @@ python-versions = ">=3.7,<4"
 [package.dependencies]
 numpy = "<1.19.0"
 ounce = ">=1.1.0,<2.0"
-vg = ">=1.11.1"
+vg = ">=2.0.0"
 
 [[package]]
 name = "property-manager"
@@ -464,7 +464,7 @@ verboselogs = ">=1.1"
 
 [[package]]
 name = "proximity"
-version = "0.4.0"
+version = "1.0.0"
 description = "Mesh proximity queries based on libspatialindex and rtree, extracted from Trimesh"
 category = "main"
 optional = true
@@ -472,10 +472,10 @@ python-versions = ">=3.7,<4"
 
 [package.dependencies]
 numpy = "*"
-polliwog = "1.0.0b14"
+polliwog = ">=1.0.0,<2"
 rtree = "0.9.7"
 scipy = "*"
-vg = ">=1.11.1"
+vg = ">=2.0.0"
 
 [[package]]
 name = "py"
@@ -806,7 +806,7 @@ python-versions = ">=3.5"
 
 [[package]]
 name = "tqdm"
-version = "4.61.2"
+version = "4.62.0"
 description = "Fast, Extensible Progress Meter"
 category = "main"
 optional = false
@@ -822,18 +822,18 @@ telegram = ["requests"]
 
 [[package]]
 name = "tri-again"
-version = "0.1.5"
-description = "Work with polygonal meshes which have vertex-wise correspondence"
+version = "1.0.0"
+description = "Scenegraph for quickly debugging 3D meshes, polylines, and points"
 category = "main"
 optional = true
 python-versions = ">=3.7,<3.9"
 
 [package.dependencies]
 numpy = "*"
-polliwog = "1.0.0b14"
+polliwog = ">=1.0.0,<2"
 pycollada = ">=0.7.1,<0.8"
 toolz = ">=0.10.0,<0.12.0"
-vg = ">=1.11.1"
+vg = ">=2.0.0"
 webcolors = ">=1.11.1,<2"
 
 [[package]]
@@ -875,11 +875,11 @@ python-versions = "*"
 
 [[package]]
 name = "vg"
-version = "1.11.1"
-description = "A vector-geometry toolbelt for dealing with 3D points and vectors"
+version = "2.0.0"
+description = "Linear algebra for humans: a very good vector-geometry and linear-algebra toolbelt"
 category = "main"
 optional = false
-python-versions = "*"
+python-versions = ">=3.7,<4"
 
 [package.dependencies]
 numpy = "*"
@@ -911,7 +911,7 @@ landmarker = ["proximity"]
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.7,<3.9"
-content-hash = "4289c0b2d8b112d8c83fd0534b87083000b2ed4694c495747fcf7df374203b3f"
+content-hash = "ded3c9584a667e3482868708cc43f5ce4b9d158f6e22805adbc46151f4817dfc"
 
 [metadata.files]
 alabaster = [
@@ -947,8 +947,8 @@ certifi = [
     {file = "certifi-2021.5.30.tar.gz", hash = "sha256:2bbf76fd432960138b3ef6dda3dde0544f27cbf8546c458e60baf371917ba9ee"},
 ]
 charset-normalizer = [
-    {file = "charset-normalizer-2.0.3.tar.gz", hash = "sha256:c46c3ace2d744cfbdebceaa3c19ae691f53ae621b39fd7570f59d14fb7f2fd12"},
-    {file = "charset_normalizer-2.0.3-py3-none-any.whl", hash = "sha256:88fce3fa5b1a84fdcb3f603d889f723d1dd89b26059d0123ca435570e848d5e1"},
+    {file = "charset-normalizer-2.0.4.tar.gz", hash = "sha256:f23667ebe1084be45f6ae0538e4a5a865206544097e4e8bbcacf42cd02a348f3"},
+    {file = "charset_normalizer-2.0.4-py3-none-any.whl", hash = "sha256:0c8911edd15d19223366a194a513099a302055a962bca2cec0f54b8b63175d8b"},
 ]
 click = [
     {file = "click-8.0.1-py3-none-any.whl", hash = "sha256:fba402a4a47334742d782209a7c79bc448911afe1149d07bdabdf480b3e2f4b6"},
@@ -1061,8 +1061,8 @@ jinja2 = [
     {file = "Jinja2-3.0.1.tar.gz", hash = "sha256:703f484b47a6af502e743c9122595cc812b0271f661722403114f71a79d0f5a4"},
 ]
 lacecore = [
-    {file = "lacecore-0.11.0-py3-none-any.whl", hash = "sha256:049a503ca347a801b0ace47e4cef9586c6f2c3f591b427ad02fcf712d50a39c0"},
-    {file = "lacecore-0.11.0.tar.gz", hash = "sha256:a743eee877cbd36c17cc388ca82afb5d84080754cca2230319952638ed3f9946"},
+    {file = "lacecore-1.0.0-py3-none-any.whl", hash = "sha256:659447904aa40d9729f9bf0c463d0fefaa2b14b32403d80657342923b61c73c6"},
+    {file = "lacecore-1.0.0.tar.gz", hash = "sha256:a121e84df749f846f4ea591bd99771d8ea68bbff59024f8300bcd9b00fd0fb63"},
 ]
 markdown-it-py = [
     {file = "markdown-it-py-1.1.0.tar.gz", hash = "sha256:36be6bb3ad987bfdb839f5ba78ddf094552ca38ccbd784ae4f74a4e1419fc6e3"},
@@ -1113,8 +1113,8 @@ mdit-py-plugins = [
     {file = "mdit_py_plugins-0.2.8-py3-none-any.whl", hash = "sha256:1833bf738e038e35d89cb3a07eb0d227ed647ce7dd357579b65343740c6d249c"},
 ]
 meshlab-pickedpoints = [
-    {file = "meshlab-pickedpoints-1.0.0.tar.gz", hash = "sha256:3dda83c649e28d55ecf53dedee29446c1ca701d6bdb7107788e97b70d359e330"},
-    {file = "meshlab_pickedpoints-1.0.0-py3-none-any.whl", hash = "sha256:3e8382eab213903682a0236c6416e3adfb64f0ada196a8787cb954ab74b54c1c"},
+    {file = "meshlab-pickedpoints-2.0.0.tar.gz", hash = "sha256:777a7d4e60ebc3d9c82ca4433e346777a42c07573d776037924ee8c1d59bf845"},
+    {file = "meshlab_pickedpoints-2.0.0-py3-none-any.whl", hash = "sha256:856420dcfa563f2dfc783352fe84fd5786b3d23eb5db04c4e9ff755d25a12d21"},
 ]
 mypy-extensions = [
     {file = "mypy_extensions-0.4.3-py2.py3-none-any.whl", hash = "sha256:090fedd75945a69ae91ce1303b5824f428daf5a028d2f6ab8a299250a846f15d"},
@@ -1156,8 +1156,8 @@ packaging = [
     {file = "packaging-21.0.tar.gz", hash = "sha256:7dc96269f53a4ccec5c0670940a4281106dd0bb343f47b7471f779df49c2fbe7"},
 ]
 pathspec = [
-    {file = "pathspec-0.8.1-py2.py3-none-any.whl", hash = "sha256:aa0cb481c4041bf52ffa7b0d8fa6cd3e88a2ca4879c533c9153882ee2556790d"},
-    {file = "pathspec-0.8.1.tar.gz", hash = "sha256:86379d6b86d75816baba717e64b1a3a3469deb93bb76d613c9ce79edc5cb68fd"},
+    {file = "pathspec-0.9.0-py2.py3-none-any.whl", hash = "sha256:7d15c4ddb0b5c802d161efc417ec1a2558ea2653c2e8ad9c19098201dc1c993a"},
+    {file = "pathspec-0.9.0.tar.gz", hash = "sha256:e564499435a2673d586f6b2130bb5b95f04a3ba06f81b8f895b651a3c76aabb1"},
 ]
 pbr = [
     {file = "pbr-5.6.0-py2.py3-none-any.whl", hash = "sha256:c68c661ac5cc81058ac94247278eeda6d2e6aecb3e227b0387c30d277e7ef8d4"},
@@ -1168,16 +1168,16 @@ pluggy = [
     {file = "pluggy-0.13.1.tar.gz", hash = "sha256:15b2acde666561e1298d71b523007ed7364de07029219b604cf808bfa1c765b0"},
 ]
 polliwog = [
-    {file = "polliwog-1.0.0b14-py3-none-any.whl", hash = "sha256:eb575710d706c1ebe4dd3c6f577a48a3e99bd9600247880d48d7a3471ccaebb1"},
-    {file = "polliwog-1.0.0b14.tar.gz", hash = "sha256:10ce6b3a907cde1a45a39ff02852ba2bd85e5c35b2f4a00df63b73323bd5e8ee"},
+    {file = "polliwog-1.0.0-py3-none-any.whl", hash = "sha256:07fa48650b3dc57001cf223cbaf31a2df1791844282ffbf5296b93d977fd843c"},
+    {file = "polliwog-1.0.0.tar.gz", hash = "sha256:460910774fe9db299ae08f8e7fde688fe8ae4d8e6b1110a5f6267e4584d5b433"},
 ]
 property-manager = [
     {file = "property-manager-3.0.tar.gz", hash = "sha256:93e76da9ae7af13cccc2cd1e3b47219950c56c125cd962aaed693894af267c54"},
     {file = "property_manager-3.0-py2.py3-none-any.whl", hash = "sha256:d5d648053e669cf9cb2f157e4a41ef46174eaa8ee13bfa49e1530c17d65bfe45"},
 ]
 proximity = [
-    {file = "proximity-0.4.0-py3-none-any.whl", hash = "sha256:fdc5231ebe32ae2fb911b435ada9c03a96cec08b3ec5825c6338a0073369bbe7"},
-    {file = "proximity-0.4.0.tar.gz", hash = "sha256:b5d3592026834c1e96c48bd0b9563089651c545b6202a7605261ccd66872f72a"},
+    {file = "proximity-1.0.0-py3-none-any.whl", hash = "sha256:f355c7497a3b266e59d594a9cf3194a8d2636fba9ab5b69a321970403b298188"},
+    {file = "proximity-1.0.0.tar.gz", hash = "sha256:e79c46ba7427600166d3a0569a80b9a806798839a1d5882928393abe0ebdce0b"},
 ]
 py = [
     {file = "py-1.10.0-py2.py3-none-any.whl", hash = "sha256:3b80836aa6d1feeaa108e046da6423ab8f6ceda6468545ae8d02d9d58d18818a"},
@@ -1429,12 +1429,12 @@ toolz = [
     {file = "toolz-0.11.1.tar.gz", hash = "sha256:c7a47921f07822fe534fb1c01c9931ab335a4390c782bd28c6bcc7c2f71f3fbf"},
 ]
 tqdm = [
-    {file = "tqdm-4.61.2-py2.py3-none-any.whl", hash = "sha256:5aa445ea0ad8b16d82b15ab342de6b195a722d75fc1ef9934a46bba6feafbc64"},
-    {file = "tqdm-4.61.2.tar.gz", hash = "sha256:8bb94db0d4468fea27d004a0f1d1c02da3cdedc00fe491c0de986b76a04d6b0a"},
+    {file = "tqdm-4.62.0-py2.py3-none-any.whl", hash = "sha256:706dea48ee05ba16e936ee91cb3791cd2ea6da348a0e50b46863ff4363ff4340"},
+    {file = "tqdm-4.62.0.tar.gz", hash = "sha256:3642d483b558eec80d3c831e23953582c34d7e4540db86d9e5ed9dad238dabc6"},
 ]
 tri-again = [
-    {file = "tri-again-0.1.5.tar.gz", hash = "sha256:8a513b0ec7550375cd03b445aa754f7c2dd2109923745c03c0d6d0c2f5bcf1bb"},
-    {file = "tri_again-0.1.5-py3-none-any.whl", hash = "sha256:4ef91d78b476b362013cf9acec81c03f8b52c04055ad9a68a5592433f0e3492e"},
+    {file = "tri-again-1.0.0.tar.gz", hash = "sha256:d4f4bfd9f69d5889c45d99ab0e4c363215f6008f2e2719d04e83595ca82c23e1"},
+    {file = "tri_again-1.0.0-py3-none-any.whl", hash = "sha256:8002b3819ee5e4b3e175e22671f229160495a4bfdb0cc084dd6ef0309d27d3f6"},
 ]
 typed-ast = [
     {file = "typed_ast-1.4.3-cp35-cp35m-manylinux1_i686.whl", hash = "sha256:2068531575a125b87a41802130fa7e29f26c09a2833fea68d9a40cf33902eba6"},
@@ -1482,8 +1482,8 @@ verboselogs = [
     {file = "verboselogs-1.7.tar.gz", hash = "sha256:e33ddedcdfdafcb3a174701150430b11b46ceb64c2a9a26198c76a156568e427"},
 ]
 vg = [
-    {file = "vg-1.11.1-py3-none-any.whl", hash = "sha256:191ed442e2100067d9dc8eebb63314670a8454a0890f21843725614ba9a80249"},
-    {file = "vg-1.11.1.tar.gz", hash = "sha256:20b55eb23cfdba67f8e6f75d6f0c65a24c4ae6574591fbfe3f7d492193fe9730"},
+    {file = "vg-2.0.0-py3-none-any.whl", hash = "sha256:86eafd1f096e3dbaa79cdbae5378d019e8cf60e67b619f69f9ed40ce1eeb1e57"},
+    {file = "vg-2.0.0.tar.gz", hash = "sha256:2a3f14951c81852c76727460abb8f977bf6e15bb07480e3f3bb01da1cd362570"},
 ]
 webcolors = [
     {file = "webcolors-1.11.1-py3-none-any.whl", hash = "sha256:b8cd5d865a25c51ff1218f0c90d0c0781fc64312a49b746b320cf50de1648f6e"},
