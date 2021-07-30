@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.0 (Jul. 13, 2021)
+
+- Update vg, polliwog, lacecore, and proximity dependencies.
+
+
 ## 1.0.0b8 (Jul. 13, 2021)
 
 - Remove `entente.__version__`.
