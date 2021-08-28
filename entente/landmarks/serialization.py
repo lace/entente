@@ -5,7 +5,7 @@ import simplejson as json
 def try_load_meshlab_pickedpoints():
     try:
         import meshlab_pickedpoints
-    except ImportError:
+    except ImportError:  # pragma: no cover
         raise ImportError(
             "To load Meshlab picked points files, install entente with the meshlab extra: "
             + "`pip install entente[meshlab]`"
