@@ -30,9 +30,7 @@ class LandmarkCompositor(object):
         # into memory.
         if not set(landmarks.keys()).issuperset(self.landmark_names):
             raise ValueError(
-                "Expected examples to contain keys {}".format(
-                    ", ".join(self.landmark_names)
-                )
+                f"Expected examples to contain keys {', '.join(self.landmark_names)}"
             )
         landmarker = Landmarker(source_mesh=mesh, landmarks=landmarks)
         transferred = landmarker.transfer_landmarks_onto(self.base_mesh)

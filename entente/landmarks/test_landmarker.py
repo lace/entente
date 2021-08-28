@@ -1,6 +1,6 @@
 from entente.landmarks.landmarker import Landmarker
+from entente.landmarks.serialization import dump_landmarks
 from lacecore import Mesh, shapes
-import meshlab_pickedpoints
 import numpy as np
 import pytest
 
@@ -39,11 +39,10 @@ def test_landmarker(tmp_path):
     )
 
     source_mesh_path = str(tmp_path / "source.obj")
-    landmark_path = str(tmp_path / "landmarks.pp")
+    landmark_path = str(tmp_path / "landmarks.json")
 
     source_mesh.write_obj(source_mesh_path)
-    with open(landmark_path, "w") as f:
-        meshlab_pickedpoints.dump(landmarks, f)
+    dump_landmarks(landmarks, landmark_path)
 
     landmarker = Landmarker.load(
         source_mesh_path=source_mesh_path, landmark_path=landmark_path

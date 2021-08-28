@@ -7,7 +7,7 @@ Example:
 
         python -m entente.cli \\
             examples/vitra/vitra_without_materials_triangulated.obj \\
-            examples/vitra/vitra.pp \\
+            examples/vitra/vitra_landmarks.json \\
             examples/vitra/vitra_stretched.obj
 
 """
@@ -33,8 +33,8 @@ def transfer_landmarks(source_mesh, landmarks, target_mesh, out):
     """
     import os
     import lacecore
-    import meshlab_pickedpoints
     from .landmarks.landmarker import Landmarker
+    from .landmarks.serialization import dump_landmarks
 
     landmarker = Landmarker.load(source_mesh_path=source_mesh, landmark_path=landmarks)
 
@@ -43,9 +43,8 @@ def transfer_landmarks(source_mesh, landmarks, target_mesh, out):
         landmarks_on_target_mesh = landmarker.transfer_landmarks_onto(m)
         if out is None:
             filename, _ = os.path.splitext(os.path.basename(target_mesh_path))
-            out = filename + ".pp"
-        with open(out, "w") as f:
-            meshlab_pickedpoints.dump(landmarks_on_target_mesh, f)
+            out = filename + ".json"
+        dump_landmarks(landmarks_on_target_mesh, out)
 
 
 @cli.command()
@@ -59,16 +58,15 @@ def composite_landmarks(recipe, output_dir, indicator_radius):
     """
     import os
     import yaml
-    import meshlab_pickedpoints
     from .landmarks.landmark_composite_recipe import LandmarkCompositeRecipe
+    from .landmarks.serialization import dump_landmarks
 
     recipe_obj = LandmarkCompositeRecipe.load(recipe)
 
     out_landmarks = os.path.join(output_dir, "landmarks")
     os.makedirs(out_landmarks, exist_ok=True)
-    with open("{}.pp".format(out_landmarks), "w") as f:
-        meshlab_pickedpoints.dump(recipe_obj.composite_landmarks, f)
-    with open("{}.yml".format(out_landmarks), "w") as f:
+    dump_landmarks(recipe_obj.composite_landmarks, f"{out_landmarks}.json")
+    with open(f"{out_landmarks}.yml", "w") as f:
         yaml.dump(recipe_obj.to_json(), f)
 
     recipe_obj.write_reprojected_landmarks(

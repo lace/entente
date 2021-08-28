@@ -73,9 +73,7 @@ class LandmarkCompositeRecipe(object):
 
         result = {}
         for unsided_name in self._unsided_landmark_names:
-            sided_names = [
-                "{}_{}".format(unsided_name, side) for side in ["left", "right"]
-            ]
+            sided_names = [f"{unsided_name}_{side}" for side in ["left", "right"]]
             symmetrized = symmetrize_landmarks_using_plane(
                 self._plane_of_symmetry,
                 np.array([landmarks[k] for k in sided_names]),
@@ -161,7 +159,7 @@ class LandmarkCompositeRecipe(object):
 
         for example in self.examples:
             example_id = example["id"]
-            out = os.path.join(output_dir, "{}.dae".format(example_id))
+            out = os.path.join(output_dir, f"{example_id}.dae")
 
             Scene(point_radius=radius).add_meshes(
                 lacecore.load_obj(example["mesh"], triangulate=True)
@@ -170,13 +168,13 @@ class LandmarkCompositeRecipe(object):
                     item["original"]
                     for item in original_and_reprojected_landmarks[example_id].values()
                 ],
-                color="blue"
+                color="blue",
             ).add_points(
                 *[
                     item["reprojected"]
                     for item in original_and_reprojected_landmarks[example_id].values()
                 ],
-                color="darkgreen"
+                color="darkgreen",
             ).write(
                 out
             )
