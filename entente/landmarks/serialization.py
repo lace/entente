@@ -28,6 +28,7 @@ def dump_landmarks(landmarks, landmark_path):
             try_load_meshlab_pickedpoints().dump(landmarks, f)
         else:
             serialized = [
-                {"name": name, "point": coords.tolist()} for name, coords in landmarks.items()
+                {"name": name, "point": coords.tolist()}
+                for name, coords in landmarks.items()
             ]
             json.dump(serialized, f)
