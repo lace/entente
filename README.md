@@ -50,7 +50,7 @@ Usage
 -----
 
 ```sh
-python -m entente.cli transfer_landmarks source.obj source.pp target1.obj target2.obj ...
+python -m entente.cli transfer_landmarks source.obj source_landmarks.json target1.obj target2.obj ...
 ```
 
 ```yml

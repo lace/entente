@@ -64,9 +64,7 @@ def find_correspondence(
             a_to_b[a_index] = b_index
         elif all_must_match:
             raise ValueError(
-                "Couldn't find corresponding element in b for item {} in a".format(
-                    a_index
-                )
+                f"Couldn't find corresponding element in b for item {a_index} in a"
             )
 
     if ret_unmatched_b:

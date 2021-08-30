@@ -7,6 +7,7 @@ This module requires entente to be installed with the `landmarker` extras:
 """
 
 from cached_property import cached_property
+from .serialization import load_landmarks
 
 
 class Landmarker(object):
@@ -36,15 +37,14 @@ class Landmarker(object):
 
         Args:
             source_mesh_path (str): File path to the source mesh.
-            landmark_path (str): File path to a meshlab ``.pp`` file containing
-                the landmark points.
+            landmark_path (str): File path to a JSON file or meshlab ``.pp``
+                file containing the landmark points.
         """
         import lacecore
-        import meshlab_pickedpoints
 
         return cls(
             source_mesh=lacecore.load_obj(source_mesh_path, triangulate=True),
-            landmarks=meshlab_pickedpoints.load(landmark_path),
+            landmarks=load_landmarks(landmark_path),
         )
 
     @cached_property

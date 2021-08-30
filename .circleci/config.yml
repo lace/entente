@@ -47,7 +47,7 @@ jobs:
       - *install_poetry
       - run:
           name: Install python dependencies
-          command: poetry install --no-ansi --no-interaction --extras landmarker --extras cli
+          command: poetry install --no-ansi --no-interaction --extras landmarker --extras cli --extras meshlab
       - *show_versions
 
       - *install_git_lfs

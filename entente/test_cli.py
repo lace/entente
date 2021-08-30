@@ -1,9 +1,9 @@
 from click.testing import CliRunner
 from entente.cli import cli
-import meshlab_pickedpoints
 import numpy as np
 from vg.compat import v1 as vg
 import yaml
+from .landmarks.serialization import dump_landmarks, load_landmarks
 from .landmarks.test_landmark_compositor import composite_landmark_examples
 from .landmarks.test_landmarker import source_target_landmarks
 
@@ -12,12 +12,11 @@ def test_transfer_landmarks_cli(tmp_path):
     source_mesh, target_mesh, landmarks, expected_landmarks = source_target_landmarks()
 
     source_mesh_path = str(tmp_path / "source.obj")
-    landmark_path = str(tmp_path / "landmarks.pp")
+    landmark_path = str(tmp_path / "landmarks.json")
     target_mesh_path = str(tmp_path / "target.obj")
 
     source_mesh.write_obj(source_mesh_path)
-    with open(landmark_path, "w") as f:
-        meshlab_pickedpoints.dump(landmarks, f)
+    dump_landmarks(landmarks, landmark_path)
     target_mesh.write_obj(target_mesh_path)
 
     runner = CliRunner()
@@ -28,7 +27,36 @@ def test_transfer_landmarks_cli(tmp_path):
         )
         assert result.exit_code == 0
 
-        transferred = meshlab_pickedpoints.load("target.pp")
+        transferred = load_landmarks("target.json")
+        np.testing.assert_array_equal(
+            transferred["origin"], expected_landmarks["origin"]
+        )
+        np.testing.assert_array_equal(
+            transferred["near_opposite_corner"],
+            expected_landmarks["near_opposite_corner"],
+        )
+
+
+def test_transfer_landmarks_cli_with_pp(tmp_path):
+    source_mesh, target_mesh, landmarks, expected_landmarks = source_target_landmarks()
+
+    source_mesh_path = str(tmp_path / "source.obj")
+    landmark_path = str(tmp_path / "landmarks.pp")
+    target_mesh_path = str(tmp_path / "target.obj")
+
+    source_mesh.write_obj(source_mesh_path)
+    dump_landmarks(landmarks, landmark_path)
+    target_mesh.write_obj(target_mesh_path)
+
+    runner = CliRunner()
+    with runner.isolated_filesystem():
+        result = runner.invoke(
+            cli,
+            ["transfer-landmarks", source_mesh_path, landmark_path, target_mesh_path],
+        )
+        assert result.exit_code == 0
+
+        transferred = load_landmarks("target.json")
         np.testing.assert_array_equal(
             transferred["origin"], expected_landmarks["origin"]
         )
