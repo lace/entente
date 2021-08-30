@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.0.0 (Aug. 30, 2021)
+
+- BREAKING CHANGE: Use Curvewise JSON landmark format by default. Install
+  `entente[landmarker,meshlab]` to keep the existing functionality for reading
+  and writing Meshlab picked point files.
+- Add a dump / load abstraction for landmarks which supports the Curvewise landmark JSON format:
+```json
+[
+  { "name": "myLandmark", "point": [1.0, 2.0, 3.0] }
+]
+```
+
+
 ## 1.0.0 (Jul. 13, 2021)
 
 - Update dependencies.
