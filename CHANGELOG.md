@@ -2,7 +2,7 @@
 
 ## 2.1.0 (Oct. 5, 2021)
 
-- Update polliwog, lacecore, and tri-again dependencies.
+- Update polliwog, lacecore, proximity, and tri-again dependencies.
 
 
 ## 2.0.0 (Aug. 30, 2021)
