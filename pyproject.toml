@@ -29,7 +29,7 @@ meshlab-pickedpoints = {version = ">=2.0.0,<3", optional = true}
 numpy = "<1.19.0"
 ounce = ">=1.1.1,<2.0"
 polliwog = ">=2.0.0,<3.0"
-proximity = {version = ">=1.0.0,<2", optional = true}
+proximity = {version = ">=1.1.0,<2", optional = true}
 PyYAML = {version = ">=5.1", optional = true}
 scipy = "*"
 tqdm = "*"
