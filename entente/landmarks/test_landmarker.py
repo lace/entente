@@ -69,7 +69,7 @@ def test_landmarker_wrong_topology():
 
 def test_landmarker_quad():
     tri_mesh = shapes.cube(np.zeros(3), 1.0)
-    quad_mesh = Mesh(v=np.zeros((0, 3)), f=np.zeros((0, 4)))
+    quad_mesh = Mesh(v=np.zeros((0, 3)), f=np.zeros((0, 4), dtype=np.int64))
 
     with pytest.raises(ValueError, match="Source mesh should be triangulated"):
         # Landmarks are empty; we don't get that far.
