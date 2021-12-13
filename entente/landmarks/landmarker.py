@@ -21,6 +21,9 @@ class Landmarker(object):
         source_mesh (lacecore.Mesh): The source mesh
         landmarks (dict): A mapping of landmark names to the points, which are
             `3x1` arraylike objects.
+
+    See also:
+        `entente.path_transfer.PathTransfer`
     """
 
     def __init__(self, source_mesh, landmarks):
