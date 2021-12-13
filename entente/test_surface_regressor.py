@@ -1,6 +1,6 @@
-from entente.surface_regressor import surface_regressor_for, apply_surface_regressor
-import numpy as np
+from entente.surface_regressor import apply_surface_regressor, surface_regressor_for
 from lacecore import shapes
+import numpy as np
 import pytest
 
 
