@@ -27,9 +27,9 @@ class PathTransfer:
 
     @cached_property
     def _regressor(self):
-        from .surface_regressor import regressor_for
+        from .surface_regressor import surface_regressor_for
 
-        return regressor_for(
+        return surface_regressor_for(
             faces=self.source_mesh.f,
             source_mesh_vertices=self.source_mesh.v,
             query_points=self.source_path.v,
@@ -46,7 +46,7 @@ class PathTransfer:
         Returns:
             polliwog.Polyline: The path transferred to the target mesh.
         """
-        from .surface_regressor import apply_regressor
+        from .surface_regressor import apply_surface_regressor
         from .equality import have_same_topology
 
         if not target_mesh.is_tri:
@@ -56,6 +56,6 @@ class PathTransfer:
             raise ValueError("Target mesh must have the same topology")
 
         return Polyline(
-            v=apply_regressor(self._regressor, target_mesh.v),
+            v=apply_surface_regressor(self._regressor, target_mesh.v),
             is_closed=self.source_path.is_closed,
         )

@@ -50,9 +50,9 @@ class Landmarker(object):
     @cached_property
     def _regressor(self):
         import numpy as np
-        from ..surface_regressor import regressor_for
+        from ..surface_regressor import surface_regressor_for
 
-        return regressor_for(
+        return surface_regressor_for(
             faces=self.source_mesh.f,
             source_mesh_vertices=self.source_mesh.v,
             query_points=np.array(list(self.landmarks.values())),
@@ -69,7 +69,7 @@ class Landmarker(object):
         Returns:
             dict: A mapping of landmark names to a np.ndarray with shape `3x1`.
         """
-        from ..surface_regressor import apply_regressor
+        from ..surface_regressor import apply_surface_regressor
         from ..equality import have_same_topology
 
         if not target.is_tri:
@@ -79,5 +79,8 @@ class Landmarker(object):
             raise ValueError("Target mesh must have the same topology")
 
         return dict(
-            zip(self.landmarks.keys(), apply_regressor(self._regressor, target.v))
+            zip(
+                self.landmarks.keys(),
+                apply_surface_regressor(self._regressor, target.v),
+            )
         )

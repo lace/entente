@@ -8,7 +8,7 @@ import numpy as np
 from vg.compat import v2 as vg
 
 
-def regressor_for(faces, source_mesh_vertices, query_points):
+def surface_regressor_for(faces, source_mesh_vertices, query_points):
     """
     Low-level function to create a regressor for the given query points on the
     given mesh. The regressor computes the corresponding points on a target
@@ -53,7 +53,7 @@ def regressor_for(faces, source_mesh_vertices, query_points):
     ).transpose()
 
 
-def apply_regressor(regressor, target_mesh_vertices):
+def apply_surface_regressor(regressor, target_mesh_vertices):
     from scipy.sparse import isspmatrix
 
     num_vertices = vg.shape.check(locals(), "target_mesh_vertices", (-1, 3))
