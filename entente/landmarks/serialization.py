@@ -8,7 +8,7 @@ def try_load_meshlab_pickedpoints():
     except ImportError:  # pragma: no cover
         raise ImportError(
             "To load Meshlab picked points files, install entente with the meshlab extra: "
-            + "`pip install entente[landmarker,meshlab]`"
+            + "`pip install entente[surface_regressor,meshlab]`"
         )
     return meshlab_pickedpoints
 

@@ -3,28 +3,7 @@ from entente.landmarks.serialization import dump_landmarks
 from lacecore import Mesh, shapes
 import numpy as np
 import pytest
-
-
-def source_target_landmarks():
-    source_mesh = shapes.cube(np.zeros(3), 1.0)
-    target_mesh = (
-        source_mesh.transform()
-        .uniform_scale(5.0)
-        .translate(np.array([0, 3.5, 1.0]))
-        .end()
-    )
-
-    landmarks = {
-        "origin": np.zeros(3),
-        "near_opposite_corner": np.array([0.8, 0.9, 1.0]),
-    }
-
-    expected_landmarks = {
-        "origin": np.array([0.0, 3.5, 1.0]),
-        "near_opposite_corner": np.array([4.0, 8.0, 6.0]),
-    }
-
-    return source_mesh, target_mesh, landmarks, expected_landmarks
+from ..test_surface_regressor import source_target_landmarks
 
 
 def test_landmarker(tmp_path):
