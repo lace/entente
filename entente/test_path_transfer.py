@@ -1,7 +1,12 @@
 from entente.path_transfer import PathTransfer
+from lacecore import Mesh, shapes
 import numpy as np
 from polliwog import Polyline
+import pytest
 from .test_surface_regressor import source_target_landmarks
+
+# A polyline, any polyline.
+BOGUS_POLYLINE = Polyline(v=np.zeros(3).reshape(1, 3))
 
 
 def test_path_transfer():
@@ -29,3 +34,25 @@ def test_path_transfer():
         expected_target_path_v,
     )
     assert transferred.is_closed is is_closed
+
+
+def test_path_transfer_wrong_topology():
+    source_mesh = shapes.cube(np.zeros(3), 1.0)
+
+    # Create a second mesh with a different topology.
+    target_mesh = source_mesh.faces_flipped()
+
+    path_transfer = PathTransfer(source_mesh, BOGUS_POLYLINE)
+
+    with pytest.raises(ValueError, match="Target mesh must have the same topology"):
+        path_transfer.path_for(target_mesh)
+
+
+def test_path_transfer_quad():
+    tri_mesh = shapes.cube(np.zeros(3), 1.0)
+    quad_mesh = Mesh(v=np.zeros((0, 3)), f=np.zeros((0, 4), dtype=np.int64))
+
+    path_transfer = PathTransfer(tri_mesh, BOGUS_POLYLINE)
+
+    with pytest.raises(ValueError, match="Target mesh must be triangulated"):
+        path_transfer.path_for(quad_mesh)
