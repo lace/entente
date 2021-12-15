@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.2.0 (Dec. 14, 2021)
+
+- PathTransfer: New capability for transferring paths from one mesh to another.
+- Deprecate `pip install[landmarker]`. Use `pip install[surface_regressor]` instead.
+- Move scipy dependency to `surface_regressor` extra since that's the only place
+  it's used.
+
+
 ## 2.1.0 (Oct. 5, 2021)
 
 - Update polliwog, lacecore, proximity, and tri-again dependencies.
