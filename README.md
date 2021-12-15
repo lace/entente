@@ -35,10 +35,10 @@ Features
 Installation
 ------------
 
-To use the landmark compositor, run `pip install entente[landmarker]` which
+To use the landmarker, run `pip install entente[surface_regressor]` which
 installs [proximity][].
 
-To use the CLI, run `pip install entente[landmarker,cli]` which
+To use the CLI, run `pip install entente[surface_regressor,cli]` which
 also installs [tri-again][] and pyyaml.
 
 
