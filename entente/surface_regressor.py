@@ -33,8 +33,7 @@ def surface_regressor_for(faces, source_mesh_vertices, query_points):
         - `entente.landmarking.Landmarker`
         - `entente.path_transfer.PathTransfer`
     """
-    # TODO export this from lace.
-    from lacecore._common.validation import check_indices
+    from lacecore import check_indices
     from proximity import faces_nearest_to_points
     from polliwog.tri import barycentric_coordinates_of_points
     from scipy.sparse import csc_matrix
