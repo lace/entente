@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.2.1 (May 16, 2022)
+
+- Support polliwog 3.0.0 prereleases.
+
+
 ## 2.2.0 (Dec. 14, 2021)
 
 - PathTransfer: New capability for transferring paths from one mesh to another.
