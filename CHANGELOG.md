@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.2.2 (Jun. 21, 2022)
+
+- Support lacecore 3.0.0 prereleases.
+
+
 ## 2.2.1 (May 16, 2022)
 
 - Support polliwog 3.0.0 prereleases.
