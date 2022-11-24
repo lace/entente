@@ -2,13 +2,13 @@ version: 2.1
 
 with_python: &with_python
   docker:
-    - image: circleci/python:3.7
+    - image: cimg/python:3.9
 
 install_poetry: &install_poetry
   run:
     name: Install Poetry
     command: |
-      pip install poetry==1.1.7
+      pip install poetry==1.2.2
       poetry --version
 
 install_python_deps: &install_python_deps
@@ -80,6 +80,12 @@ jobs:
           name: Run the doc build
           when: always
           command: ./dev.py doc
+
+      - run:
+        name: run tests on latest numpy
+        command: |
+          pip install numpy==1.23.4
+          ./dev.py coverage
 
   format:
     <<: *with_python
