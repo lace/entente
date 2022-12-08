@@ -339,15 +339,14 @@ testing = ["coverage", "pytest (>=3.6,<4)", "pytest-cov", "pytest-regressions"]
 
 [[package]]
 name = "meshlab-pickedpoints"
-version = "2.0.0"
+version = "3.0.0"
 description = "Read and write MeshLab picked point (.pp) files"
 category = "main"
 optional = true
 python-versions = "*"
 
-[package.dependencies]
-numpy = "*"
-vg = ">=2.0.0"
+[package.extras]
+cli = ["click (>=8.0,<9.0)"]
 
 [[package]]
 name = "mypy-extensions"
@@ -938,7 +937,7 @@ surface-regressor = ["proximity", "scipy"]
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.7,<4"
-content-hash = "4098c127f999972d88cec243ce4760cfc7d91a5a8636187cc0b3113c8a48642f"
+content-hash = "ff4fc963d9469fc108f8ec600a6f8e7f8996580de494cda37a5a20e203817066"
 
 [metadata.files]
 alabaster = [
@@ -1145,8 +1144,8 @@ mdit-py-plugins = [
     {file = "mdit_py_plugins-0.2.8-py3-none-any.whl", hash = "sha256:1833bf738e038e35d89cb3a07eb0d227ed647ce7dd357579b65343740c6d249c"},
 ]
 meshlab-pickedpoints = [
-    {file = "meshlab-pickedpoints-2.0.0.tar.gz", hash = "sha256:777a7d4e60ebc3d9c82ca4433e346777a42c07573d776037924ee8c1d59bf845"},
-    {file = "meshlab_pickedpoints-2.0.0-py3-none-any.whl", hash = "sha256:856420dcfa563f2dfc783352fe84fd5786b3d23eb5db04c4e9ff755d25a12d21"},
+    {file = "meshlab-pickedpoints-3.0.0.tar.gz", hash = "sha256:8cbb27afd5f21dcc8099aa8feb2ac166503fa686423df0258602f8375a1a6bc8"},
+    {file = "meshlab_pickedpoints-3.0.0-py3-none-any.whl", hash = "sha256:034ad70d888c5150ec96f4af9ce5ea08a9b82cd098a9db81e717148eae7452c8"},
 ]
 mypy-extensions = [
     {file = "mypy_extensions-0.4.3-py2.py3-none-any.whl", hash = "sha256:090fedd75945a69ae91ce1303b5824f428daf5a028d2f6ab8a299250a846f15d"},
