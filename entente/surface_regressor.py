@@ -71,6 +71,4 @@ def apply_surface_regressor(regressor, target_mesh_vertices):
         expected_num_vertices = int(regressor.shape[1] / 3)
         raise ValueError(f"This regressor expects {expected_num_vertices} vertices")
 
-    result = (regressor * target_mesh_vertices.ravel()).reshape(-1, 3)
-
-    return result
+    return (regressor * target_mesh_vertices.ravel()).reshape(-1, 3)

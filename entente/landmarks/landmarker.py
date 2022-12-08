@@ -55,12 +55,10 @@ class Landmarker(object):
     def _regressor(self):
         from ..surface_regressor import surface_regressor_for
 
-        serialized_landmarks = np.array([point["point"] for point in self.landmarks])
-
         return surface_regressor_for(
             faces=self.source_mesh.f,
             source_mesh_vertices=self.source_mesh.v,
-            query_points=serialized_landmarks,
+            query_points=np.array([point["point"] for point in self.landmarks]),
         )
 
     def transfer_landmarks_onto(self, target):
