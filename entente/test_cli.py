@@ -28,12 +28,9 @@ def test_transfer_landmarks_cli(tmp_path):
         assert result.exit_code == 0
 
         transferred = load_landmarks("target.json")
+
         np.testing.assert_array_equal(
-            transferred["origin"], expected_landmarks["origin"]
-        )
-        np.testing.assert_array_equal(
-            transferred["near_opposite_corner"],
-            expected_landmarks["near_opposite_corner"],
+            transferred, expected_landmarks
         )
 
 
@@ -58,11 +55,7 @@ def test_transfer_landmarks_cli_with_pp(tmp_path):
 
         transferred = load_landmarks("target.json")
         np.testing.assert_array_equal(
-            transferred["origin"], expected_landmarks["origin"]
-        )
-        np.testing.assert_array_equal(
-            transferred["near_opposite_corner"],
-            expected_landmarks["near_opposite_corner"],
+            transferred, expected_landmarks
         )
 
 

@@ -13,15 +13,15 @@ def source_target_landmarks():
         .end()
     )
 
-    landmarks = {
-        "origin": np.zeros(3),
-        "near_opposite_corner": np.array([0.8, 0.9, 1.0]),
-    }
+    landmarks = [
+        {"name": "origin", "point": [0.0, 0.0, 0.0]},
+        {"name": "near_opposite_corner", "point": [0.8, 0.9, 1.0]},
+    ]
 
-    expected_landmarks = {
-        "origin": np.array([0.0, 3.5, 1.0]),
-        "near_opposite_corner": np.array([4.0, 8.0, 6.0]),
-    }
+    expected_landmarks = [
+        {"name": "origin", "point": [0.0, 3.5, 1.0]},
+        {"name": "near_opposite_corner", "point": [4.0, 8.0, 6.0]},
+    ]
 
     return source_mesh, target_mesh, landmarks, expected_landmarks
 

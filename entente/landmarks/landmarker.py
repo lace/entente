@@ -8,6 +8,7 @@ This module requires entente to be installed with the `surface_regressor` extra:
 
 from cached_property import cached_property
 from .serialization import load_landmarks
+import numpy as np
 
 
 class Landmarker(object):
@@ -52,13 +53,14 @@ class Landmarker(object):
 
     @cached_property
     def _regressor(self):
-        import numpy as np
         from ..surface_regressor import surface_regressor_for
+
+        serialized_landmarks = np.array([point["point"] for point in self.landmarks])
 
         return surface_regressor_for(
             faces=self.source_mesh.f,
             source_mesh_vertices=self.source_mesh.v,
-            query_points=np.array(list(self.landmarks.values())),
+            query_points=serialized_landmarks,
         )
 
     def transfer_landmarks_onto(self, target):
@@ -70,7 +72,7 @@ class Landmarker(object):
             target (lacecore.Mesh): Target mesh
 
         Returns:
-            dict: A mapping of landmark names to a np.ndarray with shape `3x1`.
+            list: Points, using the Metabolize/Curvewise points JSON schema
         """
         from ..surface_regressor import apply_surface_regressor
         from ..equality import have_same_topology
@@ -81,9 +83,10 @@ class Landmarker(object):
         if not have_same_topology(self.source_mesh, target):
             raise ValueError("Target mesh must have the same topology")
 
-        return dict(
-            zip(
-                self.landmarks.keys(),
-                apply_surface_regressor(self._regressor, target.v),
-            )
-        )
+        return [
+            {
+                "name": point["name"],
+                "point": apply_surface_regressor(self._regressor, target.v)[i].tolist(),
+            }
+            for (i, point) in enumerate(self.landmarks)
+        ]
