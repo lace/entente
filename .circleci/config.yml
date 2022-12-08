@@ -59,10 +59,10 @@ jobs:
           command: ./dev.py coverage
 
       - run:
-        name: run tests on latest numpy
-        command: |
-          pip install numpy==1.23.4
-          ./dev.py coverage
+          name: run tests on latest numpy
+          command: |
+            pip install numpy==1.23.4
+            ./dev.py coverage
 
   lint:
     <<: *with_python
