@@ -64,8 +64,8 @@ class LandmarkCompositeRecipe(object):
     @cached_property
     def _plane_of_symmetry(self):
         return Plane(
-            point_on_plane=np.array(self.symmetrize["reference_point"]),
-            unit_normal=vg.normalize(np.array(self.symmetrize["normal"])),
+            reference_point=np.array(self.symmetrize["reference_point"]),
+            normal=vg.normalize(np.array(self.symmetrize["normal"])),
         )
 
     def _symmetrize_landmarks(self, landmarks):
