@@ -55,6 +55,10 @@ class Landmarker(object):
     def _regressor(self):
         from ..surface_regressor import surface_regressor_for
 
+        # import pdb
+
+        # pdb.set_trace()
+
         return surface_regressor_for(
             faces=self.source_mesh.f,
             source_mesh_vertices=self.source_mesh.v,
@@ -86,5 +90,7 @@ class Landmarker(object):
                 "name": landmark["name"],
                 "point": new_point.tolist(),
             }
-            for (landmark, new_point) in zip(self.landmarks, apply_surface_regressor(self._regressor, target.v))
+            for (landmark, new_point) in zip(
+                self.landmarks, apply_surface_regressor(self._regressor, target.v)
+            )
         ]

@@ -105,8 +105,13 @@ def test_composite_landmarks_cli(tmp_path):
 
         with open("composite_result/landmarks.yml", "r") as f:
             result = yaml.safe_load(f)
+        near_origin_composited = next(
+            item for item in result["composited"] if item["name"] == "near_origin"
+        )["point"]
         np.testing.assert_array_almost_equal(
-            result["composited"]["near_origin"], np.zeros(3), decimal=2
+            np.array(near_origin_composited),
+            np.zeros(3),
+            decimal=2,
         )
 
 
@@ -172,9 +177,17 @@ def test_composite_landmarks_cli_symmetrized(tmp_path):
         with open("composite_result/landmarks.yml", "r") as f:
             result = yaml.safe_load(f)
 
+        bottom_left_composited = next(
+            item for item in result["composited"] if item["name"] == "bottom_left"
+        )["point"]
         np.testing.assert_array_almost_equal(
-            result["composited"]["bottom_left"], np.zeros(3), decimal=1
+            np.array(bottom_left_composited), np.zeros(3), decimal=1
         )
+        bottom_left_composited_and_symmetrized = next(
+            item
+            for item in result["composited_and_symmetrized"]
+            if item["name"] == "bottom_left"
+        )["point"]
         np.testing.assert_array_almost_equal(
-            result["composited_and_symmetrized"]["bottom_left"], np.zeros(3), decimal=1
+            bottom_left_composited_and_symmetrized, np.zeros(3), decimal=1
         )

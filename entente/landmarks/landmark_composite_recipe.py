@@ -71,16 +71,29 @@ class LandmarkCompositeRecipe(object):
     def _symmetrize_landmarks(self, landmarks):
         from .symmetrize_landmarks import symmetrize_landmarks_using_plane
 
-        result = {}
         for unsided_name in self._unsided_landmark_names:
             sided_names = [f"{unsided_name}_{side}" for side in ["left", "right"]]
             symmetrized = symmetrize_landmarks_using_plane(
                 self._plane_of_symmetry,
-                np.array([landmarks[k] for k in sided_names]),
+                np.array(
+                    [
+                        next(item for item in landmarks if item["name"] == name)[
+                            "point"
+                        ]
+                        for name in sided_names
+                    ]
+                ),
             )
-            for k, v in zip(sided_names, symmetrized):
-                result[k] = v
-        return result
+
+        return [
+            {
+                "name": name,
+                "point": new_point.tolist(),
+            }
+            for (name, new_point) in zip(
+                sided_names, symmetrized
+            )
+        ]
 
     @cached_property
     def composite_landmarks(self):
@@ -90,16 +103,15 @@ class LandmarkCompositeRecipe(object):
         )
         for example in self.examples:
             example_mesh = lacecore.load_obj(example["mesh"], triangulate=True)
-            landmarks = {k: example[k] for k in self.landmark_names}
+            landmarks = [
+                {"name": name, "point": example[name]} for name in self.landmark_names
+            ]
             compositor.add_example(mesh=example_mesh, landmarks=landmarks)
         return compositor.result
 
     @cached_property
     def symmetrized_landmarks(self):
-        return {
-            k: v.tolist()
-            for k, v in self._symmetrize_landmarks(self.composite_landmarks).items()
-        }
+        return self._symmetrize_landmarks(self.composite_landmarks)
 
     @cached_property
     def reprojected_landmarks(self):
@@ -124,27 +136,33 @@ class LandmarkCompositeRecipe(object):
         for example in self.examples:
             example_id = example["id"]
             reprojected = self.reprojected_landmarks[example_id]
-            result[example_id] = {
-                k: {
-                    "original": example[k],
-                    "reprojected": reprojected[k].tolist(),
+            points = {}
+            for name in self.landmark_names:
+                reprojected_point = next(
+                    item for item in reprojected if item["name"] == name
+                )["point"]
+                points[name] = {
+                    "original": example[name],
+                    "reprojected": reprojected_point,
                     "displacement": np.round(
-                        reprojected[k] - np.array(example[k]), decimals=self.decimals
+                        np.array(reprojected_point) - np.array(example[name]),
+                        decimals=self.decimals,
                     ).tolist(),
                     "euclidean_distance": float(
                         round(
-                            vg.euclidean_distance(np.array(example[k]), reprojected[k]),
+                            vg.euclidean_distance(
+                                np.array(example[name]), np.array(reprojected_point)
+                            ),
                             ndigits=self.decimals,
                         )
                     ),
                 }
-                for i, k in enumerate(self.landmark_names)
-            }
+            result[example_id] = points
         return result
 
     def to_json(self):
         result = {
-            "composited": {k: v.tolist() for k, v in self.composite_landmarks.items()},
+            "composited": self.composite_landmarks,
             "examples": self.original_and_reprojected_landmarks,
         }
         if self.symmetrize is not None:
