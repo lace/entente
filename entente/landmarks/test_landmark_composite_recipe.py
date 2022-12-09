@@ -46,8 +46,11 @@ def test_landmark_compositor(tmp_path):
     recipe = write_recipe_assets(tmp_path)
 
     recipe = LandmarkCompositeRecipe(recipe)
+    near_origin_composite = next(
+        item for item in recipe.composite_landmarks if item["name"] == "near_origin"
+    )["point"]
     np.testing.assert_array_almost_equal(
-        recipe.composite_landmarks["near_origin"], np.zeros(3), decimal=2
+        np.array(near_origin_composite), np.zeros(3), decimal=2
     )
 
     (
@@ -57,13 +60,23 @@ def test_landmark_compositor(tmp_path):
         example_mesh_2,
         near_origin_2,
     ) = composite_landmark_examples()
+    example_1_near_origin_reprojected = next(
+        item
+        for item in recipe.reprojected_landmarks["example1"]
+        if item["name"] == "near_origin"
+    )["point"]
     np.testing.assert_array_almost_equal(
-        recipe.reprojected_landmarks["example1"]["near_origin"],
+        np.array(example_1_near_origin_reprojected),
         example_mesh_1.v[0],
         decimal=1,
     )
+    example_2_near_origin_reprojected = next(
+        item
+        for item in recipe.reprojected_landmarks["example2"]
+        if item["name"] == "near_origin"
+    )["point"]
     np.testing.assert_array_almost_equal(
-        recipe.reprojected_landmarks["example2"]["near_origin"],
+        np.array(example_2_near_origin_reprojected),
         example_mesh_2.v[0],
         decimal=2,
     )
