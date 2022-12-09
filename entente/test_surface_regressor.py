@@ -45,7 +45,7 @@ def test_surface_regressor_for():
 
 def test_apply_surface_regressor_errors():
     source_mesh, target_mesh, landmarks, _ = source_target_landmarks()
-    query_points = np.array(list(landmarks.values()))
+    query_points = np.array([point["point"] for point in landmarks])
 
     regressor = surface_regressor_for(
         faces=source_mesh.f,
