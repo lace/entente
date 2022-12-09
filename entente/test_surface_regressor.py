@@ -28,7 +28,7 @@ def source_target_landmarks():
 
 def test_surface_regressor_for():
     source_mesh, target_mesh, landmarks, expected_landmarks = source_target_landmarks()
-    query_points = np.array(list(landmarks.values()))
+    query_points = np.array([point["point"] for point in landmarks])
 
     regressor = surface_regressor_for(
         faces=source_mesh.f,
@@ -38,7 +38,8 @@ def test_surface_regressor_for():
     target_landmark_coords = apply_surface_regressor(regressor, target_mesh.v)
 
     np.testing.assert_array_almost_equal(
-        target_landmark_coords, np.array(list(expected_landmarks.values()))
+        target_landmark_coords,
+        np.array([point["point"] for point in expected_landmarks]),
     )
 
 
