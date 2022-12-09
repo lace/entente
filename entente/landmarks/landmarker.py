@@ -83,8 +83,8 @@ class Landmarker(object):
 
         return [
             {
-                "name": point["name"],
-                "point": apply_surface_regressor(self._regressor, target.v)[i].tolist(),
+                "name": landmark["name"],
+                "point": new_point.tolist(),
             }
-            for (i, point) in enumerate(self.landmarks)
+            for (landmark, new_point) in zip(self.landmarks, apply_surface_regressor(self._regressor, target.v))
         ]

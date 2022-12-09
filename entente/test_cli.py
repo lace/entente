@@ -29,9 +29,7 @@ def test_transfer_landmarks_cli(tmp_path):
 
         transferred = load_landmarks("target.json")
 
-        np.testing.assert_array_equal(
-            transferred, expected_landmarks
-        )
+        assert transferred == expected_landmarks
 
 
 def test_transfer_landmarks_cli_with_pp(tmp_path):
@@ -54,9 +52,7 @@ def test_transfer_landmarks_cli_with_pp(tmp_path):
         assert result.exit_code == 0
 
         transferred = load_landmarks("target.json")
-        np.testing.assert_array_equal(
-            transferred, expected_landmarks
-        )
+        assert transferred == expected_landmarks
 
 
 def test_composite_landmarks_cli(tmp_path):
