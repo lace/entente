@@ -7,8 +7,8 @@ This module requires entente to be installed with the `surface_regressor` extra:
 """
 
 from cached_property import cached_property
-from .serialization import load_landmarks
 import numpy as np
+from .serialization import load_landmarks
 
 
 class Landmarker(object):
