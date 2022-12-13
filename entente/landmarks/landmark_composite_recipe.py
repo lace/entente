@@ -90,9 +90,7 @@ class LandmarkCompositeRecipe(object):
                 "name": name,
                 "point": new_point.tolist(),
             }
-            for (name, new_point) in zip(
-                sided_names, symmetrized
-            )
+            for (name, new_point) in zip(sided_names, symmetrized)
         ]
 
     @cached_property
