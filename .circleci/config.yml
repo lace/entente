@@ -2,7 +2,7 @@ version: 2.1
 
 with_python: &with_python
   docker:
-    - image: cimg/python:3.9
+    - image: cimg/python:3.9.13
 
 install_poetry: &install_poetry
   run:
