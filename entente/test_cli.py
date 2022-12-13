@@ -3,7 +3,11 @@ from entente.cli import cli
 import numpy as np
 from vg.compat import v1 as vg
 import yaml
-from .landmarks.serialization import dump_landmarks, load_landmarks
+from .landmarks.serialization import (
+    dump_landmarks,
+    load_landmarks,
+    point_for_landmark_name,
+)
 from .landmarks.test_landmark_compositor import composite_landmark_examples
 from .landmarks.test_landmarker import source_target_landmarks
 
@@ -105,9 +109,9 @@ def test_composite_landmarks_cli(tmp_path):
 
         with open("composite_result/landmarks.yml", "r") as f:
             result = yaml.safe_load(f)
-        near_origin_composited = next(
-            item for item in result["composited"] if item["name"] == "near_origin"
-        )["point"]
+        near_origin_composited = point_for_landmark_name(
+            result["composited"], "near_origin"
+        )
         np.testing.assert_array_almost_equal(
             np.array(near_origin_composited),
             np.zeros(3),
@@ -177,17 +181,15 @@ def test_composite_landmarks_cli_symmetrized(tmp_path):
         with open("composite_result/landmarks.yml", "r") as f:
             result = yaml.safe_load(f)
 
-        bottom_left_composited = next(
-            item for item in result["composited"] if item["name"] == "bottom_left"
-        )["point"]
+        bottom_left_composited = point_for_landmark_name(
+            result["composited"], "bottom_left"
+        )
         np.testing.assert_array_almost_equal(
             np.array(bottom_left_composited), np.zeros(3), decimal=1
         )
-        bottom_left_composited_and_symmetrized = next(
-            item
-            for item in result["composited_and_symmetrized"]
-            if item["name"] == "bottom_left"
-        )["point"]
+        bottom_left_composited_and_symmetrized = point_for_landmark_name(
+            result["composited_and_symmetrized"], "bottom_left"
+        )
         np.testing.assert_array_almost_equal(
             bottom_left_composited_and_symmetrized, np.zeros(3), decimal=1
         )

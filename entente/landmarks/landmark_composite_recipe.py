@@ -5,6 +5,7 @@ from polliwog import Plane
 from vg.compat import v1 as vg
 from .landmark_compositor import LandmarkCompositor
 from .landmarker import Landmarker
+from .serialization import point_for_landmark_name
 
 DEFAULT_RADIUS = 0.1
 
@@ -76,12 +77,7 @@ class LandmarkCompositeRecipe(object):
             symmetrized = symmetrize_landmarks_using_plane(
                 self._plane_of_symmetry,
                 np.array(
-                    [
-                        next(item for item in landmarks if item["name"] == name)[
-                            "point"
-                        ]
-                        for name in sided_names
-                    ]
+                    [point_for_landmark_name(landmarks, name) for name in sided_names]
                 ),
             )
 
@@ -136,9 +132,7 @@ class LandmarkCompositeRecipe(object):
             reprojected = self.reprojected_landmarks[example_id]
             points = {}
             for name in self.landmark_names:
-                reprojected_point = next(
-                    item for item in reprojected if item["name"] == name
-                )["point"]
+                reprojected_point = point_for_landmark_name(reprojected, name)
                 points[name] = {
                     "original": example[name],
                     "reprojected": reprojected_point,

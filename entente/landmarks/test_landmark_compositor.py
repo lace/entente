@@ -2,6 +2,7 @@ from entente.landmarks.landmark_compositor import LandmarkCompositor
 from lacecore import shapes
 import numpy as np
 import pytest
+from .serialization import point_for_landmark_name
 
 
 def composite_landmark_examples():
@@ -31,9 +32,7 @@ def test_landmark_compositor():
     compositor.add_example(
         example_mesh_2, [{"name": "near_origin", "point": near_origin_2}]
     )
-    near_origin = next(
-        item for item in compositor.result if item["name"] == "near_origin"
-    )["point"]
+    near_origin = point_for_landmark_name(compositor.result, "near_origin")
     np.testing.assert_array_almost_equal(np.array(near_origin), np.zeros(3), decimal=2)
 
 

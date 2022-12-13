@@ -27,3 +27,7 @@ def dump_landmarks(landmarks, landmark_path):
             try_load_meshlab_pickedpoints().dump(landmarks, f)
         else:
             json.dump(landmarks, f)
+
+
+def point_for_landmark_name(landmarks, name):
+    return next(item for item in landmarks if item["name"] == name)["point"]
