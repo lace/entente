@@ -1,4 +1,3 @@
-import numpy as np
 import simplejson as json
 
 
@@ -19,7 +18,7 @@ def load_landmarks(landmark_path):
             return try_load_meshlab_pickedpoints().load(f)
         else:
             serialized = json.load(f)
-            return {item["name"]: np.array(item["point"]) for item in serialized}
+            return serialized
 
 
 def dump_landmarks(landmarks, landmark_path):
@@ -27,8 +26,8 @@ def dump_landmarks(landmarks, landmark_path):
         if landmark_path.endswith(".pp"):
             try_load_meshlab_pickedpoints().dump(landmarks, f)
         else:
-            serialized = [
-                {"name": name, "point": coords.tolist()}
-                for name, coords in landmarks.items()
-            ]
-            json.dump(serialized, f)
+            json.dump(landmarks, f)
+
+
+def point_for_landmark_name(landmarks, name):
+    return next(item for item in landmarks if item["name"] == name)["point"]

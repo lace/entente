@@ -20,20 +20,19 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-# tri-again doesn't work in Python 3.9.
-python = ">=3.7,<3.9"
+python = ">=3.7,<4"
 cached_property = "*"
 click = {version = ">7.0,<9.0", optional = true}
-lacecore = {version = ">=2.3.0,<=3.0.0", extras = ["obj"]}
-meshlab-pickedpoints = {version = ">=2.0.0,<3", optional = true}
-numpy = "<1.19.0"
+lacecore = {version= ">=3.0.0a0,<4", extras = ["obj"]}
+meshlab-pickedpoints = {version = ">=3.0.0,<4", optional = true}
+numpy = "<1.19.3"
 ounce = ">=1.1.1,<2.0"
-polliwog = ">=2.0.0,<=3.0.0"
+polliwog = ">=3.0.0a0,<4"
 proximity = {version = ">=1.1.0,<2", optional = true}
 PyYAML = {version = ">=5.1", optional = true}
 scipy = {version = "*", optional = true}
 tqdm = "*"
-tri-again = {version = ">=1.1.0,<2.0", optional = true}
+tri-again = {version = ">=2.0.0a0,<3", optional = true}
 vg = ">=2.0.0"
 simplejson = "*"
 

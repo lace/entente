@@ -12,10 +12,7 @@ def test_landmarker(tmp_path):
     landmarker = Landmarker(source_mesh, landmarks)
 
     transferred = landmarker.transfer_landmarks_onto(target_mesh)
-    np.testing.assert_array_equal(transferred["origin"], expected_landmarks["origin"])
-    np.testing.assert_array_equal(
-        transferred["near_opposite_corner"], expected_landmarks["near_opposite_corner"]
-    )
+    assert transferred == expected_landmarks
 
     source_mesh_path = str(tmp_path / "source.obj")
     landmark_path = str(tmp_path / "landmarks.json")
@@ -27,10 +24,7 @@ def test_landmarker(tmp_path):
         source_mesh_path=source_mesh_path, landmark_path=landmark_path
     )
     transferred = landmarker.transfer_landmarks_onto(target_mesh)
-    np.testing.assert_array_equal(transferred["origin"], expected_landmarks["origin"])
-    np.testing.assert_array_equal(
-        transferred["near_opposite_corner"], expected_landmarks["near_opposite_corner"]
-    )
+    assert transferred == expected_landmarks
 
 
 def test_landmarker_wrong_topology():

@@ -13,22 +13,22 @@ def source_target_landmarks():
         .end()
     )
 
-    landmarks = {
-        "origin": np.zeros(3),
-        "near_opposite_corner": np.array([0.8, 0.9, 1.0]),
-    }
+    landmarks = [
+        {"name": "origin", "point": [0.0, 0.0, 0.0]},
+        {"name": "near_opposite_corner", "point": [0.8, 0.9, 1.0]},
+    ]
 
-    expected_landmarks = {
-        "origin": np.array([0.0, 3.5, 1.0]),
-        "near_opposite_corner": np.array([4.0, 8.0, 6.0]),
-    }
+    expected_landmarks = [
+        {"name": "origin", "point": [0.0, 3.5, 1.0]},
+        {"name": "near_opposite_corner", "point": [4.0, 8.0, 6.0]},
+    ]
 
     return source_mesh, target_mesh, landmarks, expected_landmarks
 
 
 def test_surface_regressor_for():
     source_mesh, target_mesh, landmarks, expected_landmarks = source_target_landmarks()
-    query_points = np.array(list(landmarks.values()))
+    query_points = np.array([point["point"] for point in landmarks])
 
     regressor = surface_regressor_for(
         faces=source_mesh.f,
@@ -38,13 +38,14 @@ def test_surface_regressor_for():
     target_landmark_coords = apply_surface_regressor(regressor, target_mesh.v)
 
     np.testing.assert_array_almost_equal(
-        target_landmark_coords, np.array(list(expected_landmarks.values()))
+        target_landmark_coords,
+        np.array([point["point"] for point in expected_landmarks]),
     )
 
 
 def test_apply_surface_regressor_errors():
     source_mesh, target_mesh, landmarks, _ = source_target_landmarks()
-    query_points = np.array(list(landmarks.values()))
+    query_points = np.array([point["point"] for point in landmarks])
 
     regressor = surface_regressor_for(
         faces=source_mesh.f,
