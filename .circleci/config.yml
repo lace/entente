@@ -61,7 +61,7 @@ jobs:
       - run:
           name: Test on numpy 1.19.3
           command: |
-            pip install numpy==1.19.3
+            poetry run pip install numpy==1.19.3
             ./dev.py coverage
 
   lint:
