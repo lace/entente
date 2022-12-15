@@ -43,18 +43,17 @@ meshlab = ["meshlab-pickedpoints"]
 surface_regressor = ["proximity", "scipy"]
 
 [tool.poetry.dev-dependencies]
-black = "21.6b0"
-click = "8.0.1"
-coverage = "5.5"
+black = "22.12.0"
+click = "8.1.3"
+coverage = "6.5.0"
 executor = "23.2"
-flake8 = "3.9.2"
-flake8-import-order = "0.18.1"
-myst-parser = "0.15.1"
-pytest = "6.2.4"
-pytest-cov = "2.12.1"
-Sphinx = "4.1.0"
+flake8 = "5.0.4"
+flake8-import-order = "0.18.2"
+myst-parser = "0.18.1"
+pytest = "7.2.0"
+pytest-cov = "4.0.0"
+Sphinx = "4.3.2"
 sphinxcontrib-apidoc = "0.3.0"
-
 
 [build-system]
 # Lint requires setuptools.
