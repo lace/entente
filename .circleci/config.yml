@@ -32,5 +32,13 @@ workflows:
       - test
 
   daily:
+    triggers:
+      - schedule:
+          cron: "0 17 * * *"
+          filters:
+            branches:
+              only: 
+              - main
+              - numpy-bug
     jobs:
       - test
