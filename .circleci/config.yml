@@ -35,8 +35,5 @@ workflows:
     triggers:
       - schedule:
           cron: "0 17 * * *"
-          filters:
-            branches:
-              only: main
     jobs:
       - test
