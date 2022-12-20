@@ -30,7 +30,3 @@ workflows:
   on-commit:
     jobs:
       - test
-
-  run-tests:
-    jobs:
-      - test
