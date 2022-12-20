@@ -25,19 +25,6 @@ jobs:
             pytest
 
 workflows:
-  version: 2
-
-  on-commit:
-    jobs:
-      - test
-
-  daily:
-    triggers:
-      - schedule:
-          cron: "0 17 * * *"
-          filters:
-            branches:
-              only: 
-              - numpy-bug
+  on-push:
     jobs:
       - test
