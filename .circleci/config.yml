@@ -1,0 +1,42 @@
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: cimg/python:3.9.13
+
+    steps:
+      - checkout
+
+      - run:
+          name: Install pytest
+          command: pip install pytest==7.2.0
+
+      - run:
+          name: Test on numpy 1.19.2
+          command: |
+            pip install numpy==1.19.2
+            pytest
+
+      - run:
+          name: Test on numpy 1.19.3
+          command: |
+            pip install numpy==1.19.3
+            pytest
+
+workflows:
+  version: 2
+
+  on-commit:
+    jobs:
+      - test
+
+  daily:
+    triggers:
+      - schedule:
+          cron: "0 17 * * *"
+          filters:
+            branches:
+              only: main
+    jobs:
+      - test
