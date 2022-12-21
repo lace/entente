@@ -89,7 +89,7 @@ def test_rigid_rotation_single_point():
 
 
 @pytest.mark.skipif(
-    sys.implementation.name == "cpython", reason="failing in CI when numpy<1.19.3"
+    sys.implementation.name == "cpython", reason="failing in CI when numpy>=1.19.3"
 )
 def test_rigid_rotation_with_reflection():  # pragma: nocover
     a = Box(origin=np.array([0.0, 0.0, 0.0]), size=np.array([1.0, 1.0, 1.0])).v
