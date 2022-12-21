@@ -56,7 +56,7 @@ jobs:
       - run:
           name: Run tests
           when: always
-          command: CI=True ./dev.py coverage 
+          command: ./dev.py coverage
 
   lint:
     <<: *with_python
