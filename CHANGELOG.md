@@ -1,6 +1,6 @@
 # Changelog
 
-## 3.0.0 (Dec. 21, 2022)
+## 3.0.0a0 (Dec. 21, 2022)
 
 - Adopt Metabolize/Curvewise named points JSON schema.
 - Support Python3.9.
