@@ -90,7 +90,7 @@ def find_rigid_rotation(a, b, allow_scaling=False):
     v = v.T
     R = v.dot(u.T)
 
-    if np.linalg.det(R) < 0:  # pragma: no cover
+    if np.linalg.det(R) < 0:  # pragma: no cover. Test is skipped in CI.
         v[:, 2] = -v[:, 2]
         R = v.dot(u.T)
 
