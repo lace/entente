@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.0.0 (Dec. 21, 2022)
+
+- Adopt Metabolize/Curvewise named points JSON schema.
+- Support Python3.9.
+
+
 ## 2.2.2 (Jun. 21, 2022)
 
 - Support lacecore 3.0.0 prereleases.

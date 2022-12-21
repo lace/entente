@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "entente"
-version = "2.2.2"
+version = "3.0.0"
 description = "Polygonal meshes in vertex-wise correspondence"
 authors = ["Paul Melnikow <github@paulmelnikow.com>", "Metabolize"]
 license = "MIT"
