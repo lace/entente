@@ -142,7 +142,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 name = "env-flag"
 version = "2.1.0"
 description = "Get boolean values from environment variables"
-category = "main"
+category = "dev"
 optional = false
 python-versions = "*"
 
@@ -948,7 +948,7 @@ surface-regressor = ["proximity", "scipy"]
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.7,<4"
-content-hash = "385bffb5c13767b67a09c3f95328bbf1c9839d83db46cd22ae2959d27cbd6fda"
+content-hash = "f95de8ed7610569aa4c396de8780f80d0079149864a61c6d2a1fe66114195849"
 
 [metadata.files]
 alabaster = [
