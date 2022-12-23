@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.0a1 (Dec. 23, 2022)
+
+- update meshlab-pickedpoints
+
+
 ## 3.0.0a0 (Dec. 21, 2022)
 
 - Adopt Metabolize/Curvewise named points JSON schema.
