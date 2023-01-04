@@ -21,7 +21,7 @@ class Landmarker(object):
     Args:
         source_mesh (lacecore.Mesh): The source mesh
         landmarks (dict): A mapping of landmark names to the points, which are
-            `3x1` arraylike objects.
+            numpy arrays with shape `(3,)`.
 
     See also:
         `entente.path_transfer.PathTransfer`
@@ -58,7 +58,7 @@ class Landmarker(object):
         return surface_regressor_for(
             faces=self.source_mesh.f,
             source_mesh_vertices=self.source_mesh.v,
-            query_points=np.array([point["point"] for point in self.landmarks]),
+            query_points=np.array(list(self.landmarks.values())),
         )
 
     def transfer_landmarks_onto(self, target):
@@ -70,7 +70,7 @@ class Landmarker(object):
             target (lacecore.Mesh): Target mesh
 
         Returns:
-            list: Points, using the Metabolize/Curvewise points JSON schema
+            dict: A mapping of landmark names to a np.ndarray with shape `3x1`.
         """
         from ..surface_regressor import apply_surface_regressor
         from ..equality import have_same_topology
@@ -81,12 +81,9 @@ class Landmarker(object):
         if not have_same_topology(self.source_mesh, target):
             raise ValueError("Target mesh must have the same topology")
 
-        return [
-            {
-                "name": landmark["name"],
-                "point": new_point.tolist(),
-            }
-            for (landmark, new_point) in zip(
-                self.landmarks, apply_surface_regressor(self._regressor, target.v)
+        return dict(
+            zip(
+                self.landmarks.keys(),
+                apply_surface_regressor(self._regressor, target.v),
             )
-        ]
+        )

@@ -6,7 +6,6 @@ import yaml
 from .landmarks.serialization import (
     dump_landmarks,
     load_landmarks,
-    point_for_landmark_name,
 )
 from .landmarks.test_landmark_compositor import composite_landmark_examples
 from .landmarks.test_landmarker import source_target_landmarks
@@ -33,7 +32,13 @@ def test_transfer_landmarks_cli(tmp_path):
 
         transferred = load_landmarks("target.json")
 
-        assert transferred == expected_landmarks
+        np.testing.assert_array_equal(
+            transferred["origin"], expected_landmarks["origin"]
+        )
+        np.testing.assert_array_equal(
+            transferred["near_opposite_corner"],
+            expected_landmarks["near_opposite_corner"],
+        )
 
 
 def test_transfer_landmarks_cli_with_pp(tmp_path):
@@ -56,7 +61,13 @@ def test_transfer_landmarks_cli_with_pp(tmp_path):
         assert result.exit_code == 0
 
         transferred = load_landmarks("target.json")
-        assert transferred == expected_landmarks
+        np.testing.assert_array_equal(
+            transferred["origin"], expected_landmarks["origin"]
+        )
+        np.testing.assert_array_equal(
+            transferred["near_opposite_corner"],
+            expected_landmarks["near_opposite_corner"],
+        )
 
 
 def test_composite_landmarks_cli(tmp_path):
@@ -109,13 +120,8 @@ def test_composite_landmarks_cli(tmp_path):
 
         with open("composite_result/landmarks.yml", "r") as f:
             result = yaml.safe_load(f)
-        near_origin_composited = point_for_landmark_name(
-            result["composited"], "near_origin"
-        )
         np.testing.assert_array_almost_equal(
-            np.array(near_origin_composited),
-            np.zeros(3),
-            decimal=2,
+            result["composited"]["near_origin"], np.zeros(3), decimal=2,
         )
 
 
@@ -181,15 +187,9 @@ def test_composite_landmarks_cli_symmetrized(tmp_path):
         with open("composite_result/landmarks.yml", "r") as f:
             result = yaml.safe_load(f)
 
-        bottom_left_composited = point_for_landmark_name(
-            result["composited"], "bottom_left"
+        np.testing.assert_array_almost_equal(
+            result["composited"]["bottom_left"], np.zeros(3), decimal=1
         )
         np.testing.assert_array_almost_equal(
-            np.array(bottom_left_composited), np.zeros(3), decimal=1
-        )
-        bottom_left_composited_and_symmetrized = point_for_landmark_name(
-            result["composited_and_symmetrized"], "bottom_left"
-        )
-        np.testing.assert_array_almost_equal(
-            bottom_left_composited_and_symmetrized, np.zeros(3), decimal=1
+            result["composited_and_symmetrized"]["bottom_left"], np.zeros(3), decimal=1
         )

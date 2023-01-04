@@ -1,3 +1,4 @@
+import numpy as np
 import simplejson as json
 
 
@@ -12,22 +13,36 @@ def try_load_meshlab_pickedpoints():
     return meshlab_pickedpoints
 
 
+def deserialize_landmarks(landmark_data):
+    # TODO: re-export
+    return {point["name"]: np.array(point["point"]) for point in landmark_data}
+
+
 def load_landmarks(landmark_path):
+    # TODO: re-export
     with open(landmark_path, "r") as f:
         if landmark_path.endswith(".pp"):
-            return try_load_meshlab_pickedpoints().load(f)
+            return deserialize_landmarks(try_load_meshlab_pickedpoints().load(f))
         else:
-            serialized = json.load(f)
-            return serialized
+            landmarks = json.load(f)
+            return deserialize_landmarks(landmarks)
+
+
+def serialize_landmarks(landmarks):
+    # TODO: re-export
+    return [
+        {"name": name, "point": point.tolist()} for (name, point) in landmarks.items()
+    ]
 
 
 def dump_landmarks(landmarks, landmark_path):
+    # TODO: re-export
     with open(landmark_path, "w") as f:
         if landmark_path.endswith(".pp"):
             try_load_meshlab_pickedpoints().dump(landmarks, f)
         else:
-            json.dump(landmarks, f)
+            json.dump(serialize_landmarks(landmarks), f)
 
-
-def point_for_landmark_name(landmarks, name):
-    return next(item for item in landmarks if item["name"] == name)["point"]
+def assert_landmarks_are_equal(first, second):
+    assert first.keys() == second.keys()
+    assert all(np.array_equal(first[key], second[key]) for key in first) is True
