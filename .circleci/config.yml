@@ -9,20 +9,16 @@ jobs:
       - checkout
 
       - run:
-          name: Install pytest
-          command: pip install pytest==7.2.0
-
-      - run:
           name: Test on numpy 1.19.2
           command: |
             pip install numpy==1.19.2
-            pytest
+            python numpy_linalg.py
 
       - run:
           name: Test on numpy 1.19.3
           command: |
             pip install numpy==1.19.3
-            pytest
+            python numpy_linalg.py
 
 workflows:
   on-commit:
