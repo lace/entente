@@ -18,5 +18,5 @@ def numpy_regression():
         ]
     )
     (a, _, b) = np.linalg.svd(array, full_matrices=False)
-    np.testing.assert_almost_equal(expected_a, a)
-    np.testing.assert_almost_equal(expected_b, b)
+    print(np.testing.assert_almost_equal(expected_a, a))
+    print(np.testing.assert_almost_equal(expected_b, b))
