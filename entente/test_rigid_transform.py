@@ -89,6 +89,9 @@ def test_rigid_rotation_single_point():
 
 
 @pytest.mark.skipif(env_flag("CI") is True, reason="failing in CI when numpy>=1.19.3")
+# This test currently has two valid answers.  On numpy 1.19.3 and higher it returns a different
+# but still accurate value.
+# TODO: re-write test to be less symmetrical.
 def test_rigid_rotation_with_reflection():
     a = Box(origin=np.array([0.0, 0.0, 0.0]), size=np.array([1.0, 1.0, 1.0])).v
     b = a * -1
