@@ -134,6 +134,7 @@ class LandmarkCompositeRecipe(object):
                     "euclidean_distance": float(
                         round(
                             vg.euclidean_distance(np.array(example[k]), reprojected[k]),
+                            ndigits=self.decimals,
                         )
                     ),
                 }
@@ -143,7 +144,7 @@ class LandmarkCompositeRecipe(object):
 
     def to_json(self):
         result = {
-            "composited": self.composite_landmarks,
+            "composited": {k: v.tolist() for k, v in self.composite_landmarks.items()},
             "examples": self.original_and_reprojected_landmarks,
         }
         if self.symmetrize is not None:

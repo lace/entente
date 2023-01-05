@@ -3,10 +3,7 @@ from entente.cli import cli
 import numpy as np
 from vg.compat import v1 as vg
 import yaml
-from .landmarks.serialization import (
-    dump_landmarks,
-    load_landmarks,
-)
+from .landmarks.serialization import dump_landmarks, load_landmarks
 from .landmarks.test_landmark_compositor import composite_landmark_examples
 from .landmarks.test_landmarker import source_target_landmarks
 
@@ -31,7 +28,6 @@ def test_transfer_landmarks_cli(tmp_path):
         assert result.exit_code == 0
 
         transferred = load_landmarks("target.json")
-
         np.testing.assert_array_equal(
             transferred["origin"], expected_landmarks["origin"]
         )
@@ -121,7 +117,7 @@ def test_composite_landmarks_cli(tmp_path):
         with open("composite_result/landmarks.yml", "r") as f:
             result = yaml.safe_load(f)
         np.testing.assert_array_almost_equal(
-            result["composited"]["near_origin"], np.zeros(3), decimal=2,
+            result["composited"]["near_origin"], np.zeros(3), decimal=2
         )
 
 
