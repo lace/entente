@@ -39,7 +39,7 @@ def dump_landmarks(landmarks, landmark_path):
     # TODO: re-export
     with open(landmark_path, "w") as f:
         if landmark_path.endswith(".pp"):
-            try_load_meshlab_pickedpoints().dump(landmarks, f)
+            try_load_meshlab_pickedpoints().dump(serialize_landmarks(landmarks), f)
         else:
             json.dump(serialize_landmarks(landmarks), f)
 
