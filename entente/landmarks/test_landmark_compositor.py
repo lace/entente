@@ -10,9 +10,9 @@ def composite_landmark_examples():
     """
     base_mesh = shapes.cube(np.zeros(3), 1.0)
     example_mesh_1 = shapes.cube(np.repeat(-3.0, 3), 8.0)
-    near_origin_1 = [-2.98, -2.98, -3.0]
+    near_origin_1 = np.array([-2.98, -2.98, -3.0])
     example_mesh_2 = shapes.cube(np.repeat(4.0, 3), 0.3)
-    near_origin_2 = [4.006, 4.001, 4.0]
+    near_origin_2 = np.array([4.006, 4.001, 4.0])
     return base_mesh, example_mesh_1, near_origin_1, example_mesh_2, near_origin_2
 
 
