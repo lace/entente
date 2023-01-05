@@ -14,12 +14,10 @@ def try_load_meshlab_pickedpoints():
 
 
 def deserialize_landmarks(landmark_data):
-    # TODO: re-export
     return {point["name"]: np.array(point["point"]) for point in landmark_data}
 
 
 def load_landmarks(landmark_path):
-    # TODO: re-export
     with open(landmark_path, "r") as f:
         if landmark_path.endswith(".pp"):
             return deserialize_landmarks(try_load_meshlab_pickedpoints().load(f))
@@ -29,19 +27,18 @@ def load_landmarks(landmark_path):
 
 
 def serialize_landmarks(landmarks):
-    # TODO: re-export
     return [
         {"name": name, "point": point.tolist()} for (name, point) in landmarks.items()
     ]
 
 
 def dump_landmarks(landmarks, landmark_path):
-    # TODO: re-export
     with open(landmark_path, "w") as f:
         if landmark_path.endswith(".pp"):
             try_load_meshlab_pickedpoints().dump(serialize_landmarks(landmarks), f)
         else:
             json.dump(serialize_landmarks(landmarks), f)
+
 
 def assert_landmarks_are_equal(first, second):
     assert first.keys() == second.keys()
