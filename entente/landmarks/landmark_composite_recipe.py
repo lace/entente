@@ -35,7 +35,13 @@ class LandmarkCompositeRecipe(object):
         self.base_mesh_path = recipe["base_mesh"]
         self.decimals = recipe["decimals"]
         self.landmark_names = recipe["landmarks"]
-        self.examples = recipe["examples"]
+        self.examples = [
+            {
+                k: np.array(v) if k in self.landmark_names else v
+                for k, v in example.items()
+            }
+            for example in recipe["examples"]
+        ]
         self.symmetrize = recipe.get("symmetrize", None)
 
     @classmethod
@@ -97,7 +103,7 @@ class LandmarkCompositeRecipe(object):
     @cached_property
     def symmetrized_landmarks(self):
         return {
-            k: v.tolist()
+            k: v
             for k, v in self._symmetrize_landmarks(self.composite_landmarks).items()
         }
 
@@ -127,10 +133,10 @@ class LandmarkCompositeRecipe(object):
             result[example_id] = {
                 k: {
                     "original": example[k],
-                    "reprojected": reprojected[k].tolist(),
+                    "reprojected": np.round(reprojected[k], decimals=self.decimals),
                     "displacement": np.round(
                         reprojected[k] - np.array(example[k]), decimals=self.decimals
-                    ).tolist(),
+                    ),
                     "euclidean_distance": float(
                         round(
                             vg.euclidean_distance(np.array(example[k]), reprojected[k]),
@@ -145,10 +151,21 @@ class LandmarkCompositeRecipe(object):
     def to_json(self):
         result = {
             "composited": {k: v.tolist() for k, v in self.composite_landmarks.items()},
-            "examples": self.original_and_reprojected_landmarks,
+            "examples": {
+                k: {
+                    k2: {
+                        k3: v3.tolist() if isinstance(v3, np.ndarray) else v3
+                        for k3, v3 in v2.items()
+                    }
+                    for k2, v2 in v.items()
+                }
+                for k, v in self.original_and_reprojected_landmarks.items()
+            },
         }
         if self.symmetrize is not None:
-            result["composited_and_symmetrized"] = self.symmetrized_landmarks
+            result["composited_and_symmetrized"] = {
+                k: v.tolist() for k, v in self.symmetrized_landmarks.items()
+            }
         return result
 
     def write_reprojected_landmarks(self, output_dir, radius=DEFAULT_RADIUS):
