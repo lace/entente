@@ -22,8 +22,8 @@ def load_landmarks(landmark_path):
         if landmark_path.endswith(".pp"):
             return deserialize_landmarks(try_load_meshlab_pickedpoints().load(f))
         else:
-            landmarks = json.load(f)
-            return deserialize_landmarks(landmarks)
+            serialized = json.load(f)
+            return deserialize_landmarks(serialized)
 
 
 def serialize_landmarks(landmarks):

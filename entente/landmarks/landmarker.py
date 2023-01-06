@@ -70,7 +70,7 @@ class Landmarker(object):
             target (lacecore.Mesh): Target mesh
 
         Returns:
-            dict: A mapping of landmark names to a np.ndarray with shape `3x1`.
+            dict: A mapping of landmark names to a np.ndarray with shape `(3,)`.
         """
         from ..surface_regressor import apply_surface_regressor
         from ..equality import have_same_topology
