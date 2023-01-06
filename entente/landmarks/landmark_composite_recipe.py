@@ -138,7 +138,7 @@ class LandmarkCompositeRecipe(object):
                         )
                     ),
                 }
-                for i, k in enumerate(self.landmark_names)
+                for k in self.landmark_names
             }
         return result
 
