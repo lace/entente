@@ -98,7 +98,9 @@ class LandmarkCompositeRecipe(object):
             example_mesh = lacecore.load_obj(example["mesh"], triangulate=True)
             landmarks = {k: example[k] for k in self.landmark_names}
             compositor.add_example(mesh=example_mesh, landmarks=landmarks)
-        return compositor.result
+        return {
+            k: np.round(v, decimals=self.decimals) for k, v in compositor.result.items()
+        }
 
     @cached_property
     def symmetrized_landmarks(self):
