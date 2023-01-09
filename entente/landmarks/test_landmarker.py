@@ -1,5 +1,5 @@
 from entente.landmarks.landmarker import Landmarker
-from entente.landmarks.serialization import dump_landmarks
+from entente.landmarks.serialization import assert_landmarks_are_equal, dump_landmarks
 from lacecore import Mesh, shapes
 import numpy as np
 import pytest
@@ -12,7 +12,7 @@ def test_landmarker(tmp_path):
     landmarker = Landmarker(source_mesh, landmarks)
 
     transferred = landmarker.transfer_landmarks_onto(target_mesh)
-    assert transferred == expected_landmarks
+    assert_landmarks_are_equal(transferred, expected_landmarks)
 
     source_mesh_path = str(tmp_path / "source.obj")
     landmark_path = str(tmp_path / "landmarks.json")
@@ -23,8 +23,9 @@ def test_landmarker(tmp_path):
     landmarker = Landmarker.load(
         source_mesh_path=source_mesh_path, landmark_path=landmark_path
     )
+
     transferred = landmarker.transfer_landmarks_onto(target_mesh)
-    assert transferred == expected_landmarks
+    assert_landmarks_are_equal(transferred, expected_landmarks)
 
 
 def test_landmarker_wrong_topology():

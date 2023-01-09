@@ -2,7 +2,6 @@ from entente.landmarks.landmark_compositor import LandmarkCompositor
 from lacecore import shapes
 import numpy as np
 import pytest
-from .serialization import point_for_landmark_name
 
 
 def composite_landmark_examples():
@@ -26,14 +25,11 @@ def test_landmark_compositor():
         near_origin_2,
     ) = composite_landmark_examples()
     compositor = LandmarkCompositor(base_mesh=base_mesh, landmark_names=["near_origin"])
-    compositor.add_example(
-        example_mesh_1, [{"name": "near_origin", "point": near_origin_1}]
+    compositor.add_example(example_mesh_1, {"near_origin": near_origin_1})
+    compositor.add_example(example_mesh_2, {"near_origin": near_origin_2})
+    np.testing.assert_array_almost_equal(
+        compositor.result["near_origin"], np.zeros(3), decimal=2
     )
-    compositor.add_example(
-        example_mesh_2, [{"name": "near_origin", "point": near_origin_2}]
-    )
-    near_origin = point_for_landmark_name(compositor.result, "near_origin")
-    np.testing.assert_array_almost_equal(np.array(near_origin), np.zeros(3), decimal=2)
 
 
 def test_landmark_compositor_error():
@@ -48,6 +44,4 @@ def test_landmark_compositor_error():
     with pytest.raises(
         ValueError, match="Expected examples to contain keys near_origin"
     ):
-        compositor.add_example(
-            example_mesh_1, [{"name": "oops", "point": near_origin_1}]
-        )
+        compositor.add_example(example_mesh_1, {"oops": near_origin_1})

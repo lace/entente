@@ -23,27 +23,22 @@ class LandmarkCompositor(object):
     def __init__(self, base_mesh, landmark_names):
         self.base_mesh = base_mesh
         self.landmark_names = set(landmark_names)
-        self.examples = {name: [] for name in landmark_names}
+        self.examples = []
 
     def add_example(self, mesh, landmarks):
         # By processing one mesh at a time, they don't all need to be loaded
         # into memory.
-        landmark_names = [landmark["name"] for landmark in landmarks]
-        if not set(landmark_names).issuperset(self.landmark_names):
+        if not set(landmarks.keys()).issuperset(self.landmark_names):
             raise ValueError(
                 f"Expected examples to contain keys {', '.join(self.landmark_names)}"
             )
         landmarker = Landmarker(source_mesh=mesh, landmarks=landmarks)
         transferred = landmarker.transfer_landmarks_onto(self.base_mesh)
-        for point in transferred:
-            self.examples[point["name"]].append(point["point"])
+        self.examples.append(transferred)
 
     @property
     def result(self):
-        return [
-            {
-                "name": name,
-                "point": np.average(np.array(self.examples[name]), axis=0).tolist(),
-            }
+        return {
+            name: np.average([example[name] for example in self.examples], axis=0)
             for name in self.landmark_names
-        ]
+        }
