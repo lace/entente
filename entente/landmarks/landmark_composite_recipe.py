@@ -153,7 +153,7 @@ class LandmarkCompositeRecipe(object):
             "examples": {
                 k: {
                     k2: {
-                        k3: v3 if k3 in ("euclidean_distance") else v3.tolist()
+                        k3: v3 if k3 == "euclidean_distance" else v3.tolist()
                         for k3, v3 in v2.items()
                     }
                     for k2, v2 in v.items()
