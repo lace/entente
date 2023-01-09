@@ -153,7 +153,7 @@ class LandmarkCompositeRecipe(object):
             "examples": {
                 k: {
                     k2: {
-                        k3: v3.tolist() if isinstance(v3, np.ndarray) else v3
+                        k3: v3 if k3 in ("id", "mesh") else v3.tolist()
                         for k3, v3 in v2.items()
                     }
                     for k2, v2 in v.items()
