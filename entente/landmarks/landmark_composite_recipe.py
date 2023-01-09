@@ -36,10 +36,7 @@ class LandmarkCompositeRecipe(object):
         self.decimals = recipe["decimals"]
         self.landmark_names = recipe["landmarks"]
         self.examples = [
-            {
-                k: np.array(v) if k in self.landmark_names else v
-                for k, v in example.items()
-            }
+            {k: v if k in ("id", "mesh") else np.array(v) for k, v in example.items()}
             for example in recipe["examples"]
         ]
         self.symmetrize = recipe.get("symmetrize", None)
