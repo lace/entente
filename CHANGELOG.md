@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.0a2 (Jan. 9, 2023)
+
+- Revert landmark schema change for input to Landmarker (from 3.0.0a0).
+
+
 ## 3.0.0a1 (Dec. 23, 2022)
 
 - update meshlab-pickedpoints
