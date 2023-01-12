@@ -92,7 +92,7 @@ def test_rigid_rotation_single_point():
 # This test currently has two valid answers.  On numpy 1.19.3 and higher it returns a different
 # but still accurate value.
 # https://github.com/lace/entente/issues/195
-# TODO: re-write test to be less symmetrical.
+# TODO: Revise test so that it only has one valid answer.
 def test_rigid_rotation_with_reflection():
     a = Box(origin=np.array([0.0, 0.0, 0.0]), size=np.array([1.0, 1.0, 1.0])).v
     b = a * -1
