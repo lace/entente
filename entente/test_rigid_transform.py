@@ -89,6 +89,16 @@ def test_rigid_rotation_single_point():
 
 
 @pytest.mark.skipif(env_flag("CI") is True, reason="failing in CI when numpy>=1.19.3")
+# TODO: Clarify the intent of this test.
+#
+# This test produces different answers on numpy 1.19.3 and higher on certain architectures. This is
+# because there are duplicate singular values.
+#
+# Since a reflection through the origin in 3-space is not a rotation at all, and there is no rotation
+# matrix which can reflect through the origin, it's not clear what the correct result should be.
+#
+# https://github.com/numpy/numpy/issues/22945
+# https://github.com/lace/entente/issues/195
 def test_rigid_rotation_with_reflection():
     a = Box(origin=np.array([0.0, 0.0, 0.0]), size=np.array([1.0, 1.0, 1.0])).v
     b = a * -1
