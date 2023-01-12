@@ -94,9 +94,8 @@ def test_rigid_rotation_single_point():
 # This test produces different answers on numpy 1.19.3 and higher on certain architectures. This is
 # because there are duplicate singular values.
 #
-# Since a reflection through the origin in 3-space is not a rotation at all, and there is no rotation matrix
-# which matches the effect of the reflection through origin, it's not clear what the correct result
-# should be.
+# Since a reflection through the origin in 3-space is not a rotation at all, and there is no rotation
+# matrix which can reflect through the origin, it's not clear what the correct result should be.
 #
 # https://github.com/numpy/numpy/issues/22945
 # https://github.com/lace/entente/issues/195
