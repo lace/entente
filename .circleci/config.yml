@@ -58,6 +58,12 @@ jobs:
           when: always
           command: ./dev.py coverage
 
+      - run:
+          name: Test on numpy 1.19.3
+          command: |
+            poetry run pip install numpy==1.19.3
+            ./dev.py coverage
+
   lint:
     <<: *with_python
 
