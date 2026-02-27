@@ -2,7 +2,7 @@
 
 ## 3.0.1
 
-- Fix incorrect dependencies due to a publushing mistake.
+- Fix incorrect dependencies due to a publishing mistake.
 
 
 ## 3.0.0
