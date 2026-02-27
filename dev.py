@@ -19,7 +19,7 @@ def cli():
 @cli.command()
 def install():
     execute(
-        "poetry install --remove-untracked --extras landmarker --extras cli --extras meshlab"
+        "poetry install --sync --extras 'landmarker cli meshlab'"
     )
 
 
