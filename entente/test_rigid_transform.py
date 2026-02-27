@@ -88,14 +88,15 @@ def test_rigid_rotation_single_point():
     np.testing.assert_array_almost_equal(a.dot(R), b)
 
 
-@pytest.mark.skipif(env_flag("CI") is True, reason="failing in CI when numpy>=1.19.3")
 def test_rigid_rotation_with_reflection():
     a = Box(origin=np.array([0.0, 0.0, 0.0]), size=np.array([1.0, 1.0, 1.0])).v
     b = a * -1
     R = find_rigid_rotation(a, b)
     expected_R = np.zeros((3, 3))
     expected_R[0][0] = expected_R[1][2] = expected_R[2][1] = -1
+    print(expected_R)
     np.testing.assert_array_almost_equal(R, expected_R)
+    np.testing.assert_array_almost_equal(a.dot(R), b)
 
 
 def test_rigid_rotation_with_scale():
