@@ -951,7 +951,7 @@ surface-regressor = ["proximity", "scipy"]
 [metadata]
 lock-version = "1.1"
 python-versions = ">=3.7,<4"
-content-hash = "2734e20d09696d7298a60c6a956486607c606885d91374d1ebba0720edd40b1b"
+content-hash = "413cc055915bda5e3566af192b54753d67b3b413199d99f16b63b6de631f09e6"
 
 [metadata.files]
 alabaster = [
