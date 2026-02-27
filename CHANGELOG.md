@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.1
+
+- Fix incorrect dependencies due to a publushing mistake.
+
+
 ## 3.0.0
 
 - Assume compatibility with future versions of key dependencies
