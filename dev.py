@@ -18,9 +18,7 @@ def cli():
 
 @cli.command()
 def install():
-    execute(
-        "poetry install --sync --extras 'landmarker cli meshlab'"
-    )
+    execute("poetry install --sync --extras 'landmarker cli meshlab'")
 
 
 @cli.command()
