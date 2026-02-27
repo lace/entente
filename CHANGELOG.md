@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.0.0
+
+- Assume compatibility with future versions of key dependencies
+
+
 ## 3.0.0a2 (Jan. 9, 2023)
 
 - Revert landmark schema change for input to Landmarker (from 3.0.0a0).
