@@ -23,16 +23,16 @@ classifiers = [
 python = ">=3.7,<4"
 cached_property = "*"
 click = {version = ">7.0,<9.0", optional = true}
-lacecore = {version= ">=3.0.0a0,<4", extras = ["obj"]}
-meshlab-pickedpoints = {version = ">=4.1.0,<5", optional = true}
+lacecore = {version= ">=3.0.0a0", extras = ["obj"]}
+meshlab-pickedpoints = {version = ">=4.1.0", optional = true}
 numpy = "*"
 ounce = ">=1.1.1,<2.0"
-polliwog = ">=3.0.0a0,<4"
+polliwog = ">=3.0.0a0"
 proximity = {version = ">=2.0.0", optional = true}
 PyYAML = {version = ">=5.1", optional = true}
 scipy = {version = "*", optional = true}
 tqdm = "*"
-tri-again = {version = ">=2.0.0a0,<3", optional = true}
+tri-again = {version = ">=2.0.0a0", optional = true}
 vg = ">=2.0.0"
 simplejson = "*"
 
